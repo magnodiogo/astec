@@ -1,0 +1,14 @@
+pt-BR:
+  seguros_fiancas:
+    index:
+      title: "Listagem de Seguros Fianças"
+    new:
+      title: Cadastrar Seguro Fiança
+    edit:
+      title: "Editar Seguro Fiança"
+    form: 
+      confirm: "Solicitar Seguro Fiança"
+      tooltip_danos_ao_imovel: "Garante, até o valor máximo de 1 (um) mês de aluguel, os danos causados pelo Locatário (Garantido) ao imóvel, exceto os decorrentes do uso normal."
+      tooltip_multa_recisoria: "Garante, até o valor máximo de 1 (um) mês de aluguel, o pagamento de multas por recisão antecipada do contrato, quando a recisão ocorrer mediante entrega das chaves ou quando ocorrer o abandano do imóvel antes do recebimento da citação, desde que prevista em contrato."
+      tooltip_pintura_interna: "Garante, até o valor máximo de 1 (um) mês de aluguel, o ressarcimento por danos causados pelo Locatário (Garantido) à pintura Interna do imóvel, desde que reconhecidos e avalidados por perito designado pela seguradora."
+      tooltip_pintura_externa: "Garante, até o valor máximo de 1 (um) mês de aluguel, o ressarcimento por danos causados pelo Locatário (Garantido) à pintura Externa do imóvel, desde que reconhecidos e avalidados por perito designado pela seguradora."

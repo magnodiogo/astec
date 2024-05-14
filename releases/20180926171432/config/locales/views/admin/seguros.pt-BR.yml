@@ -1,0 +1,17 @@
+pt-BR:
+  admin:
+    seguros:
+      coberturas_pendentes:
+        title: "Coberturas Pendentes"
+      detalhado_por_endereco:
+        title: "Relatório Detalhado por Endereco"
+      detalhado_por_produtor:
+        title: "Relatório Detalhado por Produtor"
+      relatorio_de_titulos:
+        title: "Relatório de Títulos"
+      relatorios:
+        title: "Relatórios"
+      renovacoes:
+        title: "Renovações"
+      simples:
+        title: "Relatório Simples"

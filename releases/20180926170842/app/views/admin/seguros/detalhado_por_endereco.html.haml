@@ -1,0 +1,78 @@
+!!!
+%html
+  %head
+    :css
+      table, tr, td, th { border: 0px solid #000; border-collapse: collapse;}
+      * {font-weight: bold}
+      td, th { padding: 1px 3px; }
+  %body
+    %h2
+      Relatório por Endereço de Seguros #{case params[:status] ; when '0' then "Pendentes" ; when '1' then "Efetivados"; else ; "Cadastrados"; end}
+    %br/
+    Emitido em: #{Time.now.to_s_br}
+    %br/
+    %br/
+    %br/
+    Período: #{params[:data_inicial]} à #{params[:data_final]}
+    %br/
+    Imobiliárias:
+    - if params[:todas] == 'true'
+      Todas
+    - else
+      = @seguros.collect{|s| s.imobiliaria.estipulante }.uniq.join(', ')
+    %br/
+    %br/
+    %br/
+    %table{:border => "1", :width => "100%"}
+      %tbody
+        %tr
+          %td{:colspan => "10"}
+            %hr/
+        %tr
+          %td{:align => "center"} TOTAL
+          %td= @seguros.size
+          %td= @seguros.collect{|s| s.premio_total }.sum.real.real_contabil
+        %tr
+          %td{:style => "padding-right: 10%; text-align: right"} Residencial:
+          %td= @total_residencial
+          %td= @premio_total_residencial.real.real_contabil
+        %tr
+          %td{:style => "padding-right: 10%; text-align: right"} Empresarial:
+          %td= @total_empresarial
+          %td= @premio_total_empresarial.real.real_contabil
+        - prev = nil
+        - count = 1
+        - @seguros.each do |s|
+          - if prev.nil? or prev.imobiliaria_id != s.imobiliaria_id
+            %tr
+              %td{:colspan => "10"}
+                %hr/
+            %tr
+              %td
+                = count.to_s.rjust(2,'0')
+                \-
+                - count += 1
+                = s.imobiliaria.estipulante
+              %td
+                = @seguros.collect {|se| se.imobiliaria_id == s.imobiliaria_id ? 1 : 0}.sum
+              %td
+                = @seguros.collect {|se| se.imobiliaria_id == s.imobiliaria_id ? se.premio_total : 0.0}.sum.real.real_contabil
+          - if prev.nil? or prev.tipo_de_seguro != s.tipo_de_seguro
+            %tr
+              %td{:style => "padding-left: 20px; "}= h s.tipo_de_seguro_desc
+              %td= @seguros.collect{|seg| (seg.imobiliaria_id == s.imobiliaria_id and seg.tipo_de_seguro == s.tipo_de_seguro) ? 1 : 0 }.sum
+          %tr
+            %td{:style => "padding-left: 50px"}= h s.logradouro.endereco
+            %td= h s.numero
+            %td= h s.complemento
+            %td= h s.tipo_de_seguro == 'R' ? s.residencia_desc : s.atividade.atividade
+            %td= h s.limite_maximo_indenizacao.real.real_contabil
+            %td= h s.cobertura_para_conteudo ? s.valor_cobertura.real.real_contabil : 'R$ -'
+            %td= h s.premio_total.real.real_contabil
+            %td= h s.user.name.blank? ? s.user.login : s.user.name
+            - if s.transmitido_por.present?
+              %td= h s.transmitido_por.name.blank? ? s.transmitido_por.login : s.transmitido_por.name
+          - prev = s
+        %tr
+          %td{:colspan => "10"}
+            %hr/

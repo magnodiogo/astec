@@ -1,0 +1,13 @@
+- model_class = SeguroFianca
+.row.grid
+  .col-md-12
+    = flash_message(@seguro_fianca)
+    .panel.panel-piluku
+      .panel-heading
+        %h3.panel-title
+          Visualização de Seguro Fiança :: Última Atualização: #{l(@seguro_fianca.updated_at, format: :short)}
+          %span.panel-options
+            %a.panel-minimize{href: "#"}
+              %i.icon.ti-angle-up
+      .panel-body
+        = render 'form'

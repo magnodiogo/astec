@@ -1,0 +1,281 @@
+- is_show_or_edit = (action_name == 'show' or action_name == 'edit')
+- is_show = (action_name == 'show')
+- model_class = SeguroFianca
+- second_class = Locatario
+= form_for @seguro_fianca, class: "form" do |f|
+  .row
+    .col-md-4
+      .form-group
+        .field
+          = f.label :finalidade
+          = f.select :finalidade, options_finalidade_seguro_fianca, {}, class: "form-control selectize", required: true, disabled: is_show_or_edit
+    .div_locatarios.col-md-4
+      .form-group
+        = select_tag :show, [[]], style: 'display: none'
+        .field
+          = label_tag :num_locatarios, 'Número de Locatários'
+          = select_tag :num_locatarios, options_for_select([["", "0"], ["1", "1"],["2", "2"]], @seguro_fianca.locatarios.try(:size).to_s), class: "form-control selectize", required: true, readonly: is_show_or_edit
+
+  #locatarios
+    - if @seguro_fianca.locatarios
+      - count = -1
+      - @seguro_fianca.locatarios.each do |locatario|
+        - count += 1                
+        - if @seguro_fianca.finalidade == 1
+          .row
+            .col-md-12
+              %h3{style: 'font-weight: bold'} Locatário #{count + 1}
+        = hidden_field_tag "seguro_fianca[locatarios_attributes][#{count}][id]", locatario.id
+        .row
+          - if locatario.nome.present?
+            .col-md-4
+              .form-group
+                .field
+                  = label_tag :nome, second_class.human_attribute_name(:nome_razao_social)
+                  = text_field_tag "seguro_fianca[locatarios_attributes][#{count}][nome]", locatario.nome, class: "form-control", readonly: is_show
+          - if locatario.cpf_cnpj.present?
+            .col-md-4
+              .form-group
+                .field
+                  = label_tag :cpf, second_class.human_attribute_name(:cpf_cnpj)
+                  = text_field_tag "seguro_fianca[locatarios_attributes][#{count}][cpf_cnpj]", locatario.cpf_cnpj, class: "form-control", readonly: is_show
+          - if locatario.estado_civil.present?
+            .col-md-4
+              .form-group
+                .field
+                  = label_tag :estado_civil, second_class.human_attribute_name(:estado_civil)
+                  = select_tag "seguro_fianca[locatarios_attributes][#{count}][estado_civil]", options_for_select(options_estado_civil, locatario.estado_civil), class: "form-control selectize", readonly: is_show
+          - if locatario.residira_no_imovel.present?
+            .col-md-4
+              .form-group
+                .field
+                  = label_tag :residira_no_imovel, second_class.human_attribute_name(:residira_no_imovel)
+                  = select_tag "seguro_fianca[locatarios_attributes][#{count}][residira_no_imovel]", options_for_select(options_yes_or_no, locatario.residira_no_imovel), class: "form-control selectize", readonly: is_show
+          - if locatario.renda.present?
+            .col-md-4
+              .form-group
+                .field
+                  = label_tag :renda, second_class.human_attribute_name(:renda)
+                  = text_field_tag "seguro_fianca[locatarios_attributes][#{count}][renda]", locatario.renda, class: "form-control", readonly: is_show
+          - if locatario.vinculo_empregaticio.present?
+            .col-md-4
+              .form-group
+                .field
+                  = label_tag :vinculo_empregaticio, second_class.human_attribute_name(:vinculo_empregaticio)
+                  = select_tag "seguro_fianca[locatarios_attributes][#{count}][vinculo_empregaticio]", options_for_select(options_vinculo_empregaticio_locatario, locatario.vinculo_empregaticio), class: "form-control selectize", readonly: is_show
+  .row
+    .col-md-12
+      %h3{style: 'font-weight: bold'} Endereço do Imóvel Locado
+  .row
+    .col-md-3
+      .form-group
+        .field
+          = f.label :cep
+          .row
+            .col-md-9.col-xs-9
+              = f.text_field :cep, required: true, readonly: is_show, class: "form-control"
+            .col-md-3.col-xs-3
+              = link_to search_cep_logradouros_path(tipo: 'SF', mes: params[:mes], renovacao: params[:renovacao]), class: "btn btn-default" do
+                %i.ion.ion-search
+    .col-md-4
+      .form-group
+        .field
+          = label_tag :endereco, "Endereço do Imóvel Locado"
+          = text_field_tag :endereco, @seguro_fianca.try(:logradouro).try(:endereco), maxlength: 60, class: "form-control", readonly: true
+    .col-md-2.col-xs-6
+      .form-group
+        .field
+          = f.label :numero, "Número"
+          = f.text_field :numero, maxlength: 6, class: "form-control", required: true, readonly: is_show, onkeypress: "return ((event.charCode >= 48 && event.charCode <= 57) || ($.inArray(event.keyCode, [37,7,8,9,37,38,39,40,46,116]) >= 0));"
+    .col-md-3.col-xs-6
+      .form-group
+        .field
+          = label_tag :complemento, "Complemento"
+          = f.text_field :complemento, maxlength: 15, class: "form-control", readonly: is_show, onkeypress: "return ((event.charCode >= 48 && event.charCode <= 57) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode == 32) || ($.inArray(event.keyCode, [37,7,8,9,37,38,39,40,46,116]) >= 0) );"
+  .row
+    .col-md-3.col-xs-6
+      .form-group
+        .field
+          = label_tag :bairro, "Bairro"
+          = text_field_tag :bairro, @seguro_fianca.try(:logradouro).try(:nome_bairro), class: "form-control", readonly: true
+    .col-md-3.col-xs-6
+      .form-group
+        .field
+          = label_tag :cidade, "Cidade"
+          = text_field_tag :cidade, @seguro_fianca.try(:logradouro).try(:localidade).try(:nome), class: "form-control", readonly: true
+    .col-md-1.col-xs-6
+      .form-group
+        .field
+          = label_tag :uf, "UF"
+          = text_field_tag :uf, @seguro_fianca.try(:logradouro).try(:uf), class: "form-control", readonly: true
+  .row
+    .col-md-12
+      %h3{style: 'font-weight: bold'} Garantias Básicas
+  .row
+    .col-md-4
+      .form-group
+        .field
+          = f.label :valor_aluguel
+          = f.text_field :valor_aluguel, value: @seguro_fianca.valor_aluguel.to_f.real, class: "form-control", required: true, readonly: is_show, maxlength: 12
+    .col-md-4
+      .form-group
+        .field
+          = f.label :valor_condominio
+          = f.text_field :valor_condominio, value: @seguro_fianca.valor_condominio.to_f.real, class: "form-control", readonly: is_show, maxlength: 12
+    .col-md-4
+      .form-group
+        .field
+          = f.label :valor_iptu
+          = f.text_field :valor_iptu, value: @seguro_fianca.valor_iptu.to_f.real, class: "form-control", readonly: is_show, maxlength: 12
+  .row
+    .col-md-12
+      %h3{style: 'font-weight: bold'} Garantias Opcionais
+  .row
+    .col-md-3
+      .form-group
+        .field
+          = f.label :danos_ao_imovel 
+          = tooltip_popover( t(".tooltip_danos_ao_imovel") )
+          = f.select :danos_ao_imovel, options_yes_or_no, {}, class: "form-control selectize", required: true, disabled: is_show
+    .col-md-3
+      .form-group
+        .field
+          = f.label :multa_recisoria
+          = tooltip_popover( t(".tooltip_multa_recisoria") )
+          = f.select :multa_recisoria, options_yes_or_no, {}, class: "form-control selectize", required: true, disabled: is_show
+    .col-md-3
+      .form-group
+        .field
+          = f.label :pintura_interna
+          = tooltip_popover( t(".tooltip_pintura_interna") )
+          = f.select :pintura_interna, options_yes_or_no, {}, class: "form-control selectize", required: true, disabled: is_show
+    .col-md-3
+      .form-group
+        .field
+          = f.label :pintura_externa
+          = tooltip_popover( t(".tooltip_pintura_externa") )
+          = f.select :pintura_externa, options_yes_or_no, {}, class: "form-control selectize", required: true, disabled: is_show
+  #div_pintura
+    .row
+      .col-md-6
+      .col-md-6{style: "color: red"}
+        A Pintura Interna ou Externa somente será indenizada se o Laudo de Vistoria Inicial informar especificamente que o imóvel foi entregue com Pintura Nova e constar  no contrato de locação a cláusula 3 do anexo I (Pintura Interna) e/ou cláusula 4 do anexo I (Pintura Externa).
+  %br
+  .form-group
+    .actions  
+      - unless is_show
+        .float-right
+          = f.submit t('.confirm', default: t("helpers.submit.confirm")), class: "btn btn-primary"
+      .float-left
+        = link_to t('.back', default: t("helpers.links.back")), seguros_fiancas_path(tipo: params[:tipo], mes: params[:mes]), class: 'btn btn-default'
+
+    :javascript
+      $( document ).ready(function() {
+        function ajax_load_locatarios(finalidade, num_locat){
+          $.ajax({
+            url:       "/seguros_fiancas/load_locatarios",
+            data:      { finalidade: finalidade.val(), num_locatarios: num_locat.val() },
+            type:      'get',
+            dataType:  'html',
+            timeout:   '30000',
+            success: function(response) {
+              $("#locatarios").html(response);
+            },
+            error: function(response) {
+              $('#message_modal').modal();
+              $(".modal-message").html("Erro ao importar os dados dos Locatários.");
+            },
+            complete: function(){
+              $("#loading").hide();
+              $(".right input").show();
+            }
+          });
+        }
+        var cep = $("#seguro_fianca_cep");
+        if ( cep.val() != "" ) { $("#seguro_fianca_numero").focus(); }
+        cep.change(function(){
+          if (cep.val() != "_____-___" && cep.val() != "") {
+            $.ajax({
+              url:  '/logradouros/search_cep?cep=' + cep.val() + "&format=json",
+              type: 'get',
+              success: function(data) {
+                $("#endereco").val(data.endereco);
+                $("#bairro").val(data.bairro);
+                $("#cidade").val(data.cidade);
+                $("#uf").val(data.uf);
+                $("#seguro_fianca_numero").focus();
+              }
+            });
+          }
+        });
+
+        var finalidade    = $("#seguro_fianca_finalidade");
+        var div_locat     = $('.div_locatarios');
+        var num_locat     = $('#num_locatarios');
+        var num_locat_val = $('#num_locatarios option:selected');
+        if (finalidade.val() != 1 || (num_locat.val() == "" || num_locat.val() == "0")) {
+          div_locat.hide();
+        }
+        finalidade.change(function() {
+          if ( finalidade.val() == "1" ) {
+            div_locat.show();
+          } else {
+            div_locat.hide();
+            $("#num_locatarios option").prop("selected", false);
+          }
+          if ( finalidade.val() != "" ) {
+            ajax_load_locatarios(finalidade, num_locat_val);
+          }
+        });
+
+        num_locat.change(function() {
+          var num_locat_val = $('#num_locatarios option:selected');
+          ajax_load_locatarios(finalidade, num_locat_val);
+        });
+
+        var interna     = $('#seguro_fianca_pintura_interna');
+        var interna_val = $('#seguro_fianca_pintura_interna option:selected');
+        var externa     = $('#seguro_fianca_pintura_externa');
+        var externa_val = $('#seguro_fianca_pintura_externa option:selected');
+        if ( interna_val.val() == "true" || externa_val.val() == "true"){
+          $("#div_pintura").show();
+        } else {
+          $("#div_pintura").hide();
+        }
+        function verificar_pintura(int, ext){
+          if ( int.val() == "true" || ext.val() == "true"){
+            $("#div_pintura").show();
+          } else {
+            $("#div_pintura").hide();
+          }
+        }
+        interna.change(function() {
+          verificar_pintura($('#seguro_fianca_pintura_interna option:selected'), $('#seguro_fianca_pintura_externa option:selected'));
+        });
+        externa.change(function() {
+          verificar_pintura($('#seguro_fianca_pintura_interna option:selected'), $('#seguro_fianca_pintura_externa option:selected'));
+        });
+
+        /* VALIDAÇÃO FORMULARIO */
+
+      });
+
+- if [2,4].include? @seguro_fianca.finalidade
+  :javascript
+    $( document ).ready(function() {
+      $("#seguro_fianca_locatarios_attributes_0_cpf_cnpj").mask('99.999.999/9999-99');
+    })
+- elsif [3].include? @seguro_fianca.finalidade
+  :javascript
+    $( document ).ready(function() {
+      $("#seguro_fianca_locatarios_attributes_0_cpf_cnpj").mask('999.999.999-99');
+      $('#seguro_fianca_locatarios_attributes_0_renda').priceFormat({ prefix: '', centsSeparator: ',', thousandsSeparator: '.' });
+    })
+- else  
+  :javascript
+    $( document ).ready(function() {
+      $("#seguro_fianca_locatarios_attributes_0_cpf_cnpj").mask('999.999.999-99');
+      $('#seguro_fianca_locatarios_attributes_0_renda').priceFormat({ prefix: '', centsSeparator: ',', thousandsSeparator: '.' });
+      $("#seguro_fianca_locatarios_attributes_1_cpf_cnpj").mask('999.999.999-99');
+      $('#seguro_fianca_locatarios_attributes_1_renda').priceFormat({ prefix: '', centsSeparator: ',', thousandsSeparator: '.' });
+    })

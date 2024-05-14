@@ -1,0 +1,83 @@
+<% is_show = ( action_name == 'show' ) %>
+
+<!-- RESIDENCIA ANTERIOR - SOMENTE PREENCHER CASO O TEMPO DE RESIDENCIA ATUAL SEJA INFERIOR A 1 ANO ( 12 MESES ) -->
+<div class="formRow" style='padding: 0'></div>
+<!-- LINHA 1 -->
+<div class="formRow" style='padding: 0'>
+  <div class='person_text_small seguros' style='width: 31%'>
+    <%= f.label :anterior_tipo, "Tipo:" %>
+    <%= f.select :anterior_tipo, options_sexo, { }, :class => "input-text big", :disabled => is_show, :required => true %>
+  </div>
+  <div class='person_text_small seguros' style='width: 31%'>
+    <%= f.label :anterior_tempo_ano, "Tempo de Residência ( Anos ):" %>
+    <%= f.text_field :anterior_tempo_ano, :class => "input-text big", :readonly => is_show, :required => true %>
+  </div>
+  <div class='person_text_small seguros' style='width: 31%'>
+    <%= f.label :anterior_tempo_mes, "Tempo de Residência ( Meses ):" %>
+    <%= f.text_field :anterior_tempo_mes, :class => "input-text big", :readonly => is_show, :required => true %>
+  </div>
+</div>
+<!-- LINHA 2 e 3 -->
+<div class="formRow double" style='padding: 0'>
+  <div class='person_text_very_small seguros'>
+    <%= f.label :anterior_cep, "CEP:" %>
+    <div style='margin-top: 2px'>
+      <% if @cep  %>
+        <%= f.text_field :anterior_cep, :maxlength => 9, :class => "input-text big", :readonly => is_show, :required => true, :style=>'width: 74%; float: left' %>
+      <% else %>
+        <%= f.text_field :anterior_cep, :maxlength => 9, :class => "input-text big", :readonly => is_show, :required => true, :style=>'width: 74%; float: left' %>
+      <% end %>
+      <% unless is_show %>
+        <a href="/ceps/search_cep?tipo=<%= params[:tipo] %>&mes=<%= params[:mes]%>&renovacao=<%= params[:renovacao] %>" style='float: left'>
+          <img style="margin: 2px 0 0 5px" src="/img/ico/search-icon24.png" />
+        </a>
+      <% end %>
+    </div>
+  </div>
+  <div id='div_endereco_anterior'>
+    <div class='person_text_small seguros'>
+      <%= label_tag :endereco, "Endereço do Imóvel Locado:" %>
+      <%= text_field_tag :endereco, @cep  ? @cep.endereco : nil, :class => "input-text nineeight-width", :readonly => true %>
+    </div>
+
+    <div class='person_text_very_small seguros'>
+      <%= label_tag :bairro, "Bairro:" %>  
+      <%= text_field_tag :bairro, @cep ? @cep.bairro.nome : nil, :class => "input-text big", :readonly => true %>
+    </div>   
+    <div class='person_text_very_small seguros'>
+      <%= label :cidade, "Cidade:" %>
+      <%= text_field_tag :cidade, @cep ? @cep.cidade : nil, :class => "input-text big", :readonly => true %>
+    </div>   
+    <div class='person_text_very_small seguros' style='width: 9.5%'>
+      <%= label_tag :uf, "UF:" %>
+      <%= text_field_tag :uf, @cep ? @cep.uf : nil , :class => "input-text big", :maxlength => 2, :readonly => true %>
+    </div>   
+  </div>
+  <div class='person_text_very_small  seguros'  style='width: 9.5%'>
+    <%= f.label :anterior_numero, "Número:" %>
+    <% if @cep %>
+       <%= f.text_field :anterior_numero, :maxlength => 6,  :class => "input-text big", :readonly => is_show, :required => true %>
+    <% else %>
+       <%= f.text_field :anterior_numero, :maxlength => 6,  :class => "input-text big", :readonly => is_show, :required => true %>
+    <% end %>
+  </div>   
+  <div class='person_text_very_small seguros' style='width: 27.5%'>
+    <%= f.label :anterior_complemento, "Complemento:" %>
+    <%= f.text_field :anterior_complemento, :maxlength => 15, :class => "input-text nineseven-width", :readonly => is_show %>
+  </div>   
+</div>
+<!-- LINHA 4 -->
+<div class="formRow" style='padding: 0'>
+  <div class='person_text_small seguros' style='width: 69.5%'>
+    <%= f.label :anterior_nome_proprietario, "Nome do Proprietário:" %>
+    <%= f.text_field :anterior_nome_proprietario, :class => "input-text ninenine-width", :readonly => is_show, :required => true %>
+  </div>
+  <div class='person_text_small seguros' style='width: 4.5%'>
+    <%= f.label :anterior_ddd_proprietario, "DDD:" %>
+    <%= f.text_field :anterior_ddd_proprietario, :class => "input-text big", :readonly => is_show, :required => true %>
+  </div>
+  <div class='person_text_small seguros' style='width: 18.4%'>
+    <%= f.label :anterior_telefone_proprietario, "Telefone:" %>
+    <%= f.text_field :anterior_telefone_proprietario, :class => "input-text big", :readonly => is_show, :required => true %>
+  </div>
+</div>

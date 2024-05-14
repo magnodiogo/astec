@@ -1,0 +1,12 @@
+{:uriI"ùfile://app/assets/javascripts/template/tinymce/plugins/example/dialog.html?type=text/html&id=11c38f2124b570a23114f5c6143d90e15cb014398e100301a260cce133e7d0a8:ET:load_pathI"app/assets/javascripts;T:filenameI"Happ/assets/javascripts/template/tinymce/plugins/example/dialog.html;T:	nameI",template/tinymce/plugins/example/dialog;T:logical_pathI"1template/tinymce/plugins/example/dialog.html;T:content_typeI"text/html;T:sourceI"’<!DOCTYPE html>
+<html>
+<body>
+	<h3>Custom dialog</h3>
+	Input some text: <input id="content">
+	<button onclick="top.tinymce.activeEditor.windowManager.getWindows()[0].close();">Close window</button>
+</body>
+</html>;T:metadata{	:dependencieso:Set:
+@hash}
+I"environment-version;TTI"environment-paths;TTI"rails-env;TTI"2processors:type=text/html&file_type=text/html;TTI"Vfile-digest://app/assets/javascripts/template/tinymce/plugins/example/dialog.html;TTF:charsetI"
+utf-8;T:digest"%\a≠ÇöINu¬#@«îm–ñÏi<ı•SåÛÖ	xA:lengthi’:dependencies_digest"%HùôcF{§ÿ◊˘s&,……†í.æY9@rwÖ◊:idI"E11c38f2124b570a23114f5c6143d90e15cb014398e100301a260cce133e7d0a8;F:
+mtimel+ô[

@@ -1,0 +1,47 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  finalidade: 1
+  cep: MyString
+  string: MyString
+  numero: MyString
+  string: MyString
+  complemento: MyString
+  string: MyString
+  tipo_do_imovel: MyString
+  string: MyString
+  valor_aluguel: 1.5
+  valor_condominio: 1.5
+  valor_iptu: 1.5
+  danos_ao_imovel: false
+  multa_recisoria: false
+  pintura_interna: false
+  pintura_externa: false
+  user_id: MyString
+  integer: MyString
+  imobiliaria_id: MyString
+  integer: MyString
+  status: 1
+
+two:
+  finalidade: 1
+  cep: MyString
+  string: MyString
+  numero: MyString
+  string: MyString
+  complemento: MyString
+  string: MyString
+  tipo_do_imovel: MyString
+  string: MyString
+  valor_aluguel: 1.5
+  valor_condominio: 1.5
+  valor_iptu: 1.5
+  danos_ao_imovel: false
+  multa_recisoria: false
+  pintura_interna: false
+  pintura_externa: false
+  user_id: MyString
+  integer: MyString
+  imobiliaria_id: MyString
+  integer: MyString
+  status: 1

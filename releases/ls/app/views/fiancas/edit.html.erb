@@ -1,0 +1,560 @@
+<h1>Editing fianca</h1>
+
+<% form_for(@fianca) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :locatario_nome %><br />
+    <%= f.text_field :locatario_nome %>
+  </p>
+  <p>
+    <%= f.label :locatario_sexo %><br />
+    <%= f.text_field :locatario_sexo %>
+  </p>
+  <p>
+    <%= f.label :locatario_cpf %><br />
+    <%= f.text_field :locatario_cpf %>
+  </p>
+  <p>
+    <%= f.label :locatario_rg %><br />
+    <%= f.text_field :locatario_rg %>
+  </p>
+  <p>
+    <%= f.label :locatario_orgao_expedidor %><br />
+    <%= f.text_field :locatario_orgao_expedidor %>
+  </p>
+  <p>
+    <%= f.label :locatario_data_expedicao %><br />
+    <%= f.date_select :locatario_data_expedicao %>
+  </p>
+  <p>
+    <%= f.label :locatario_nacionalidade %><br />
+    <%= f.text_field :locatario_nacionalidade %>
+  </p>
+  <p>
+    <%= f.label :locatario_nascimento %><br />
+    <%= f.date_select :locatario_nascimento %>
+  </p>
+  <p>
+    <%= f.label :locatario_estado_civil %><br />
+    <%= f.text_field :locatario_estado_civil %>
+  </p>
+  <p>
+    <%= f.label :locatario_mae %><br />
+    <%= f.text_field :locatario_mae %>
+  </p>
+  <p>
+    <%= f.label :locatario_pai %><br />
+    <%= f.text_field :locatario_pai %>
+  </p>
+  <p>
+    <%= f.label :locatario_residira_no_imovel %><br />
+    <%= f.check_box :locatario_residira_no_imovel %>
+  </p>
+  <p>
+    <%= f.label :locatario_compora_renda %><br />
+    <%= f.check_box :locatario_compora_renda %>
+  </p>
+  <p>
+    <%= f.label :locatario_correntista %><br />
+    <%= f.check_box :locatario_correntista %>
+  </p>
+  <p>
+    <%= f.label :locatario_segmoneto %><br />
+    <%= f.text_field :locatario_segmoneto %>
+  </p>
+  <p>
+    <%= f.label :locatario_email_primario %><br />
+    <%= f.text_field :locatario_email_primario %>
+  </p>
+  <p>
+    <%= f.label :locatario_email_secundario %><br />
+    <%= f.text_field :locatario_email_secundario %>
+  </p>
+  <p>
+    <%= f.label :imovel_tipo %><br />
+    <%= f.text_field :imovel_tipo %>
+  </p>
+  <p>
+    <%= f.label :imovel_cep %><br />
+    <%= f.text_field :imovel_cep %>
+  </p>
+  <p>
+    <%= f.label :imovel_numero %><br />
+    <%= f.text_field :imovel_numero %>
+  </p>
+  <p>
+    <%= f.label :imovel_complemento %><br />
+    <%= f.text_field :imovel_complemento %>
+  </p>
+  <p>
+    <%= f.label :imovel_administradora %><br />
+    <%= f.text_field :imovel_administradora %>
+  </p>
+  <p>
+    <%= f.label :imovel_aluguel %><br />
+    <%= f.text_field :imovel_aluguel %>
+  </p>
+  <p>
+    <%= f.label :imovel_iptu %><br />
+    <%= f.text_field :imovel_iptu %>
+  </p>
+  <p>
+    <%= f.label :imovel_condominio %><br />
+    <%= f.text_field :imovel_condominio %>
+  </p>
+  <p>
+    <%= f.label :imovel_agua %><br />
+    <%= f.text_field :imovel_agua %>
+  </p>
+  <p>
+    <%= f.label :imovel_luz %><br />
+    <%= f.text_field :imovel_luz %>
+  </p>
+  <p>
+    <%= f.label :imovel_gas_canalizado %><br />
+    <%= f.text_field :imovel_gas_canalizado %>
+  </p>
+  <p>
+    <%= f.label :imovel_danos %><br />
+    <%= f.text_field :imovel_danos %>
+  </p>
+  <p>
+    <%= f.label :imovel_multa_recisao %><br />
+    <%= f.text_field :imovel_multa_recisao %>
+  </p>
+  <p>
+    <%= f.label :imovel_pintura_interna %><br />
+    <%= f.text_field :imovel_pintura_interna %>
+  </p>
+  <p>
+    <%= f.label :imovel_puntura_externa %><br />
+    <%= f.text_field :imovel_puntura_externa %>
+  </p>
+  <p>
+    <%= f.label :residencia_tipo %><br />
+    <%= f.text_field :residencia_tipo %>
+  </p>
+  <p>
+    <%= f.label :residencia_tempo_ano %><br />
+    <%= f.text_field :residencia_tempo_ano %>
+  </p>
+  <p>
+    <%= f.label :residencia_tempo_mes %><br />
+    <%= f.text_field :residencia_tempo_mes %>
+  </p>
+  <p>
+    <%= f.label :residencia_cep %><br />
+    <%= f.text_field :residencia_cep %>
+  </p>
+  <p>
+    <%= f.label :residencia_numero %><br />
+    <%= f.text_field :residencia_numero %>
+  </p>
+  <p>
+    <%= f.label :residencia_complemento %><br />
+    <%= f.text_field :residencia_complemento %>
+  </p>
+  <p>
+    <%= f.label :residencia_ddd_fixo %><br />
+    <%= f.text_field :residencia_ddd_fixo %>
+  </p>
+  <p>
+    <%= f.label :residencia_telefone_fixo %><br />
+    <%= f.text_field :residencia_telefone_fixo %>
+  </p>
+  <p>
+    <%= f.label :residencia_ddd_celular %><br />
+    <%= f.text_field :residencia_ddd_celular %>
+  </p>
+  <p>
+    <%= f.label :residencia_celular %><br />
+    <%= f.text_field :residencia_celular %>
+  </p>
+  <p>
+    <%= f.label :residencia_nome_proprietario %><br />
+    <%= f.text_field :residencia_nome_proprietario %>
+  </p>
+  <p>
+    <%= f.label :residencia_ddd_proprietario %><br />
+    <%= f.text_field :residencia_ddd_proprietario %>
+  </p>
+  <p>
+    <%= f.label :residencia_telefone_proprietario %><br />
+    <%= f.text_field :residencia_telefone_proprietario %>
+  </p>
+  <p>
+    <%= f.label :residencia_correspondencia %><br />
+    <%= f.check_box :residencia_correspondencia %>
+  </p>
+  <p>
+    <%= f.label :correspondencia_cep %><br />
+    <%= f.text_field :correspondencia_cep %>
+  </p>
+  <p>
+    <%= f.label :correspondencia_numero %><br />
+    <%= f.text_field :correspondencia_numero %>
+  </p>
+  <p>
+    <%= f.label :correspondencia_complemento %><br />
+    <%= f.text_field :correspondencia_complemento %>
+  </p>
+  <p>
+    <%= f.label :anterior_tipo %><br />
+    <%= f.text_field :anterior_tipo %>
+  </p>
+  <p>
+    <%= f.label :anterior_tempo_ano %><br />
+    <%= f.text_field :anterior_tempo_ano %>
+  </p>
+  <p>
+    <%= f.label :anterior_tempo_mes %><br />
+    <%= f.text_field :anterior_tempo_mes %>
+  </p>
+  <p>
+    <%= f.label :anterior_cep %><br />
+    <%= f.text_field :anterior_cep %>
+  </p>
+  <p>
+    <%= f.label :anterior_numero %><br />
+    <%= f.text_field :anterior_numero %>
+  </p>
+  <p>
+    <%= f.label :anterior_complemento %><br />
+    <%= f.text_field :anterior_complemento %>
+  </p>
+  <p>
+    <%= f.label :anterior_nome_proprietario %><br />
+    <%= f.text_field :anterior_nome_proprietario %>
+  </p>
+  <p>
+    <%= f.label :anterior_ddd_proprietario %><br />
+    <%= f.text_field :anterior_ddd_proprietario %>
+  </p>
+  <p>
+    <%= f.label :anterior_telefone_proprietario %><br />
+    <%= f.text_field :anterior_telefone_proprietario %>
+  </p>
+  <p>
+    <%= f.label :dependentes_tipo_1 %><br />
+    <%= f.text_field :dependentes_tipo_1 %>
+  </p>
+  <p>
+    <%= f.label :dependentes_nome_1 %><br />
+    <%= f.text_field :dependentes_nome_1 %>
+  </p>
+  <p>
+    <%= f.label :dependentes_nascimento_1 %><br />
+    <%= f.text_field :dependentes_nascimento_1 %>
+  </p>
+  <p>
+    <%= f.label :dependentes_tipo_2 %><br />
+    <%= f.text_field :dependentes_tipo_2 %>
+  </p>
+  <p>
+    <%= f.label :dependentes_nome_2 %><br />
+    <%= f.text_field :dependentes_nome_2 %>
+  </p>
+  <p>
+    <%= f.label :dependentes_nascimento_2 %><br />
+    <%= f.text_field :dependentes_nascimento_2 %>
+  </p>
+  <p>
+    <%= f.label :referencia_bancaria_codigo_banco %><br />
+    <%= f.text_field :referencia_bancaria_codigo_banco %>
+  </p>
+  <p>
+    <%= f.label :referencia_bancaria_banco %><br />
+    <%= f.text_field :referencia_bancaria_banco %>
+  </p>
+  <p>
+    <%= f.label :referencia_bancaria_agencia %><br />
+    <%= f.text_field :referencia_bancaria_agencia %>
+  </p>
+  <p>
+    <%= f.label :referencia_bancaria_conta %><br />
+    <%= f.text_field :referencia_bancaria_conta %>
+  </p>
+  <p>
+    <%= f.label :referencia_bancaria_segmento %><br />
+    <%= f.text_field :referencia_bancaria_segmento %>
+  </p>
+  <p>
+    <%= f.label :referencia_bancaria_cliente_desde %><br />
+    <%= f.date_select :referencia_bancaria_cliente_desde %>
+  </p>
+  <p>
+    <%= f.label :cartao_credito_bandeira %><br />
+    <%= f.text_field :cartao_credito_bandeira %>
+  </p>
+  <p>
+    <%= f.label :cartao_credito_numero %><br />
+    <%= f.text_field :cartao_credito_numero %>
+  </p>
+  <p>
+    <%= f.label :cartao_credito_validade %><br />
+    <%= f.date_select :cartao_credito_validade %>
+  </p>
+  <p>
+    <%= f.label :referencia_comercial_empresa %><br />
+    <%= f.text_field :referencia_comercial_empresa %>
+  </p>
+  <p>
+    <%= f.label :referencia_comercial_ddd %><br />
+    <%= f.text_field :referencia_comercial_ddd %>
+  </p>
+  <p>
+    <%= f.label :referencia_comercial_telefone %><br />
+    <%= f.text_field :referencia_comercial_telefone %>
+  </p>
+  <p>
+    <%= f.label :referencia_comercial_ramal %><br />
+    <%= f.text_field :referencia_comercial_ramal %>
+  </p>
+  <p>
+    <%= f.label :referencia_pessoal_nome %><br />
+    <%= f.text_field :referencia_pessoal_nome %>
+  </p>
+  <p>
+    <%= f.label :referencia_pessoal_ddd %><br />
+    <%= f.text_field :referencia_pessoal_ddd %>
+  </p>
+  <p>
+    <%= f.label :referencia_pessoal_telefone %><br />
+    <%= f.text_field :referencia_pessoal_telefone %>
+  </p>
+  <p>
+    <%= f.label :bens_moveis_tipo %><br />
+    <%= f.text_field :bens_moveis_tipo %>
+  </p>
+  <p>
+    <%= f.label :bens_moveis_fabricante %><br />
+    <%= f.text_field :bens_moveis_fabricante %>
+  </p>
+  <p>
+    <%= f.label :bens_moveis_modelo %><br />
+    <%= f.text_field :bens_moveis_modelo %>
+  </p>
+  <p>
+    <%= f.label :bens_moveis_placa %><br />
+    <%= f.text_field :bens_moveis_placa %>
+  </p>
+  <p>
+    <%= f.label :bens_moveis_valor %><br />
+    <%= f.text_field :bens_moveis_valor %>
+  </p>
+  <p>
+    <%= f.label :bens_moveis_onus %><br />
+    <%= f.check_box :bens_moveis_onus %>
+  </p>
+  <p>
+    <%= f.label :bens_moveis_instituicao %><br />
+    <%= f.text_field :bens_moveis_instituicao %>
+  </p>
+  <p>
+    <%= f.label :bens_moveis_ano %><br />
+    <%= f.text_field :bens_moveis_ano %>
+  </p>
+  <p>
+    <%= f.label :bens_moveis_seguro %><br />
+    <%= f.check_box :bens_moveis_seguro %>
+  </p>
+  <p>
+    <%= f.label :bens_moveis_seguradora %><br />
+    <%= f.text_field :bens_moveis_seguradora %>
+  </p>
+  <p>
+    <%= f.label :bens_imoveis_tipo %><br />
+    <%= f.text_field :bens_imoveis_tipo %>
+  </p>
+  <p>
+    <%= f.label :bens_imoveis_cep %><br />
+    <%= f.text_field :bens_imoveis_cep %>
+  </p>
+  <p>
+    <%= f.label :bens_imoveis_numero %><br />
+    <%= f.text_field :bens_imoveis_numero %>
+  </p>
+  <p>
+    <%= f.label :bens_imoveis_complemento %><br />
+    <%= f.text_field :bens_imoveis_complemento %>
+  </p>
+  <p>
+    <%= f.label :bens_imoveis_valor %><br />
+    <%= f.text_field :bens_imoveis_valor %>
+  </p>
+  <p>
+    <%= f.label :bens_imoveis_onus %><br />
+    <%= f.check_box :bens_imoveis_onus %>
+  </p>
+  <p>
+    <%= f.label :bens_imoveis_segura %><br />
+    <%= f.check_box :bens_imoveis_segura %>
+  </p>
+  <p>
+    <%= f.label :bens_imoveis_seguradora %><br />
+    <%= f.text_field :bens_imoveis_seguradora %>
+  </p>
+  <p>
+    <%= f.label :locatario_ocupacao %><br />
+    <%= f.text_field :locatario_ocupacao %>
+  </p>
+  <p>
+    <%= f.label :locatario_categoria %><br />
+    <%= f.text_field :locatario_categoria %>
+  </p>
+  <p>
+    <%= f.label :locatario_empresa_nome %><br />
+    <%= f.text_field :locatario_empresa_nome %>
+  </p>
+  <p>
+    <%= f.label :locatario_empresa_ddd %><br />
+    <%= f.text_field :locatario_empresa_ddd %>
+  </p>
+  <p>
+    <%= f.label :locatario_empresa_telefone %><br />
+    <%= f.text_field :locatario_empresa_telefone %>
+  </p>
+  <p>
+    <%= f.label :locatario_empresa_ramal %><br />
+    <%= f.text_field :locatario_empresa_ramal %>
+  </p>
+  <p>
+    <%= f.label :locatario_empresa_cep %><br />
+    <%= f.text_field :locatario_empresa_cep %>
+  </p>
+  <p>
+    <%= f.label :locatario_empresa_numero %><br />
+    <%= f.text_field :locatario_empresa_numero %>
+  </p>
+  <p>
+    <%= f.label :locatario_empresa_complemento %><br />
+    <%= f.text_field :locatario_empresa_complemento %>
+  </p>
+  <p>
+    <%= f.label :locatario_empresa_data_admissao %><br />
+    <%= f.date_select :locatario_empresa_data_admissao %>
+  </p>
+  <p>
+    <%= f.label :locatario_empresa_cargo %><br />
+    <%= f.text_field :locatario_empresa_cargo %>
+  </p>
+  <p>
+    <%= f.label :locatario_empresa_salario %><br />
+    <%= f.text_field :locatario_empresa_salario %>
+  </p>
+  <p>
+    <%= f.label :locatario_empresa_outras_rendas %><br />
+    <%= f.text_field :locatario_empresa_outras_rendas %>
+  </p>
+  <p>
+    <%= f.label :locatario_empresa_valor %><br />
+    <%= f.text_field :locatario_empresa_valor %>
+  </p>
+  <p>
+    <%= f.label :locatario_anterior_nome %><br />
+    <%= f.text_field :locatario_anterior_nome %>
+  </p>
+  <p>
+    <%= f.label :locatario_anterior_ddd %><br />
+    <%= f.text_field :locatario_anterior_ddd %>
+  </p>
+  <p>
+    <%= f.label :locatario_anterior_telefone %><br />
+    <%= f.text_field :locatario_anterior_telefone %>
+  </p>
+  <p>
+    <%= f.label :locatario_anterior_ramal %><br />
+    <%= f.text_field :locatario_anterior_ramal %>
+  </p>
+  <p>
+    <%= f.label :locatario_anterior_cep %><br />
+    <%= f.text_field :locatario_anterior_cep %>
+  </p>
+  <p>
+    <%= f.label :locatario_anterior_numero %><br />
+    <%= f.text_field :locatario_anterior_numero %>
+  </p>
+  <p>
+    <%= f.label :locatario_anterior_complemento %><br />
+    <%= f.text_field :locatario_anterior_complemento %>
+  </p>
+  <p>
+    <%= f.label :locatario_anterior_cargo %><br />
+    <%= f.text_field :locatario_anterior_cargo %>
+  </p>
+  <p>
+    <%= f.label :locatario_anterior_salario %><br />
+    <%= f.text_field :locatario_anterior_salario %>
+  </p>
+  <p>
+    <%= f.label :locador_nome %><br />
+    <%= f.text_field :locador_nome %>
+  </p>
+  <p>
+    <%= f.label :locador_cpf %><br />
+    <%= f.text_field :locador_cpf %>
+  </p>
+  <p>
+    <%= f.label :locador_email %><br />
+    <%= f.text_field :locador_email %>
+  </p>
+  <p>
+    <%= f.label :locador_renda %><br />
+    <%= f.text_field :locador_renda %>
+  </p>
+  <p>
+    <%= f.label :locador_rg %><br />
+    <%= f.text_field :locador_rg %>
+  </p>
+  <p>
+    <%= f.label :locador_orgao_expedidor %><br />
+    <%= f.text_field :locador_orgao_expedidor %>
+  </p>
+  <p>
+    <%= f.label :locador_data_expedicao %><br />
+    <%= f.date_select :locador_data_expedicao %>
+  </p>
+  <p>
+    <%= f.label :locador_ddd_fixo %><br />
+    <%= f.text_field :locador_ddd_fixo %>
+  </p>
+  <p>
+    <%= f.label :locador_telefone_fixo %><br />
+    <%= f.text_field :locador_telefone_fixo %>
+  </p>
+  <p>
+    <%= f.label :locador_ddd_celular %><br />
+    <%= f.text_field :locador_ddd_celular %>
+  </p>
+  <p>
+    <%= f.label :locador_celular %><br />
+    <%= f.text_field :locador_celular %>
+  </p>
+  <p>
+    <%= f.label :locador_cep %><br />
+    <%= f.text_field :locador_cep %>
+  </p>
+  <p>
+    <%= f.label :locador_numero %><br />
+    <%= f.text_field :locador_numero %>
+  </p>
+  <p>
+    <%= f.label :locador_complemento %><br />
+    <%= f.text_field :locador_complemento %>
+  </p>
+  <p>
+    <%= f.label :imobiliaria_id %><br />
+    <%= f.text_field :imobiliaria_id %>
+  </p>
+  <p>
+    <%= f.label :user_id %><br />
+    <%= f.text_field :user_id %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @fianca %> |
+<%= link_to 'Back', fiancas_path %>

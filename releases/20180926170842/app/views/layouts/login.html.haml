@@ -1,0 +1,16 @@
+!!!
+%html{:lang => "en"}
+  %head
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
+    %meta{:content => "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0", :name => "viewport"}/
+    / 320
+    %title WebTecMaster
+    = stylesheet_link_tag "login"
+    = javascript_include_tag "login"
+    = csrf_meta_tags
+  %body
+    .signin_wrapper{style: "background: url('/assets/lock.jpg?#{Time.now.strftime("%d%m%y%s")}'); background-size: cover;  -webkit-background-size: cover;    -moz-background-size: cover;    -o-background-size: cover;    height: 100%;    width: 100%;    position: fixed;    background-repeat: no-repeat;    background-position: 50% 50%;    background-position: 50% 50%9 !important;"}
+      = yield
+      / modal
+    / wrapper

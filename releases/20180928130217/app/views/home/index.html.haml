@@ -1,0 +1,69 @@
+= flash_message
+
+- if current_user.somente_calculo
+  %h2 
+    %b &nbsp; Cálculo Rápido
+  .row
+    .col-md-4.col-sm-5.col-xs-12
+      = link_to calculadora_seguros_path, id: "seguro-incendio" do 
+        = image_tag "seguro-incendio.png", width: "100%"
+- elsif current_user.imobiliaria_id 
+  .row
+    .col-md-4.col-sm-5.col-xs-12
+      = link_to '#', id: "seguro-incendio" do 
+        = image_tag "seguro-incendio.png", width: "100%"
+    .col-md-4.col-sm-5.hidden-xs
+      = link_to titulos_path, id: "capitalizacao" do 
+        = image_tag "capitalizacao.png", width: "100%"
+    .col-md-4.col-sm-5.hidden-xs
+      = link_to seguros_fiancas_path, id: "seguro-fianca" do 
+        = image_tag "seguro-fianca.png", width: "100%"
+  .row#predio
+    .col-md-4.col-sm-5.col-xs-12
+      = link_to residencial_seguros_path, id: "predio-residencial" do 
+        = image_tag "predio-residencial.png", width: "100%"
+    .col-md-4.col-sm-5.col-xs-12
+      = link_to empresarial_seguros_path, id: "predio-empresarial" do 
+        = image_tag "predio-empresarial.png", width: "100%"
+  .row
+    .col-md-4.col-sm-5.visible-xs.col-xs-12
+      = link_to titulos_path, id: "capitalizacao-phone" do 
+        = image_tag "capitalizacao.png", width: "100%"
+
+  :javascript
+    $("#predio").hide();
+    var capitalizacao = $("#capitalizacao img");
+    var seguro_fianca = $("#seguro-fianca img");
+    var capitalizacao2 = $("#capitalizacao-phone img");
+    $("#seguro-incendio").click(function(){
+      if ($("#capitalizacao img").css('opacity') == 1){
+        capitalizacao.fadeTo("slow", 0.2);
+        seguro_fianca.fadeTo("slow", 0.2);
+        capitalizacao2.fadeTo("slow", 0.2);
+        $("#predio").show('slow');
+      } else {
+        $("#predio").hide('slow');
+        capitalizacao.fadeTo("slow", 1);
+        seguro_fianca.fadeTo("slow", 1);
+        capitalizacao2.fadeTo("slow", 1);
+      }
+    });
+
+
+- if @mensagem
+  #myModal.modal.fade{"aria-labelledby" => "gridSystemModalLabel", :role => "dialog", :tabindex => "-1", 'data-backdrop' => "static"}
+    .modal-dialog{:role => "document"}
+      .modal-content
+        .modal-header
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+          %h4#gridSystemModalLabel.modal-title= @mensagem.titulo.upcase
+        .modal-body{style: "min-height: 200px"}
+          .row
+            .col-md-12= @mensagem.texto.html_safe
+        .modal-footer
+          .float-left
+            %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Fechar
+
+  :javascript
+    $("#myModal").modal('show', {backdrop: 'static', keyboard: false});

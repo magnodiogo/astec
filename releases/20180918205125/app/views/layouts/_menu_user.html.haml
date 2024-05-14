@@ -1,0 +1,43 @@
+- if can? :empresarial, Seguro or can? :residencial, Seguro
+  %li.submenu
+    = link_to '#', class: "waves-effect waves-light" do
+      %i.icon.ti-plug
+      %span.text Seguro Incêndio
+      %i.chevron.ti-angle-right
+    %ul.list-unstyled
+      - if can? :residencial, Seguro
+        %li
+          = link_to "Prédio Residencial", residencial_seguros_path
+      - if can? :empresarial, Seguro
+        %li
+          = link_to "Prédio Empresarial", empresarial_seguros_path
+- if can? :calculadora, Seguro
+  %li
+    = link_to calculadora_seguros_path, class: "waves-effect waves-light" do
+      %i.icon.ti-desktop
+      Cálculo Rápido
+- if can? :index, Titulo
+  %li
+    = link_to titulos_path, class: "waves-effect waves-light" do
+      %i.icon.ti-pencil-alt
+      Título de Capitalização
+- if can? :index, SeguroFianca
+  %li
+    = link_to seguros_fiancas_path, class: "waves-effect waves-light" do
+      %i.icon.ti-layers
+      Seguro Fiança
+- if can? :index, Faq
+  %li
+    = link_to faqs_path, class: "waves-effect waves-light" do
+      %i.icon.ti-help-alt
+      Perguntas Frequentes
+- if can? :formulario, Emailer
+  %li
+    = link_to formulario_emailer_index_path, class: "waves-effect waves-light" do
+      %i.icon.ti-comment
+      Fale Conosco
+- if can? :teamviewer, :home
+  %li
+    = link_to 'https://download.teamviewer.com/download/TeamViewer_Setup.exe', class: "waves-effect waves-light", target: "_blank" do
+      %i.icon.ti-tumblr
+      TeamViewer

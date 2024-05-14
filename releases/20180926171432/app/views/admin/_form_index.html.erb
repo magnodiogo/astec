@@ -1,0 +1,65 @@
+<%- form_tag("/admin/relatorios", :class => "nice custom", :method => :post, :target => "_blank") do -%>
+   <div class="box_c_content">
+      <center><%= flash_message %></center>
+      
+      <div class="twelve columns">
+         <div class="formRow2">
+            <div class='person_text_big'>
+               <%= label_tag :relatorio %>
+               <%= select_tag :relatorio, options_for_select([ ['Simples'], ['Detalhado por Produtor'], ['Detalhado por Endereço', 'Detalhado por Endereco'] ]), :class => "input-text medium", :required => true, :style => "width: 200px"  %>
+            </div>
+
+            <div class='person_text_small'>
+               <%= label_tag :data_inicial %>
+               <%= text_field_tag :data_inicial, params[:data_inicial].blank? ? @inicio.to_s_br : params[:data_inicial], :class => "input-text big", :onkeypress => 'mascara(this,data)', :maxlength => 10, :required => true %>
+            </div>
+
+            <div class='person_text_small'>
+               <%= label_tag :data_final %>
+               <%= text_field_tag :data_final, params[:data_final].blank? ? @fim.to_s_br : params[:data_final], :class => "input-text big", :onkeypress => 'mascara(this,data)', :maxlength => 10, :required => true %>
+            </div>
+
+            <div class='person_text_small'>
+               <%= label_tag :status %>
+               <%= select_tag :status, options_for_select([['Cadastrados','2'],['Efetivados',1]]), :class => "input-text big", :required => true  %>
+            </div>
+
+            <div class='person_text' style='width: 95%; height: auto'>
+               <%= label_tag :imobiliarias %>
+               <br/>
+               Todas &nbsp;&nbsp;&nbsp;&nbsp;
+               <%= check_box_tag :todas, true, :checked => true %>
+               <br/>
+               <table width=95% id='imob' style='display: none'>
+               <% count = 1 %>
+               <% Imobiliaria.all(:order => "nome_fantasia").each do |i| %>
+                   <% if count % 2 != 0%>
+                      <tr>
+                   <% end %>
+                   
+                   <td width=40%> <%= i.estipulante %> </td>
+                   <td width=5%> <%= check_box_tag 'imobiliarias[]', i.id %></td>
+                   <td width=5%> &nbsp;</td>
+ 
+                   <% if count % 2 == 0%>
+                      </tr>
+                   <% end %>
+                   <% count += 1 %>
+               <% end %>
+               </table>
+            </div>
+
+         </div>
+      </div>
+
+      <div class="eleven columns"><br/><br/> <hr/> </div>
+
+      <div class="right_margin">
+         <%= submit_tag "Confirmar", :class => "button small nice blue radius"%>
+      </div>
+
+      <div class="medium table_act" style="clear:both;position:relative;top:5px">
+      </div>
+   </div>
+<% end -%>
+

@@ -1,0 +1,37 @@
+pt-BR:
+  activerecord:
+    models:
+      corretora: 
+        one: Corretora
+        other: Corretoras
+    attributes:
+      corretora:
+        id: "#"
+        codigo_sucursal:      Cód Sucursal
+        codigo_corretor:      Cód Corretor
+        codigo_colaborador:   Cód Colaborador
+        codigo_susep:         Cód Susep
+        tipo_de_pessoa:       Tipo de Pessoa
+        razao_social:         Razão Social
+        codigo_da_inspetoria: Cód Inspetoria
+        codigo_do_inspetor:   Cód Inspetor
+        email_corretor:       Email Corretor
+        ddd_corretor:         DDD Corretor
+        telefone_corretor:    Telefone Corretor
+        iof:                  IOF
+        endereco:             Endereço
+        numero:               Número
+        complemento:          Complemento
+        bairro:               Bairro
+        cidade:               Cidade
+        uf:                   UF
+        cep:                  CEP
+        created_at:           Data de Cadastro
+        updated_at:           Data de Atualização
+    errors:
+      models:
+        corretora:
+          attributes:
+          validate:
+
+

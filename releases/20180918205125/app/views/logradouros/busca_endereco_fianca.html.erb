@@ -1,0 +1,20 @@
+<div class='person_text_small seguros'>
+  <%= label_tag :endereco, "Endereço:" %>
+  <%= text_field_tag :endereco, @cep.id ? @cep.endereco : @cep.tipo, :class => "input-text big", :readonly => true%>
+</div>
+
+<div class='person_text_very_small seguros'>
+  <%= label_tag :bairro, "Bairro:" %>
+  <%= text_field_tag :bairro, @cep.id ?  @cep.bairro.nome : '',:class => "input-text big", :readonly => true %>
+</div>   
+
+<div class='person_text_very_small seguros'>
+  <%= label_tag :cidade, "Cidade" %>
+  <%= text_field_tag :cidade, @cep.id ? @cep.cidade : '', :class => "input-text big", :readonly => true %>
+</div>
+
+<div class='person_text_very_small seguros' style='width: 9.5%'>
+  <%= label_tag :uf, "UF:" %>
+  <%= text_field_tag :uf, @cep.uf, :maxlength=>2, :class => "input-text big", :readonly => true %>
+</div>
+

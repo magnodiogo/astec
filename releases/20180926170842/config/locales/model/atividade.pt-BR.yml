@@ -1,0 +1,22 @@
+pt-BR:
+  activerecord:
+    models:
+      atividade: 
+        one: Atividade
+        other: Atividades
+    attributes:
+      atividade:
+        id: "#"
+        codigo:     Código
+        atividade:  Atividade
+        bloqueado:  Bloqueado
+        observacao: Observação
+        created_at: "Data de Cadastro"
+        updated_at: "Data de Atualização"
+    errors:
+      models:
+        atividade:
+          attributes:
+          validate:
+
+

@@ -1,0 +1,44 @@
+- model_class = Mensagem
+= form_for @mensagem, url: (@mensagem.new_record? ? admin_mensagens_path(@mensagem) : admin_mensagem_path), class: "form" do |f|
+  .row
+    .col-md-7.form-group
+      .field
+        = f.label :titulo
+        = f.text_field :titulo, required: true, class: "form-control"
+    .col-md-2.form-group
+      .field
+        = f.label :inicio
+        = f.text_field :inicio, value: @mensagem.inicio.try(:to_s_br), class: "form-control datepicker"
+    .col-md-2.form-group
+      .field
+        = f.label :fim
+        = f.text_field :fim, value: @mensagem.fim.try(:to_s_br), class: "form-control datepicker"
+    .col-md-1.form-group
+      .field
+        = f.label :ativo
+        = f.check_box :ativo
+  .row
+    .col-md-12.form-group
+      .field
+        = f.label :texto
+        = f.text_area :texto, rows: 9, required: true, class: 'form-control editor', wysihtml5: { locale: "pt-BR" } 
+  .row
+    .col-md-12.form-group
+      .field
+        = f.label :user_ids
+        = f.select :user_ids, users, {}, :multiple => "multiple", :style => "display: none;", :tabindex => "-1", class: "multi form-control"
+  .row
+    .col-md-12.form-group
+      .field
+        = f.label :imobiliaria_ids
+        = f.select :imobiliaria_ids, Imobiliaria.order(:estipulante).pluck(:estipulante, :id), {}, :multiple => "multiple", :style => "display: none;", :tabindex => "-1", class: "multi form-control"
+  .form-group
+    .actions  
+      .float-right
+        = f.submit t('.confirm', default: t("helpers.submit.confirm")), class: "btn btn-primary"
+      .float-left
+        = link_to t('.back', default: t("helpers.links.back")), admin_mensagens_path, class: 'btn btn-default'
+:javascript
+  $('.editor').each(function(i, elem) {
+    $(elem).wysihtml5({ toolbar: {'image': false}, locale: "pt-BR"});
+  });

@@ -1,0 +1,8 @@
+  [1m[36mLocatario Load (1.1ms)[0m  [1mSELECT  "locatarios".* FROM "locatarios"  ORDER BY "locatarios"."id" DESC LIMIT 1[0m
+  [1m[35mLocatario Load (0.7ms)[0m  SELECT  "locatarios".* FROM "locatarios"  ORDER BY "locatarios"."id" DESC LIMIT 1
+  [1m[36mLocatario Load (3.3ms)[0m  [1mSELECT  "locatarios".* FROM "locatarios"  ORDER BY "locatarios"."id" DESC LIMIT 1[0m
+  [1m[36m (18.6ms)[0m  [1mSELECT "seguros"."transmitido_em" FROM "seguros" WHERE (transmitido_em between '2022-09-28 03:00:00.000000' and '2022-09-29 02:59:59.999999')  ORDER BY "seguros"."transmitido_em" ASC[0m
+  [1m[35m (13.6ms)[0m  SELECT "seguros"."transmitido_em" FROM "seguros" WHERE (transmitido_em between '2022-09-28 03:00:00.000000' and '2022-09-29 02:59:59.999999')  ORDER BY "seguros"."transmitido_em" ASC
+  [1m[36m (11.9ms)[0m  [1mSELECT "seguros"."transmitido_em" FROM "seguros" WHERE (transmitido_em between '2022-09-28' and '2022-09-28')  ORDER BY "seguros"."transmitido_em" ASC[0m
+  [1m[35m (12.1ms)[0m  SELECT "seguros"."transmitido_em" FROM "seguros" WHERE (transmitido_em between '2022-09-28' and '2022-09-28')  ORDER BY "seguros"."transmitido_em" ASC
+  [1m[36m (19.9ms)[0m  [1mSELECT "seguros"."transmitido_em" FROM "seguros" WHERE (transmitido_em between '2022-09-28 03:00:00.000000' and '2022-09-29 02:59:59.999999')  ORDER BY "seguros"."transmitido_em" ASC[0m

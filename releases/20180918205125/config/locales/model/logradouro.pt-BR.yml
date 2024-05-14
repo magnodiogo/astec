@@ -1,0 +1,24 @@
+pt-BR:
+  activerecord:
+    models:
+      logradouro: 
+        one: CEP
+        other: CEPs
+    attributes:
+      logradouro:
+        id: "#"
+        codigo_correios: Código
+        uf:           "UF"
+        nome:         "Logradouro"
+        tipo:         "Tipo"
+        codigo_ibge:  "IBGE"
+        nome_bairro:  "Bairro"
+        cep:          "CEP"
+        codigo_cidade: "Cidade"
+        estado_id:    "UF"
+      models:
+        logradouro:
+          attributes:
+          validate:
+
+

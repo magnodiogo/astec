@@ -1,0 +1,78 @@
+- model_class = Logradouro
+.row.grid
+  .col-md-12
+    = flash_message
+    .panel.panel-piluku
+      .panel-heading
+        %h3.panel-title
+          Listagem de CEPs
+          .right-button
+            - if can? :new, Logradouro
+              = link_to t('.new', default: t("helpers.links.new")), new_admin_logradouro_path, class: 'btn btn-wtc'
+      .panel-body
+        = form_for @logradouro, url: search_cep_logradouros_path, method: :get, class: "form" do |f|
+          = hidden_field_tag 'mes',         params[:mes]
+          = hidden_field_tag 'tipo',        params[:tipo]
+          = hidden_field_tag 'renovacao',   params[:renovacao]
+          .row
+            .col-md-2.col-xs-6
+              .form-group
+                .field
+                  = f.label :estado_id
+                  = f.collection_select :estado_id, @estados, :id, :uf, {include_blank: true}, { data: { dynamic_selectable_url: dynamic_select_ds_logradouros_path(':estado_id'), dynamic_selectable_target: '#logradouro_codigo_cidade' } , class: "form-control selectize" }
+            .col-md-3.col-xs-6
+              .form-group
+                .field
+                  = f.label :codigo_cidade
+                  = f.collection_select :codigo_cidade, @cidades || [], :codigo_correios, :nome, {include_blank: true}, class: "form-control selectize"
+          .row
+            .col-md-5.col-xs-4
+              .form-group
+                .field
+                  = f.label :nome
+                  = f.text_field :nome, class: "form-control"
+            .col-md-3.col-xs-4
+              .form-group
+                .field
+                  = f.label :nome_bairro
+                  = f.text_field :nome_bairro, class: "form-control"
+            .col-md-2.col-xs-4
+              .form-group
+                .field
+                  = f.label :cep
+                  = f.text_field :cep, class: "form-control unmask", maxlength: 8
+            .col-md-2.col-xs-4
+              = f.submit "Consultar", class: "btn btn-primary", style: "margin-top: 25px; width: 100%"
+      /
+      - if @logradouros and @logradouros.any?
+        .panel-body
+          .table-responsive
+            %table.table.table-striped.table-hover
+              %thead
+                %tr
+                  %th= model_class.human_attribute_name(:cep)
+                  %th= model_class.human_attribute_name(:endereco)
+                  %th= model_class.human_attribute_name(:nome_bairro)
+                  %th= model_class.human_attribute_name(:cidade)
+                  %th= model_class.human_attribute_name(:uf)
+                  %th{colspan: 2} Opções
+              %tbody
+                - @logradouros.each do |logradouro|
+                  %tr
+                    %td= logradouro.cep
+                    %td= logradouro.endereco
+                    %td= logradouro.nome_bairro
+                    %td= logradouro.localidade.try(:nome)
+                    %td= logradouro.uf
+                    %td
+                      - if params[:tipo] != 'TC'
+                        = link_to new_seguro_path(renovacao: params[:renovacao], mes: params[:mes], tipo: params[:tipo], cep: logradouro.cep, tipo: params[:tipo]), :title => 'Confirmar', class: "btn btn-default btn-xs" do
+                          %i.ion.ion-arrow-right-a
+                      - else
+                        = link_to new_titulo_path(cep: logradouro.cep), :title => 'Confirmar', class: "btn btn-default btn-xs" do
+                          %i.ion.ion-arrow-right-a
+              %tfoot
+                %tr
+                  %td{colspan: 99}
+                    %center= page_navigation_links @logradouros if will_paginate @logradouros
+

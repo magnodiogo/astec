@@ -1,0 +1,73 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "Users") do |sheet|
+
+  center      = sheet.styles.add_style(:alignment =>{:horizontal => :center})
+  bold        = sheet.styles.add_style(:b => true)
+  center_bold = sheet.styles.add_style(:b => true, :alignment =>{:horizontal => :center})
+
+  sheet.add_row ["PERÍODO", "#{params[:data_inicial]} à #{params[:data_final]}"]
+  sheet.add_row [""]
+  sheet.add_row ["IMOBILIÁRIAS:", params[:todas] == 'true' ? "Todas" : @seguros.collect{|s| s.imobiliaria.estipulante }.uniq.join(', ') ]
+  sheet.add_row [""]
+  sheet.add_row ["TOTAL",       @seguros.size,      @seguros.collect{|s| s.premio_total }.sum.real.real_contabil]
+  sheet.add_row ["RESIDENCIAL", @total_residencial, @premio_total_residencial.real.real_contabil]
+  sheet.add_row ["EMPRESARIAL", @total_empresarial, @premio_total_empresarial.real.real_contabil]
+
+  prev = nil
+  count = 1
+  i = 1
+  @seguros.each do |s|
+    if prev.nil? or prev.imobiliaria_id != s.imobiliaria_id
+      sheet.add_row [""]
+      sheet.add_row [ count.to_s.rjust(2,'0').to_s,
+                      s.imobiliaria.estipulante.to_s, 
+                      @seguros.collect {|se| se.imobiliaria_id == s.imobiliaria_id ? 1 : 0}.sum, 
+                      @seguros.collect {|se| se.imobiliaria_id == s.imobiliaria_id ? se.premio_total : 0.0}.sum.real.real_contabil], :style => [center_bold, bold, bold, bold ]
+      count += 1
+      i = 1
+    end
+    if prev.nil? or prev.tipo_de_seguro != s.tipo_de_seguro
+      sheet.add_row [ s.tipo_de_seguro_desc, "",
+                      @seguros.collect{|seg| (seg.imobiliaria_id == s.imobiliaria_id and seg.tipo_de_seguro == s.tipo_de_seguro) ? 1 : 0 }.sum]
+      sheet.add_row [ "#",
+                      "Endereço", 
+                      "Bairro", 
+                      "Cidade", 
+                      "UF", 
+                      "Atividade", 
+                      "R$ Prédio", 
+                      "R$ Conteúdo", 
+                      "Proprietário", 
+                      "CPF/CNPJ Proprietário", 
+                      "Inquilino", 
+                      "CPF/CNPJ Inquilino", 
+                      "Prêmio Total", 
+                      "Usuário Transmissão"], :style => center_bold
+    end
+    sheet.add_row [i,
+                   s.logradouro.endereco.to_s + " " + s.numero.to_s  + " " + s.complemento,
+                   s.logradouro.nome_bairro,
+                   s.logradouro.localidade.nome,
+                   s.logradouro.localidade.uf,
+                   s.tipo_de_seguro == 'R' ? s.residencia_desc : s.atividade.atividade,
+                   s.limite_maximo_indenizacao.real.real_contabil,
+                   s.cobertura_para_conteudo ? s.valor_cobertura.real.real_contabil : 'R$ -',
+                   s.proprietario,
+                   cpf_cnpj_formatado(s.cpf_cnpj_proprietario.to_s),
+                   s.inquilino,
+                   cpf_cnpj_formatado(s.cpf_cnpj_inquilino.to_s),
+                   s.premio_total.real.real_contabil,
+                   s.user.name.blank? ? s.user.login : s.user.name,
+                   s.transmitido_por.present? ? (s.transmitido_por.name.blank? ? s.transmitido_por.login : s.transmitido_por.name) : "" ], 
+        :style => [ center, nil, nil, nil, nil, nil, nil, nil ]
+    i += 1
+    prev = s
+  end
+
+
+#  # each user is a row on your spreadsheet
+#  @users.each do |user|
+#    sheet.add_row [user.id, user.name, user.email]
+#  end
+
+end

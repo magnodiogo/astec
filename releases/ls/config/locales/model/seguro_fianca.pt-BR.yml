@@ -1,0 +1,41 @@
+pt-BR:
+  activerecord:
+    models:
+      seguro_fianca: 
+        one: Seguro Fiança
+        other: Seguros Fianças
+    attributes:
+      seguro_fianca:
+        id: "#"
+        finalidade:       "Finalidade da Locação"
+        cep:              "CEP"
+        numero:           "Número"
+        complemento:      "Complemento"
+        tipo_do_imovel:   "Tipo do Imóvel"
+        valor_aluguel:    "Valor do Aluguel"
+        valor_condominio: "Valor do Condomínio"
+        valor_iptu:       "Valor mensal do IPTU"
+        danos_ao_imovel:  "Danos ao imóvel"
+        multa_recisoria:  "Multa rescisória contratual"
+        pintura_interna:  "Pintura Interna"
+        pintura_externa:  "Pintura Externa"
+        status:           "Situação"
+        imobiliaria_id:   "Imobiliária"
+        user_id:          "Usuário"
+        created_at:       "Data de Cadastro"
+        updated_at:       "Data de Atualização"
+        locatario_nome:       "Nome do Locatário"
+        logradouro:           "Endereço"
+        finalidade_do_imovel: "Tipo de Locação"
+        pago:                 "Confirmado Pagamento"
+        valor_titulo:         "Valor do Título"
+        locatario_cpf_cnpj:   "CPF/CNPJ do Locatário"
+    errors:
+      models:
+        seguro_fianca:
+          attributes:
+          validate:
+
+
+
+

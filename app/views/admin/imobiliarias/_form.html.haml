@@ -1,0 +1,161 @@
+- model_class = Imobiliaria
+/ form-heading
+= form_for @imobiliaria, url: (@imobiliaria.new_record? ? admin_imobiliarias_path(@imobiliaria) : admin_imobiliaria_path), class: "form" do |f|
+  .row
+    .col-md-6
+      .form-group
+        .field
+          = f.label :nome_fantasia
+          = f.text_field :nome_fantasia, class: "form-control", :size => 60, :maxlength => 60
+    .col-md-6
+      .form-group
+        .field
+          = f.label :estipulante
+          = f.text_field :estipulante, class: "form-control", :size => 60, :maxlength => 60
+  .row
+    .col-md-6
+      .form-group
+        .field
+          = f.label :tipo_pessoa
+          %ul.list-inline.checkboxes-radio
+            %li.ms-hover
+              = f.radio_button :tipo_pessoa, 'F'
+              %label{for: "imobiliaria_tipo_pessoa_f" }
+                %span
+                Pessoa Física
+            %li.ms-hover
+              = f.radio_button :tipo_pessoa, 'J'
+              %label{for: "imobiliaria_tipo_pessoa_j" }
+                %span
+                Pessoa Jurídica 
+    .col-md-6
+      .form-group
+        .field
+          = f.label :cpf_cnpj
+          = f.text_field :cpf_cnpj, required: true, class: "form-control", :size => 18, :maxlength => 18
+  .row
+    .col-md-3
+      .form-group
+        .field
+          = f.label :data_nascimento
+          = f.text_field :data_nascimento, class: "form-control datepicker", :size => 10, :maxlength => 10
+    .col-md-3
+      .form-group
+        .field
+          = f.label :ie_rg
+          = f.text_field :ie_rg, class: "form-control", :size => 15, :maxlength => 15
+    .col-md-3
+      .form-group
+        .field
+          = f.label :data_expedicao
+          = f.text_field :data_expedicao, class: "form-control datepicker", :size => 10, :maxlength => 10
+    .col-md-3
+      .form-group
+        .field
+          = f.label :orgao_expeditor
+          = f.text_field :orgao_expeditor, class: "form-control", :size => 20, :maxlength => 20
+  .row
+    .col-md-6
+      .form-group
+        .field
+          = f.label :endereco
+          = f.text_field :endereco, class: "form-control", :size => 40, :maxlength => 40
+    .col-md-3
+      .form-group
+        .field
+          = f.label :numero
+          = f.text_field :numero, class: "form-control", :size => 6, :maxlength => 6
+    .col-md-3
+      .form-group
+        .field
+          = f.label :complemento
+          = f.text_field :complemento, class: "form-control", :size => 15, :maxlength => 15
+  .row
+    .col-md-6
+      .form-group
+        .field
+          = f.label :bairro
+          = f.text_field :bairro, class: "form-control", :size => 20, :maxlength => 20
+    .col-md-3
+      .form-group
+        .field
+          = f.label :cidade
+          = f.text_field :cidade, class: "form-control", :size => 40, :maxlength => 40
+    .col-md-3
+      .form-group
+        .field
+          = f.label :estado
+          = f.text_field :estado, class: "form-control", :size => 2, :maxlength => 2
+  .row
+    .col-md-6
+      .form-group
+        .field
+          = f.label :telefone
+          = f.text_field :telefone, class: "form-control", :size => 14, :maxlength => 14
+    .col-md-6
+      .form-group
+        .field
+          = f.label :celular
+          = f.text_field :celular, class: "form-control", :size => 14, :maxlength => 14
+  .row
+    .col-md-6
+      .form-group
+        .field
+          = f.label :contato
+          = f.text_field :contato, class: "form-control", :size => 20, :maxlength => 20
+    .col-md-6
+      .form-group
+        .field
+          = f.label :email
+          = f.email_field :email, class: "form-control", :size => 60, :maxlength => 60
+  .row
+    .col-md-6
+      .form-group
+        .field
+          = f.label :retorno
+          = f.text_field :retorno, class: "form-control", :size => 2, :maxlength => 2
+    .col-md-6
+      .form-group
+        .field
+          = f.label :operacao
+          = f.text_field :operacao, class: "form-control", :size => 60, :maxlength => 60
+  .row
+    .col-md-6
+      .form-group
+        .field
+          = f.label :taxa_residencial
+          = f.text_field :taxa_residencial, class: "form-control"
+    .col-md-6
+      .form-group
+        .field
+          = f.label :taxa_empresarial
+          = f.text_field :taxa_empresarial, class: "form-control", :size => 60, :maxlength => 60
+  .row
+    .col-md-6
+      .form-group
+        .field
+          = f.label :valor_no_recibo
+          = f.check_box :valor_no_recibo, class: "form-control"
+    .col-md-6
+      .form-group
+        .field
+          = f.label :pro_laborista
+          = f.text_field :pro_laborista, class: "form-control", :size => 5, :maxlength => 5
+
+  .form-group
+    .actions  
+      .float-right
+        = f.submit t('.confirm', default: t("helpers.submit.confirm")), class: "btn btn-primary"
+      .float-left
+        = link_to t('.back', default: t("helpers.links.back")), admin_imobiliarias_path, class: 'btn btn-default'
+
+:javascript
+  var fis = $("#imobiliaria_tipo_pessoa_f");
+  var jur = $("#imobiliaria_tipo_pessoa_j");
+  var cpfcnpj = $("#imobiliaria_cpf_cnpj");
+  fis.change(function(){
+    cpfcnpj.mask('999.999.999-99');
+  });
+  jur.change(function(){
+    cpfcnpj.mask('99.999.999/9999-99');
+  });

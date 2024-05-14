@@ -1,0 +1,7 @@
+pt-BR:
+  unauthorized:
+    manage:
+      all: "Acesso negado para %{action} %{subject}."
+      user: "Acesso negado para gerenciar user accounts."
+    update:
+      project: "Not allowed to update this project."

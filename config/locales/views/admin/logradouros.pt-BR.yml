@@ -1,0 +1,19 @@
+pt-BR:
+  admin:
+    logradouros:
+      form: 
+        header: Dados do CEP
+        header_images: Imagens do CEP
+      edit: 
+        title: Editar %{model}
+      index:  
+        title: CEPs
+        header: Listagem de CEPs
+        new: Cadastrar CEP
+      new:
+        title: Cadastrar %{model}
+      show:
+        title: "Detalhes do %{model}"
+        title_serventia: "Listagem de %{model}"
+        header_serventia: "Listagem de %{model}"
+        tipo_de_documentos: Tipos de Documentos

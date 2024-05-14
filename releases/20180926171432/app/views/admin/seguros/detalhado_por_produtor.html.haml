@@ -1,0 +1,78 @@
+- unome = nil
+:css
+  table, tr, td, th { border: 0px solid #000; border-collapse: collapse;}
+  * {font-weight: bold}
+  td, th { padding: 1px 3px; }
+%h2
+  Relatório por Produtor de Seguros #{case params[:status] ; when '0' then "Pendentes" ; when '1' then "Efetivados"; else ; "Cadastrados"; end}
+%br/
+Emitido em: #{Time.now.to_s_br}
+%br/
+%br/
+%br/
+Período: #{params[:data_inicial]} à #{params[:data_final]}
+%br/
+Imobiliárias:
+- if params[:todas] == 'true'
+  Todas
+- else
+  = @seguros.collect{|s| s.imobiliaria.estipulante }.uniq.join(', ')
+%br/
+%br/
+%br/
+- count = 1
+%table{:border => "1", :width => "60%"}
+  %tbody
+    %tr
+      %td{:colspan => "6"}
+        %hr/
+    %tr
+      %td{:align => "center"} TOTAL
+      %td= @seguros.collect{|s| s.count.to_i }.sum
+      %td= @seguros.collect{|s| s.sum.to_f }.sum.real.real_contabil
+    %tr
+      %td{:style => "padding-right: 10%; text-align: right"} Residencial:
+      - total = []; @seguros.collect{|t| total << t.count.to_i if t.tipo_de_seguro == 'R' }
+      %td= total.sum
+      - total = []; @seguros.collect{|t| total << t.sum.to_i if t.tipo_de_seguro == 'R' }
+      %td= total.sum.real.real_contabil
+    %tr
+      %td{:style => "padding-right: 10%; text-align: right"} Empresarial:
+      - total = []; @seguros.collect{|t| total << t.count.to_i if t.tipo_de_seguro == 'C' }
+      %td= total.sum
+      - total = []; @seguros.collect{|t| total << t.sum.to_i if t.tipo_de_seguro == 'C' }
+      %td= total.sum.real.real_contabil
+    - prev = user = nil
+    - @seguros.each do |s|
+      - if prev.nil? or prev.imobiliaria_id != s.imobiliaria_id
+        - unome = nil if 
+        %tr
+          %td{:colspan => "6"}
+            %hr/
+        %tr
+          %td
+            = count.to_s.rjust(2,'0')
+            \-
+            - count += 1
+            = s.imobiliaria.estipulante
+          - total = []; @seguros.collect{|t| total << t.count.to_i if t.imobiliaria_id == s.imobiliaria_id }
+          %td= total.sum
+          - total = []; @seguros.collect{|t| total << t.sum.to_f if t.imobiliaria_id == s.imobiliaria_id }
+          %td= total.sum.real.real_contabil
+      - nome   = s.transmitido_por.try(:name) || s.transmitido_por.try(:login) 
+      - nome ||= "Não Transmitido "
+      - if nome != unome
+        - unome = nome
+        %tr
+          %td{:align => "center"} 
+            = nome
+      %tr
+        %td{:style => "padding-right: 10%; text-align: right"}= h s.tipo_de_seguro_desc
+        %td= h s.count
+        %td= h s.sum.to_f.real.real_contabil
+      - prev  = s
+      - user  = s.transmitido_por
+
+    %tr
+      %td{:colspan => "6"}
+        %hr/

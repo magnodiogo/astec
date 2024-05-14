@@ -1,0 +1,26 @@
+pt-BR:
+  activerecord:
+    models:
+      locatario: 
+        one: CEP
+        other: CEPs
+    attributes:
+      locatario:
+        id: "#"
+        nome:                 "Nome"
+        razao_social:         "Razao Social"
+        cpf:                  "CPF"
+        cnpj:                 "CNPJ"
+        estado_civil:         "Estado Civil"
+        residira_no_imovel:   "Residirá no Imóvel ?"
+        renda:                "Renda"
+        cpf_cnpj:         CPF/CNPJ
+        nome_razao_social: "Nome / Razão Social"
+        vinculo_empregaticio: "Vínculo Empregatício"
+      models:
+        locatario:
+          attributes:
+          validate:
+
+
+

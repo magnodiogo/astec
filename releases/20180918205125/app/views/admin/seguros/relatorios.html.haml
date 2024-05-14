@@ -1,0 +1,73 @@
+- model_class = Seguro
+- if request.get?
+  .row.grid
+    .col-md-12
+      = flash_message
+      .panel.panel-piluku
+        .panel-heading
+          %h3.panel-title
+            Relatórios de Seguros
+            %span.panel-options
+              %a.panel-minimize{:href => "#"}
+                %i.icon.ti-angle-up
+        .panel-body
+          = form_tag relatorios_admin_seguros_path, method: :post, class: "form" do |f|
+            .row
+              .col-md-3
+                .form-group
+                  .field
+                    = label_tag :relatorio
+                    = select_tag :relatorio, options_for_select([ ['Simples'], ['Detalhado por Produtor'], ['Detalhado por Endereço', 'Detalhado por Endereco'] ]), class: "form-control selectize", required: true
+            .row
+              .col-md-3
+                .form-group
+                  .field
+                    = label_tag :data_inicial
+                    = text_field_tag :data_inicial, params[:data_inicial], class: "form-control ", required: true
+              .col-md-3
+                .form-group
+                  .field
+                    = label_tag :data_final
+                    = text_field_tag :data_final, params[:data_final], class: "form-control ", required: true
+              .col-md-3
+                .form-group
+                  .field
+                    = label_tag :status
+                    = select_tag :status, options_for_select([['Cadastrados','2'],['Efetivados','1'], ['Renovados', '3']]), :class => "form-control selectize", :required => true
+            .row
+              .col-md-12
+                .form-group
+                  .field
+                    = label_tag :imobiliarias, "Imobiliárias"
+                    %br/
+                    .row
+                      .col-md-1
+                        = check_box_tag :todas, true, :checked => true, id: "todas"
+                      .col-md-11
+                        Todas     
+                    %br/
+                    .row#imobiliarias
+                      - count = 1
+                      - Imobiliaria.order("nome_fantasia").each do |i|
+                        - if count % 2 != 0
+                          .col-md-1
+                            = check_box_tag 'imobiliarias[]', i.id
+                          .col-md-5
+                            = truncate(i.estipulante, length: 40)
+                            - if count % 2 == 0
+                              - count += 1
+            .form-group
+              .actions  
+                .float-right
+                  = submit_tag t('.confirm', default: t("helpers.submit.confirm")), class: "btn btn-primary"
+          :javascript
+            var imobiliarias = $("#imobiliarias");
+            var todas        = $("#todas");
+            imobiliarias.hide();
+            todas.change(function(){
+              if (todas[0].checked){
+                imobiliarias.hide();
+              } else {
+                imobiliarias.show();
+              }
+            })

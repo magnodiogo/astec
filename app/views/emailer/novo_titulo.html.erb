@@ -1,0 +1,48 @@
+<style>
+  table, tr, td, th { border: 1px solid #000; border-collapse: collapse;}
+  td, th { padding: 1px 3px; }
+</style>
+
+<h2>NOVO TÍTULO CADASTRADO</h2>
+<br/>
+Cadastrado em: <%= l(Time.now, format: :short) %>
+<br/>
+Imobiliaria:   <%= @titulo.imobiliaria.estipulante %>
+<br/>
+Usuário:       <%= @titulo.user.name %>
+<br/>
+<br/>
+<table width='100%' border=1>
+  <tbody>
+    <% %w(cep endereco numero complemento bairro cidade uf finalidade_do_imovel tipo_do_imovel valor_locacao locatario_nome locatario_tipo locatario_cpf_cnpj locatario_telefone locatario_email locatario_data_nascimento locatario_rg locatario_orgao_emissor locatario_data_expedicao locatario_profissao responsavel_legal_nome responsavel_legal_rg responsavel_legal_cpf locatario_atividade locador_nome locador_tipo locador_cpf_cnpj multiplicador_do_titulo meses_do_titulo valor_titulo).each do |key| %>
+      <tr>
+        <td width='40%'><b><%= Titulo.human_attribute_name(key.to_sym) %></b></td>
+        <td>
+          <% if key == 'endereco' %>
+            <%= @titulo.logradouro.nome %>
+          <% elsif key == 'bairro' %>
+            <%= @titulo.logradouro.nome_bairro %>
+          <% elsif key == 'cidade' %>
+            <%= @titulo.logradouro.localidade.nome %>
+          <% elsif key == 'uf' %>
+            <%= @titulo.logradouro.uf %>
+          <% elsif key == 'multiplicador_do_titulo' %>
+            <%= @titulo.multiplicador_do_titulo_desc %>
+          <% elsif key == 'tipo_do_imovel' %>
+            <%= @titulo.tipo_do_imovel_desc %>
+          <% elsif key == 'finalidade_do_imovel' %>
+            <%= @titulo.finalidade_do_imovel_desc %>
+          <% elsif ['locatario_data_nascimento','locatario_data_expedicao'].include?(key) %>
+            <% begin %>
+              <%=l @titulo.send(key) %>
+            <% rescue %>
+            <% end %>
+          <% else %>
+            <%= @titulo.send(key) %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

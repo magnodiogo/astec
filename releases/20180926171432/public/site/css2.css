@@ -1,0 +1,200 @@
+@font-face {
+    font-family: 'Humnst777CnBTRegular';
+    src: url('/site/humnst777-cn-bt-webfont.eot');
+    src: url('/site/humnst777-cn-bt-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/site/humnst777-cn-bt-webfont.woff') format('woff'),
+         url('/site/humnst777-cn-bt-webfont.ttf') format('truetype'),
+         url('/site/humnst777-cn-bt-webfont.svg#Humnst777CnBTRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+@charset "utf-8";
+/* CSS Document */
+* { 
+margin : 0; 
+padding : 0px;
+font-family:Arial, Helvetica, sans-serif;
+}
+
+a {text-decoration:none; color:#333;} 
+
+a:hover {text-decoration:underline} 
+
+h1 { font-size:38px; color:#939; font-weight:bold; font-family: 'Humnst777CnBTRegular';}/* Títulos de página*/
+h2 { font-size:20px; color:#69737C; font-weight:bold; font-family: 'Humnst777CnBTRegular'}
+h3 { font-size:12px; color:#69737C; font-weight:bold;  font-family:Arial, Helvetica, sans-serif}
+h4 { font-size:14px; color:#005893; font-weight:bold;}
+h5 { font-size:13px; color:#005893; font-weight:bold;}
+h6 { font-size:34px; color:#939; font-weight:bold; font-family: 'Humnst777CnBTRegular';}
+
+.span1 { font-size:14px; color:#033; font-weight:bold;}
+.span2 { font-size:11px; color:#033;}
+.span3 { font-size:10px; color:#033; font-weight:bold;}
+.span4 { font-size:15px; color:#069; font-weight:bold;}
+
+img {border:none}
+
+body { font-family:Verdana, Geneva, sans-serif; font-size:12px; background:#FFF; margin-top:4px}
+#bg {margin :0 auto; height:100%; background:#FFF} /* geral */
+
+/* base */
+
+#banertop {float:right; width:240px; margin-top:0px; margin-right:5px; text-align:right; color:#0066CC; padding:5px;}/* banner do topo*/
+
+
+
+#menuh { padding:0px 0px ; margin :0 auto; height:38px; width:988px; background:url(imgs/bg_menuh1.png);} /* Menu Horizontal conteudo */ 
+#list {width:174px; padding:11px 10px 0 0; float:left;} /* Acesso rápido */ 
+.linha1 {width:100%; height:0px; background-color:#FC0} /* Linha em cima do MENU */
+
+.titulodapagina { background:; padding-left:2px; font-size:20px; font-weight:bold; margin:15px 0 0px 0px}
+
+.arapido {margin-left:10px}
+.main {
+	background:#FFF;
+	padding:0px;
+    margin:auto;
+	width:965px;
+	height:100%;
+	border-right:solid 0px #EBEBD6;
+}
+
+#menuv {float:left;}
+#principal {width:735px; float:right; background:#FFF; padding:0px 4px; }
+
+#news {background-color:#FFF; padding:3px;}
+#direito2 {background-color:#C90}
+
+
+
+
+
+/* Menu Vertical -------------------------------------------------------------------------------------------- */
+
+/*- ------------Menu Horizontal--------------- */
+
+  	/*
+Algumas propriedades são puxadas do reset.css....são essas:
+ol, ul, li { list-style:none; margin:0; padding:0}
+assim os elementos ficam sem aqueles bolinha lá ^^.
+Usamos o reset css pois ele ja aplica isso não somente as listas mais a todos os elementos da pagina, facilitando assim o serviço
+*/
+ul.menu li {
+
+	float:left; /*não usa o display:inline, pois esse faz com que fique espaços entre cada botão do menu , sendo assim o float left resolve esse problema*/
+	/*  background:url(imgs/bg_menuh1.png); o background é definido no li para funcionar*/
+	padding:0px 0px 0px 5px; /* para funcionar juntamente com o float:left*/
+line-height: 23px; /* usamos line-height para definir a autura do menu pois assim o texto fica bem no meio....se usar-mos height o texto fica no top*/
+	/* border-style: solid; 
+	border-width: 1px;
+ 	border-color: #404040 #1a1a1a #1a1a1a #505050;  propreidade da borda para dar a impressaõ de 3D*/
+}
+ul.menu li a{
+	display: block; /* eu num entendi muito bem mais isso faz com que fica melhor ^^....funciona juntamente com o padding...se quiser usar so o padding é so retirar o display e aumentar o padding...mais assim é melhor...a borda fica certinha ^^*/
+	padding: 5px 17px; /* os espaços entre os botoes é feito com o ul.menu li a pois todos os elementos são link(a)...*/
+	color: #FFF;
+	font-size:12px;
+	font-family:Arial,Helvetica,sans-serif;
+	text-decoration: none;
+	font-weight: bold;
+}
+ul.menu li a:hover, ul.menu li:hover{
+	/* todas as propriedades aqui servirão para quando estiver-mos com o mouse encima do botão...alterar a cor de fundo e etc..*/
+/* 	color: #0058B0;  para alterar a cor do texto quando estamos com o mouse encima (hover)*/
+	background:url(imgs/bg_.png); 
+	/*border-top-color: #5db1e0 !important;
+	border-left-color: #5db1e0; */
+	text-decoration:underline;
+}
+
+
+ol, ul, li { list-style:none }
+caption, th { text-align:left }
+
+
+
+/* Global reset-RESET */
+/* The below restores some sensible defaults */
+
+/* Menu */
+
+
+.linkofc {float:left; width:230px; border-right:solid 1px #FFF; font-weight:bold;}
+.linkofc2 {float:left; padding-left:5px;}
+.linkofc3 {background-color:#FFF; border:solid 1px #FFF; padding:2px;} /* título das oficinas */
+.linkofc4 {background-color:#F5F5F5; border:dashed 1px #CCC} /* conteudo das oficinas */
+.menutitle{
+cursor:pointer;
+margin-bottom: 5px;
+background-color:#ECECFF;
+color:#000000;
+width:140px;
+padding:2px;
+text-align:center;
+font-weight:bold;
+/*/*/border:1px solid #000000;/* */
+}
+
+.submenu{
+margin-bottom: 0.5em;
+}
+
+
+.janela3 {background-color:#FFF; margin-top:5px; color:#333; font-size:14px; font-weight:bold; height:20px}
+.janela31 {float:left; padding-left:4px; padding-right:10px; background-color:#FFF; border-left:solid 3px #069;}
+.janela32 {float:left; width:20px; height:4px; background-color:#CCC; margin-top:7px;}
+
+.imginfsegs { padding: 3px; margin:0/**top**/ 0/**right**/  0/**botton**/ 0/**elft**/; float:left; border:solid 1px #999;}
+.infsegs1 { font-size:22px; font-weight:bold; float:left; padding-left:14px;}
+.infsegs2 { padding:10px/**top**/ 3px/**right**/  3px/**botton**/ 20px/**elft**/;}
+.infsegs3 { clear:both; padding:10px; font-size:14px; }
+
+.not { color:#1D1D1D;  text-align:justify; background:#FFF; padding-left:3px; text-decoration:none;
+         white-space: -moz-pre-wrap;
+         white-space: -pre-wrap;
+         white-space: -o-pre-wrap;
+         white-space: pre-wrap;
+         word-wrap: break-word;
+		 
+}
+
+
+/*tool tip*/
+p#vtip { display: none; position: absolute; padding: 10px; left: 5px; font-size: 0.8em; background-color:#FFF; border: 1px solid #900; -moz-border-radius: 5px; -webkit-border-radius: 5px; z-index: 9999 }
+p#vtip #vtipArrow { position: absolute; top: -10px; left: 5px }
+
+
+
+
+#slideshow {
+    position:relative;
+
+}
+
+#slideshow DIV {
+    position:absolute;
+    top:0;
+    left:0;
+    z-index:8;
+    opacity:0.0;
+
+    background-color: #FFF;
+}
+
+#slideshow DIV.active {
+    z-index:10;
+    opacity:1.0;
+}
+
+#slideshow DIV.last-active {
+    z-index:9;
+}
+
+#slideshow DIV IMG {
+
+    display: block;
+    border: 0;
+    margin-bottom: 10px;
+}

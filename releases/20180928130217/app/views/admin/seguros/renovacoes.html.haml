@@ -1,0 +1,89 @@
+- model_class = Seguro
+.row.grid
+  .col-md-12
+    = flash_message
+    .panel.panel-piluku
+      - if request.get?
+        .panel-heading
+          %h3.panel-title
+            Renovações
+            %span.panel-options
+              %a.panel-minimize{:href => "#"}
+                %i.icon.ti-angle-up
+        .panel-body
+          = form_tag renovacoes_admin_seguros_path, method: :post, class: "form" do |f|
+            .row
+              .col-md-6
+                .form-group
+                  .field
+                    = label_tag :imobiliaria_id
+                    = select_tag :imobiliaria_id, options_for_select(imobiliarias), :class => "form-control selectize", :required => true
+            .row
+              .col-md-3
+                .form-group
+                  .field
+                    = label_tag :mes
+                    = select_tag :mes, options_for_select(meses, params[:mes].to_i), class: "form-control selectize", required: true
+              .col-md-3
+                .form-group
+                  .field
+                    = label_tag :ano
+                    = select_tag :ano, options_for_select(2013..Date.today.year, params[:ano].to_i), class: "form-control selectize", required: true
+            .form-group
+              .actions  
+                .float-right
+                  = submit_tag t('.confirm', default: t("helpers.submit.confirm")), class: "btn btn-primary"
+      - elsif @seguros and @seguros.any?
+        .panel-heading
+          %h3.panel-title
+            Renovações
+            %span.panel-options
+              %a.panel-minimize{:href => "#"}
+                %i.icon.ti-angle-up
+        .panel-body
+          .table-responsive
+            = form_tag renovacoes_admin_seguros_path, :class => "form" do
+              %table.table.table-striped.table-hover
+                %thead
+                  %tr
+                    %th= model_class.human_attribute_name(:inquilino)
+                    %th= model_class.human_attribute_name(:endereco)
+                    %th= model_class.human_attribute_name(:tipo)
+                    %th Transmissão
+                    %th= model_class.human_attribute_name(:renovado)
+                    %th Opções
+                %tbody
+                  - @seguros.each do |seguro|
+                    %tr
+                      %td= seguro.inquilino 
+                      %td= seguro.endereco_formatado 
+                      %td= seguro.tipo_de_seguro_desc.gsub(':', '')
+                      %td= seguro.transmitido_em.to_date.beginning_of_month.to_s_br 
+                      %td= seguro.renovado ? "Já enviado" : "" 
+                      %td= check_box_tag 'ids[]', seguro.id
+                %tfoot
+                  %tr
+                    %td{colspan: 99}
+                      .float-right
+                        = submit_tag "Gerar Renovações", class: "btn btn-primary"
+      - elsif @ids
+        .panel-heading
+          %h3.panel-title
+            Qual a Data de Vencimento ?
+            %span.panel-options
+              %a.panel-minimize{:href => "#"}
+                %i.icon.ti-angle-up
+        .panel-body
+          = form_tag gerar_renovacoes_admin_seguros_path, method: :post, class: "form" do |f|
+            = hidden_field_tag "ids", @ids
+            .row
+              .col-md-6
+                .form-group
+                  .field
+                    = label_tag :renovar_ate, "Renovar Até"
+                    = text_field_tag :renovar_ate, nil, :class => "form-control datepicker", :required => true
+            .form-group
+              .actions  
+                .float-right
+                  = submit_tag t('.confirm', default: t("helpers.submit.confirm")), class: "btn btn-primary"
+

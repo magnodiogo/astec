@@ -1,0 +1,109 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ * require_tree .
+ *= require bootstrap.min.css
+ *= require material.css
+ *
+ *= require themify-icons.css
+ *= require simple-line-icons.css
+ *= require animate.css
+ *= require select2.css
+ *= require ionicons.min.css
+ *= require font-awesome.min.css
+ *= require gritter/jquery.gritter.css
+ *= require chartist/chartist.min.css
+ *= require nvd3.css
+ *= require maps-custom.css
+ *= require forms.css
+ *= require mail.css
+ *= require portlets.css
+ *= require multi-select.css
+ *= require bootstrap-datepicker3.css
+ *= require bootstrap-datepicker3.standalone.css
+ *= require bootstrap-colorpicker.css
+ *= require buttons.css
+ *= require pagination.css
+ *= require tabs-accordions.css
+ *= require animation-custom.css
+ *= require popovers-tooltips.css
+ *= require modals.css
+ *= require carousel.css
+ *= require infoboxes.css
+ *= require right-sidebar.css
+ *= require basic-tables.css
+ *= require invoice.css
+ *= require pricing.css
+ *= require timeline.css
+ *= require profile.css
+ *= require gallery.css
+ *= require misc.css
+ *= require bic_calendar.css
+ *= require widgets.css
+ *= require weather.css
+ *
+ *= require style.css
+ *= require animated-masonry-gallery.css
+ *= require rotated-gallery.css
+ *= require sweet-alerts/sweetalert.css
+ *= require nestable.css
+ *= require sortable/app.css
+ *= require sortable/ply.css
+ *= require chartist/chartist.min.css
+ *= require jquery.dataTables.min.css
+ *= require widgets.css
+ *= require jtree.css
+ *= require typeahead.css
+ *  require summernote-bs3.css
+ *= require bootstrap-wysihtml5
+ *= require template.css
+ * require_self
+ */
+
+/*
+@import 'themify-icons.css';
+@import 'simple-line-icons.css';
+@import 'animate.css';
+@import 'select2.css';
+@import 'ionicons.min.css';
+@import 'font-awesome.min.css';
+@import 'gritter/jquery.gritter.css';
+@import 'chartist/chartist.min.css';
+@import 'nvd3.css';
+@import 'maps-custom.css';
+@import 'forms.css';
+@import 'mail.css';
+@import 'portlets.css';
+@import 'multi-select.css';
+@import 'bootstrap-datepicker3.css';
+@import 'bootstrap-datepicker3.standalone.css';
+@import 'bootstrap-colorpicker.css';
+@import 'buttons.css';
+@import 'pagination.css';
+@import 'tabs-accordions.css';
+@import 'animation-custom.css';
+@import 'popovers-tooltips.css';
+@import 'modals.css';
+@import 'carousel.css';
+@import 'infoboxes.css';
+@import 'right-sidebar.css';
+@import 'basic-tables.css';
+@import 'invoice.css';
+@import 'pricing.css';
+@import 'timeline.css';
+@import 'profile.css';
+@import 'gallery.css';
+@import 'misc.css';
+@import 'bic_calendar.css';
+@import 'widgets.css';
+@import 'weather.css';
+*/

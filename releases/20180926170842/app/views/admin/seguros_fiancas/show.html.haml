@@ -1,0 +1,202 @@
+- model_class = Titulo
+- is_show = true
+.row.grid
+  .col-md-12
+    = flash_message(@titulo)
+    .panel.panel-piluku
+      .panel-heading
+        %h3.panel-title
+          = t('.title', default: model_class.model_name.human.titleize, model: model_class.model_name.human.titleize)
+          %span.panel-options
+            %a.panel-minimize{:href => "#"}
+              %i.icon.ti-angle-up
+      .panel-body
+        = form_for @titulo, url: admin_titulos_path, class: "form" do |f|
+          .row
+            .col-md-3
+              .form-group
+                .field
+                  = f.label :cep
+                  .row
+                    .col-md-9.col-xs-9
+                      = f.text_field :cep, required: true, readonly: is_show, class: "form-control"
+                    .col-md-3.col-xs-3
+                      = link_to search_cep_logradouros_path(tipo: 'TC', mes: params[:mes], renovacao: params[:renovacao]), class: "btn btn-default" do
+                        %i.ion.ion-search
+            .col-md-4
+              .form-group
+                .field
+                  = label_tag :endereco, "Endereço do Imóvel Locado"
+                  = text_field_tag :endereco, @titulo.try(:logradouro).try(:endereco), maxlength: 60, class: "form-control", readonly: true
+            .col-md-2.col-xs-6
+              .form-group
+                .field
+                  = f.label :numero, "Número"
+                  = f.text_field :numero, maxlength: 6, class: "form-control", required: true, readonly: is_show, onkeypress: "return event.charCode >= 48 && event.charCode <= 57"
+            .col-md-3.col-xs-6
+              .form-group
+                .field
+                  = label_tag :complemento, "Complemento"
+                  = f.text_field :complemento, maxlength: 15, class: "form-control", readonly: is_show
+          .row
+            .col-md-3.col-xs-6
+              .form-group
+                .field
+                  = label_tag :bairro, "Bairro"
+                  = text_field_tag :bairro, @titulo.try(:logradouro).try(:nome_bairro), class: "form-control", readonly: true
+            .col-md-3.col-xs-6
+              .form-group
+                .field
+                  = label_tag :cidade, "Cidade"
+                  = text_field_tag :cidade, @titulo.try(:logradouro).try(:localidade).try(:nome), class: "form-control", readonly: true
+            .col-md-1.col-xs-6
+              .form-group
+                .field
+                  = label_tag :uf, "UF"
+                  = text_field_tag :uf, @titulo.try(:logradouro).try(:uf), class: "form-control", readonly: true
+
+          .row
+            .col-md-4
+              .form-group
+                .field
+                  = f.label :finalidade_do_imovel
+                  = f.select :finalidade_do_imovel, options_finalidade_do_imovel, {}, class: "form-control selectize", required: true, readonly: is_show
+            .col-md-4
+              .form-group
+                .field
+                  = f.label :tipo_do_imovel
+                  = f.select :tipo_do_imovel, options_tipo_do_imovel, {}, class: "form-control selectize", required: true, readonly: is_show
+            .col-md-4
+              .form-group
+                .field
+                  = f.label :valor_locacao
+                  = f.text_field :valor_locacao, value: @titulo.valor_locacao.to_f.real, class: "form-control", required: true, readonly: is_show, min: 10, max: 99999999, maxlength: 12
+          .row
+            .col-md-4
+              .form-group
+                .field
+                  = f.label :locatario_nome
+                  = f.text_field :locatario_nome, maxlength: 60, required: true, readonly: is_show, class: "form-control"
+            .col-md-4
+              .form-group
+                .field
+                  = f.label :locatario_tipo
+                  .row
+                    .col-md-1
+                      = f.radio_button :locatario_tipo, 'PF', style: "display: block", disabled: is_show
+                    .col-md-5
+                      Pessoa Física
+                    .col-md-1
+                      = f.radio_button :locatario_tipo, 'PJ', style: "display: block", disabled: is_show
+                    .col-md-5
+                      Pessoa Jurídica
+            .col-md-4
+              .form-group
+                .field
+                  = f.label :locatario_cpf_cnpj
+                  = f.text_field :locatario_cpf_cnpj, maxlength: 18, size: 18, class: "form-control", required: true, readonly: is_show
+          .row
+            .col-md-4
+              .form-group
+                .field
+                  = f.label :locatario_telefone
+                  = f.text_field :locatario_telefone, required: true, readonly: is_show, class: "form-control"
+            .col-md-8
+              .form-group
+                .field
+                  = f.label :locatario_email
+                  = f.email_field :locatario_email, required: true, readonly: is_show, class: "form-control"
+
+          .row#locatario_pessoa_fisica
+            .col-md-4
+              .form-group
+                .field
+                  = f.label :locatario_data_nascimento
+                  = f.text_field :locatario_data_nascimento, value: l(@titulo.locatario_data_nascimento.try(:to_date)), readonly: is_show, class: "form-control datepicker"
+            .col-md-4
+              .form-group
+                .field
+                  = f.label :locatario_rg
+                  = f.text_field :locatario_rg, readonly: is_show, maxlength: 32, class: "form-control", onkeypress: "return event.charCode >= 48 && event.charCode <= 57"
+            .col-md-4
+              .form-group
+                .field
+                  = f.label :locatario_orgao_emissor
+                  = f.text_field :locatario_orgao_emissor, readonly: is_show, maxlength: 32, class: "form-control"
+            .col-md-4
+              .form-group
+                .field
+                  = f.label :locatario_data_expedicao
+                  = f.text_field :locatario_data_expedicao, value: l(@titulo.locatario_data_expedicao.try(:to_date)), readonly: is_show, class: "form-control datepicker"
+            .col-md-8
+              .form-group
+                .field
+                  = f.label :locatario_profissao
+                  = f.text_field :locatario_profissao, readonly: is_show, maxlength: 32, class: "form-control"
+          .row#locatario_pessoa_juridica
+            .col-md-4
+              .form-group
+                .field
+                  = f.label :responsavel_legal_nome
+                  = f.text_field :responsavel_legal_nome, readonly: is_show, class: "form-control"
+            .col-md-4
+              .form-group
+                .field
+                  = f.label :responsavel_legal_rg
+                  = f.text_field :responsavel_legal_rg, readonly: is_show, maxlength: 32, class: "form-control", onkeypress: "return event.charCode >= 48 && event.charCode <= 57"
+            .col-md-4
+              .form-group
+                .field
+                  = f.label :responsavel_legal_cpf
+                  = f.text_field :responsavel_legal_cpf, readonly: is_show, class: "form-control"
+            .col-md-4
+              .form-group
+                .field
+                  = f.label :locatario_atividade
+                  = f.text_field :locatario_atividade, readonly: is_show, class: "form-control"
+          .row
+            .col-md-4
+              .form-group
+                .field
+                  = f.label :locador_nome
+                  = f.text_field :locador_nome, maxlength: 60, readonly: is_show, class: "form-control"
+            .col-md-4
+              .form-group
+                .field
+                  = f.label :locador_tipo
+                  .row
+                    .col-md-1
+                      = f.radio_button :locador_tipo, 'PF', style: "display: block", disabled: is_show
+                    .col-md-5
+                      Pessoa Física
+                    .col-md-1
+                      = f.radio_button :locador_tipo, 'PJ', style: "display: block", disabled: is_show
+                    .col-md-5
+                      Pessoa Jurídica
+
+            .col-md-4
+              .form-group
+                .field
+                  = f.label :locador_cpf_cnpj
+                  = f.text_field :locador_cpf_cnpj, maxlength: 18, size: 18, class: "form-control", required: true, readonly: is_show
+          .row
+            .col-md-4
+              .form-group
+                .field
+                  = f.label :multiplicador_do_titulo
+                  = f.select :multiplicador_do_titulo, [['Multiplos por Aluguel', 'M'], ['Aluguel mais Encargos', 'A']], {}, class: "form-control selectize", required: true, readonly: is_show
+            .col-md-4
+              .form-group
+                .field
+                  = f.label :meses_do_titulo
+                  = f.select :meses_do_titulo, options_meses_do_titulo, {}, class: "form-control selectize", required: true, readonly: is_show
+            .col-md-4
+              .form-group
+                .field
+                  = f.label :valor_titulo
+                  = f.text_field :valor_titulo, value: @titulo.valor_titulo.to_f.real, class: "form-control", required: true, readonly: is_show, min: 10, max: 99999999, maxlength: 12
+
+          .form-group
+            .actions  
+              .float-left
+                = link_to t('.back', default: t("helpers.links.back")), admin_titulos_path, class: 'btn btn-default'

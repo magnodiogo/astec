@@ -1,0 +1,117 @@
+%head
+  %meta{:charset => "utf-8"}
+  :css
+    * {font-size: 15px} th { text-decoration: underline; }
+
+%body
+  - caminho = '/var/www/seguros'
+  - caminho = '/home/mondrian/workspace'
+  %table{:width => "100%"}
+    %tr
+      %td{:width => "20%"}
+        %img{:src => "#{Rails.public_path}/antigo/images/logo_session_mini.png"}/
+      %td{:align => "center", :style => "font-size: 19px", :width => "60%"}
+        COBERTURA PROVISÓRIA #{@seguro.tipo_de_seguro == 'C' ? "EMPRESARIAL" : "RESIDENCIAL"}
+      %td{:align => "right", :width => "25%"}
+        %img{:height => "45", :src => "#{Rails.public_path}/antigo/images/5305.gif"}/
+  %br
+  %br
+  %br
+  %table
+    %tr
+      %td Proponente:
+      %td
+        = @seguro.imobiliaria.nome_fantasia.remover_acentos
+    %tr
+      %td Cobertura provisória válida
+      %td
+        de #{(@seguro.transmitido_em.to_date + 1.day).to_s_br} ate #{(@seguro.transmitido_em.to_date.end_of_month + 1.day).to_s_br}
+  %br
+  %table{:width => "100%"}
+    %tr
+      %th{:align => "center", :width => "100%"} CARACTERÍSTICA DO RISCO
+  %table
+    %tr
+      %td
+        Data de Inclusão: #{@seguro.transmitido_em.to_date.to_s_br}
+  %table{:width => "100%"}
+    %tr
+      %td
+        Inquilino: #{@seguro.inquilino.remover_acentos.upcase if @seguro.inquilino}
+      %td{:align => "right"}
+        CPF/CNPJ: #{@seguro.cpf_cnpj_inquilino}
+  %table{:width => "100%"}
+    %tr
+      %td
+        Proprietário: #{@seguro.proprietario.remover_acentos.upcase if @seguro.proprietario}
+      %td{:align => "right"}
+        CPF/CNPJ: #{@seguro.cpf_cnpj_proprietario}
+  %table{:width => "100%"}
+    %tr
+      %td
+        Endereço: #{@seguro.logradouro.endereco.remover_acentos}
+      %td
+        Número: #{@seguro.numero}
+      %td{:align => "right"}
+        Complemento: #{@seguro.complemento.remover_acentos}
+  %table{:width => "100%"}
+    %tr
+      %td
+        CEP: #{@seguro.cep}
+      %td
+        Cidade: #{@seguro.logradouro.localidade.nome.remover_acentos.upcase}
+      %td{:align => "right"}
+        UF: #{@seguro.logradouro.uf.upcase}
+  %table{:width => "100%"}
+    %tr
+      %td
+        - if @seguro.residencia and @seguro.residencia == "A"
+          Residência:
+          APARTAMENTO
+        - elsif @seguro.residencia
+          Residência:
+          CASA
+        - elsif @seguro.atividade
+          Atividade: #{@seguro.atividade.atividade.upcase}
+      %td{:align => "right"}
+        Cobertura: PRÉDIO #{@seguro.cobertura_para_conteudo and @seguro.cobertura_para_conteudo > 0 ? " + CONTEÚDO" : ""}
+  %table{:width => "100%"}
+    %tr
+      %td
+        Local de risco será incluído na proposta com vigência de #{(@seguro.transmitido_em.to_date.end_of_month + 1.day).to_s_br} até #{(@seguro.transmitido_em.to_date.end_of_month + 1.day + 1.year).to_s_br} *
+    %tr
+      %td
+        Valor do Seguro: #{@seguro.premio_total.to_f.real.real_contabil}
+  %br
+  %br
+  %table{:width => "100%"}
+    %tr
+      %th{:align => "center", :width => "100%"} COBERTURA
+  %table{:width => "100%"}
+    %tr
+      %td{:width => "70%"} Cobertura:
+      %td Limite Máximo de indenização:
+    %tr
+      %td INCÊNDIO, RAIO e EXPLOSÃO (PRÉDIO)
+      %td
+        = @seguro.limite_maximo_indenizacao.to_f.real.real_contabil
+    - if @seguro.tipo_de_seguro == 'R' and @seguro.cobertura_para_conteudo > 0
+      %tr
+        %td
+          INCÊNDIO, RAIO e EXPLOSÃO (CONTEÚDO)
+        %td
+          = @seguro.valor_cobertura.to_f.real.real_contabil
+  %br
+  %br
+  %table{:width => "100%"}
+    %tr
+      %th{:align => "center", :width => "100%"} OBSERVAÇÕES
+    %tr
+      %td É opcional para a seguradora a inspeção do local de risco. Fica condicionada a aceitação do seguro ao resultado da inspeção (opcional da seguradora) do local de risco.
+    %tr
+      %td * A validade desta proposta está condicionada ao pagamento, à seguradora, por parte de #{@seguro.imobiliaria.nome_fantasia.remover_acentos}.
+  %br
+  %br
+  %hr
+  = @seguro.limite_maximo_indenizacao.to_s.gsub('.','')
+  0#{@seguro.cep}#{@seguro.transmitido_em.strftime("%Y%m%d%H%M")}

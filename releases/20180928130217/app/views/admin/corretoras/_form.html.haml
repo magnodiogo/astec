@@ -1,0 +1,121 @@
+- model_class = Corretora
+/ form-heading
+= form_for @corretora, url: (@corretora.new_record? ? admin_corretoras_path(@corretora) : admin_corretora_path), class: "form" do |f|
+  .row
+    .col-md-3
+      .form-group
+        .field
+          = f.label :codigo_sucursal
+          = f.text_field :codigo_sucursal, class: "form-control", :size => 2, :maxlength => 2
+    .col-md-3
+      .form-group
+        .field
+          = f.label :codigo_corretor
+          = f.text_field :codigo_corretor, class: "form-control", :size => 4, :maxlength => 4
+    .col-md-3
+      .form-group
+        .field
+          = f.label :codigo_colaborador
+          = f.text_field :codigo_colaborador, class: "form-control", :size => 5, :maxlength => 5
+    .col-md-3
+      .form-group
+        .field
+          = f.label :codigo_susep
+          = f.text_field :codigo_susep, class: "form-control"
+  .row
+    .col-md-3
+      .form-group
+        .field
+          = f.label :codigo_da_inspetoria
+          = f.text_field :codigo_da_inspetoria, class: "form-control", :size => 6, :maxlength => 6
+    .col-md-3
+      .form-group
+        .field
+          = f.label :codigo_do_inspetor
+          = f.text_field :codigo_do_inspetor, class: "form-control", :size => 6, :maxlength => 6
+    .col-md-6
+      .form-group
+        .field
+          = f.label :tipo_de_pessoa
+          %ul.list-inline.checkboxes-radio
+            %li.ms-hover
+              = f.radio_button :tipo_de_pessoa, 'F'
+              %label{for: "corretora_tipo_de_pessoa_f" }
+                %span
+                Pessoa Física
+            %li.ms-hover
+              = f.radio_button :tipo_de_pessoa, 'J'
+              %label{for: "corretora_tipo_de_pessoa_j" }
+                %span
+                Pessoa Jurídica 
+  .row
+    .col-md-6
+      .form-group
+        .field
+          = f.label :razao_social
+          = f.text_field :razao_social, required: true, class: "form-control", :size => 40, :maxlength => 40
+    .col-md-6
+      .form-group
+        .field
+          = f.label :email_corretor
+          = f.text_field :email_corretor, required: true, class: "form-control", :size => 60, :maxlength => 60
+  .row
+    .col-md-6
+      .form-group
+        .field
+          = f.label :endereco
+          = f.text_field :endereco, required: true, class: "form-control", :size => 40, :maxlength => 40
+    .col-md-3
+      .form-group
+        .field
+          = f.label :numero
+          = f.text_field :numero, required: true, class: "form-control", :size => 6, :maxlength => 6
+    .col-md-3
+      .form-group
+        .field
+          = f.label :complemento
+          = f.text_field :complemento, required: true, class: "form-control", :size => 15, :maxlength => 15
+  .row
+    .col-md-3
+      .form-group
+        .field
+          = f.label :bairro
+          = f.text_field :bairro, required: true, class: "form-control", :size => 20, :maxlength => 20
+    .col-md-3
+      .form-group
+        .field
+          = f.label :cidade
+          = f.text_field :cidade, required: true, class: "form-control", :size => 40, :maxlength => 40
+    .col-md-3
+      .form-group
+        .field
+          = f.label :uf
+          = f.text_field :uf, required: true, class: "form-control", :size => 2, :maxlength => 2
+    .col-md-3
+      .form-group
+        .field
+          = f.label :cep
+          = f.text_field :cep, required: true, class: "form-control"
+  .row
+    .col-md-3
+      .form-group
+        .field
+          = f.label :ddd_corretor
+          = f.text_field :ddd_corretor, required: true, class: "form-control"
+    .col-md-3
+      .form-group
+        .field
+          = f.label :telefone_corretor
+          = f.text_field :telefone_corretor, required: true, class: "form-control"
+    .col-md-3
+      .form-group
+        .field
+          = f.label :iof
+          = f.text_field :iof, required: true, class: "form-control", :maxlength => 4, :size => 4
+  .form-group
+    .actions  
+      .float-right
+        = f.submit t('.confirm', default: t("helpers.submit.confirm")), class: "btn btn-primary"
+      .float-left
+        = link_to t('.back', default: t("helpers.links.back")), admin_corretoras_path, class: 'btn btn-default'
+

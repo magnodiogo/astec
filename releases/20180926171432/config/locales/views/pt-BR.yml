@@ -1,0 +1,121 @@
+pt-BR: 
+  helpers:
+    form: "Formulário"
+    show: "Visualizar"
+    actions: "Ações"
+    links:
+      show: Visualizar
+      print: Imprimir
+      back: "Voltar"
+      cancel: "Cancelar"
+      confirm: "Confirma a execução dessa operação ?"
+      destroy: "Remover"
+      new: "Cadastrar"
+      edit: "Editar"
+      users: "Usuários"
+      sign_out: Sair
+      admin: Administrar
+      block: Bloquear
+      unblock: Desbloquear
+      reset_password: Resetar Senha
+      search: Buscar
+      reopen_process: Reabrir
+      close: Fechar
+      clear: Limpar
+      login_with: Logar Como
+      unlock_edition: Liberar Edição
+      published: Publicado
+      unpublished: Despublicado
+      unpublish: Despublicar
+      publish: Publicar
+      home: Página Inicial
+      news: Notícias
+      players: Jogadores
+      statistics: Estatísticas
+      import_squad: Importar Elenco Anterior
+      edit_account: Editar Usuário
+      my_player: Meu Jogador
+      my_user: Meu Usuário
+      moder: Gerenciar
+      admin: Administrar
+      report: Reportar
+      update: "Atualizar - %{position}"
+      read_more: Leia mais
+      more: Mais
+      image: Imagem
+      shelve: Arquivar
+      map: Mapa
+      generate_playoffs: Gerar Mata-Mata
+      week_teams: Time da Semana
+    label:
+      type_search: Tipo de Busca
+      type_status: Tipo de Status
+      initial_period: Período Inicial
+      final_period: Período Final
+      find_by: Buscar por
+      user: Usuário
+      password: Senha
+      layout_print: Layout de Impressao
+      filter: Filtrar
+      add_info: Informações Adicionais
+      search_team: "Procure um Time..."
+      initial_date: Período Inicial
+      final_date: Período Final
+    submit:
+      search: Consultar
+      confirm: Confirmar
+      add: Adicionar
+    titles:
+      home: "Principal"
+      edit: "Editar %{model}"
+      save: "Salvar %{model}"
+      new: "Cadastrar %{model}"
+      delete: "Remover %{model}"
+      usuarios: 'Listar Usuários'
+      reports: Relatórios de %{model}
+    home:
+      contact_info: Informações de Contato
+      social_network: Redes Sociais
+      about_us: Quem Somos
+      phone:   'Telefone:'
+      address: 'Endereço:'
+      zipcode: 'CEP:'
+    menu:
+      active_matches: Jogos Ativos
+      next_matches: Próximos Jogos
+    descriptions:
+      team: "Equipe"
+      single: "Individual"
+  submit:
+    create: Cadastrar %{model}
+    update: Atualizar %{model}
+
+  today_matches: Jogos do Dia
+
+  confederations:  Confederações
+  competitions: Competições
+  world:      "Mundial"
+  continent:  "Continental"
+  country:    "Nacional"
+  # continentes
+  africa:     "África"
+  asia:       "Ásia"
+  europe:     "Europa"
+  namerica:   "América do Norte"
+  oceania:    "Oceania"
+  samerica:   "América do Sul"
+
+  pt-BR:      "Português (Brasil)"
+  en:         "English"
+  es:         "Español"
+
+  sunday:    Domingo
+  monday:    Segunda-Feira
+  tuesday:   Terça-Feira
+  wednesday: Quarta-Feira
+  thursday:  Quinta-Feira
+  friday:    Sexta-Feira
+  saturday:  Sábado
+  round: "%{letter}ª Rodada"
+  weekdays: Dias de Jogos
+

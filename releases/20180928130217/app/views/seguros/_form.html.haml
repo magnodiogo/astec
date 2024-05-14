@@ -1,0 +1,282 @@
+- is_show = (action_name == 'show')
+- model_class = Seguro
+= form_for @seguro, class: "form" do |f|
+  = f.hidden_field :imobiliaria_id, value: current_user.imobiliaria_id
+  = f.hidden_field :tipo_de_seguro, value: @tipo
+  = f.hidden_field :atividade_id,   value: @seguro.atividade_id
+  = hidden_field_tag 'mes',         params[:mes]
+  = hidden_field_tag 'tipo',        params[:tipo]
+  = hidden_field_tag 'renovacao',   params[:renovacao]
+
+  - if params[:renovacao].present?
+    .row
+      .col-md-3
+        .form-group
+          .field
+            = f.label :data_limite_renovacao
+            = f.text_field :data_limite_renovacao, maxlength: 10, class: "form-control datepicker", required: true
+  .row
+    .col-md-3
+      .form-group
+        .field
+          = f.label :cep
+          .row
+            .col-md-9.col-xs-9
+              = f.text_field :cep, required: true, class: "form-control", readonly: is_show
+            .col-md-3.col-xs-3
+              = link_to search_cep_logradouros_path(tipo: params[:tipo], mes: params[:mes], renovacao: params[:renovacao]), class: "btn btn-default" do
+                %i.ion.ion-search
+    .col-md-4
+      .form-group
+        .field
+          = label_tag :endereco, "Endereço"
+          = text_field_tag :endereco, @seguro.try(:logradouro).try(:endereco), maxlength: 60, class: "form-control", readonly: is_show, readonly: true
+    .col-md-2.col-xs-6
+      .form-group
+        .field
+          = f.label :numero, "Número"
+          = f.text_field :numero, maxlength: 6, class: "form-control", readonly: is_show, onkeypress: "return ((event.charCode >= 48 && event.charCode <= 57) || ($.inArray(event.keyCode, [37,7,8,9,37,38,39,40,46,116]) >= 0));", required: true
+    .col-md-3.col-xs-6
+      .form-group
+        .field
+          = label_tag :complemento, "Complemento"
+          = f.text_field :complemento, maxlength: 50, class: "form-control", readonly: is_show, onkeypress: "return ((event.charCode >= 48 && event.charCode <= 57) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode == 32) || ($.inArray(event.keyCode, [37,7,8,9,37,38,39,40,46,116]) >= 0) );"
+  .row
+    .col-md-3.col-xs-6
+      .form-group
+        .field
+          = label_tag :bairro, "Bairro"
+          = text_field_tag :bairro, @seguro.try(:logradouro).try(:nome_bairro), class: "form-control", readonly: is_show, readonly: true
+    .col-md-3.col-xs-6
+      .form-group
+        .field
+          = label_tag :cidade, "Cidade"
+          = text_field_tag :cidade, @seguro.try(:logradouro).try(:localidade).try(:nome), class: "form-control", readonly: is_show, readonly: true
+    .col-md-1.col-xs-6
+      .form-group
+        .field
+          = label_tag :uf, "UF"
+          = text_field_tag :uf, @seguro.try(:logradouro).try(:uf), class: "form-control", readonly: is_show, readonly: true
+    - if @tipo == 'R'
+      .col-md-2.col-xs-6
+        .form-group
+          .field
+            = f.label :residencia, "Residência"
+            = f.select :residencia, [['Casa', 'C'], ['Apartamento', 'A']], {}, class: "form-control selectize", required: true
+
+  .row
+    .col-md-4
+      .form-group
+        .field
+          = f.label :inquilino
+          = f.text_field :inquilino, maxlength: 60, required: true, class: "form-control", readonly: is_show
+    .col-md-4
+      .form-group
+        .field
+          = f.label :tipo_pessoa
+          .row
+            .col-md-1
+              = f.radio_button :tipo_pessoa, 'PF', style: "display: block", disabled: is_show
+            .col-md-4
+              Física
+            .col-md-1
+              = f.radio_button :tipo_pessoa, 'PJ', style: "display: block", disabled: is_show
+            .col-md-5
+              Jurídica
+    .col-md-4
+      .form-group
+        .field
+          = f.label :cpf_cnpj_inquilino
+          = f.text_field :cpf_cnpj_inquilino, maxlength: 18, size: 18, class: "form-control", readonly: is_show, required: true
+  .row
+    .col-md-4
+      .form-group
+        .field
+          = f.label :proprietario
+          = f.text_field :proprietario, maxlength: 60, required: true, class: "form-control", readonly: is_show
+    .col-md-4
+      .form-group
+        .field
+          = f.label :tipo_pessoa_proprietario
+          .row
+            .col-md-1
+              = f.radio_button :tipo_pessoa_proprietario, 'PF', style: "display: block", disabled: is_show
+            .col-md-4
+              Física
+            .col-md-1
+              = f.radio_button :tipo_pessoa_proprietario, 'PJ', style: "display: block", disabled: is_show
+            .col-md-5
+              Jurídica
+
+    .col-md-4
+      .form-group
+        .field
+          = f.label :cpf_cnpj_proprietario
+          = f.text_field :cpf_cnpj_proprietario, maxlength: 18, size: 18, class: "form-control", readonly: is_show, required: true
+
+  .row
+    - if @tipo == 'R' or (@seguro.atividade.nil? and action_name == 'show')
+      .col-md-4
+        .form-group
+          .field
+            = f.label :limite_maximo_indenizacao
+            - if action_name == 'show'
+              = text_field_tag :show, @seguro.limite_maximo_indenizacao.to_f.real, :class => "form-control", :readonly => true
+            - else
+              = f.text_field :limite_maximo_indenizacao, value: (@seguro.limite_maximo_indenizacao.to_f.real), :class => "form-control", :required => true, :max => (params[:tipo] == 'R' ? 2000000 : 2000000), :min => (params[:tipo] == 'R' ? 30000 : 50000 ), :maxlength => 12
+            #div_limite_error
+      .col-md-4
+        .form-group
+          .field
+            = f.label :cobertura_para_conteudo
+            = f.select :cobertura_para_conteudo, options_for_select(@cobertura, @seguro.cobertura_para_conteudo ? @seguro.cobertura_para_conteudo.to_i : ''), {}, class: "form-control selectize", required: true
+    - else
+      .col-md-4
+        .form-group
+          .field
+            = f.label :atividade_id
+            = f.text_field :atividade_desc, value: (@seguro.atividade ? @seguro.atividade.atividade : @seguro.atividade_desc) , :required => true, :autocomplete => :off, class: "typeahead", style: "font-size: 14px", :readonly => is_show
+            #div_info_atividade
+      .col-md-4
+        .form-group
+          .field
+            = f.label :limite_maximo_indenizacao, "Limite Máximo da Indenização:"
+            - if action_name == 'show'
+              = text_field_tag :show, @seguro.limite_maximo_indenizacao.to_f.real, :readonly => true
+            - else
+              = f.text_field :limite_maximo_indenizacao, value: (@seguro.limite_maximo_indenizacao.to_f.real), :required => true, :max => (params[:tipo] == 'R' ? 2000000 : 2000000), :min => (params[:tipo] == 'R' ? 30000 : 50000 ), :maxlength => 12
+            #div_limite_error
+    .col-md-4
+      .form-group
+        .field
+          = f.label :premio_total, "Prêmio Total:"
+          = f.text_field :premio_total, value: @seguro.premio_total.to_f.real, :readonly => true
+
+  .form-group
+    .actions  
+      - unless is_show
+        .float-right
+          = f.submit (@seguro.new_record? ? 'Incluir' : 'Alterar'), class: "btn btn-primary"
+      .float-left
+        = link_to t('.back', default: t("helpers.links.back")), seguros_path(tipo: params[:tipo], mes: params[:mes]), class: 'btn btn-default'
+
+- unless is_show
+  :javascript
+    $( document ).ready(function() {
+      var fis = $("#seguro_tipo_pessoa_pf");
+      var jur = $("#seguro_tipo_pessoa_pj");
+      var cpfcnpj = $("#seguro_cpf_cnpj_inquilino");
+      fis.change(function(){
+        cpfcnpj.mask('999.999.999-99');
+      });
+      jur.change(function(){
+        cpfcnpj.mask('99.999.999/9999-99');
+      });
+      if (fis[0].checked) {
+        cpfcnpj.mask('999.999.999-99');
+      }
+      if (jur[0].checked) {
+        cpfcnpj.mask('99.999.999/9999-99');
+      }
+      var fis2 = $("#seguro_tipo_pessoa_proprietario_pf");
+      var jur2 = $("#seguro_tipo_pessoa_proprietario_pj");
+      var cpfcnpj2 = $("#seguro_cpf_cnpj_proprietario");
+      fis2.change(function(){
+        cpfcnpj2.mask('999.999.999-99');
+      });
+      jur2.change(function(){
+        cpfcnpj2.mask('99.999.999/9999-99');
+      });
+      if (fis2[0].checked) {
+        cpfcnpj2.mask('999.999.999-99');
+      }
+      if (jur2[0].checked) {
+        cpfcnpj2.mask('99.999.999/9999-99');
+      }
+
+      var limite      = $("#seguro_limite_maximo_indenizacao");
+      var cobertura   = $("#seguro_cobertura_para_conteudo");
+      var imobiliaria = $("#seguro_imobiliaria_id");
+      var tipo        = $("#tipo");
+      limite.change(function(){
+        ajax_calcula_premio(limite, cobertura);
+      });
+      cobertura.change(function(){
+        ajax_calcula_premio(limite, cobertura);
+      });
+      function ajax_calcula_premio(limite, cobertura){
+        $.ajax({
+          url:  '/seguros/calcula_premio?seguro_limite_maximo_indenizacao=' + limite.val() + "&seguro_cobertura_para_conteudo=" + cobertura.val() + "&imobiliaria_id=" + imobiliaria.val() + "&seguro_tipo_de_seguro=" + tipo.val(),
+          //data: { seguro_limite_maximo_indenizacao: limite.val(), seguro_cobertura_para_conteudo: cobertura.val() },
+          type: 'get',
+          error: function() { $('#seguro_premio_total').val('0,00');  },
+          success: function(data) {
+            $('#seguro_premio_total').val(data);
+          }
+        });
+      }
+      var cep = $("#seguro_cep");
+      if ( cep.val() != "" ) { $("#seguro_numero").focus(); }
+      cep.change(function(){
+        if (cep.val() != "_____-___" && cep.val() != "") {
+          $.ajax({
+            url:  '/logradouros/search_cep?cep=' + cep.val() + "&format=json",
+            type: 'get',
+            success: function(data) {
+              $("#endereco").val(data.endereco);
+              $("#bairro").val(data.bairro);
+              $("#cidade").val(data.cidade);
+              $("#uf").val(data.uf);
+              $("#seguro_numero").focus();
+            }
+          });
+        }
+      });
+      var atividade = $("#seguro_atividade_desc");
+      function ajax_atividade_desc(){
+        $.ajax({
+          url:  '/atividades/consultar?atividade=' + atividade.val(),
+          type: 'get',
+          success: function(data) {
+            $('#div_info_atividade').html(data.observacao);
+          }
+        });
+      }
+      if (atividade.val() && atividade.val() != ""){
+        ajax_atividade_desc();
+      }
+      atividade.change(function(){
+        if (atividade.val() != "") {
+          ajax_atividade_desc();
+        }
+      });
+    });
+    var atividades = new Bloodhound({
+      datumTokenizer: Bloodhound.tokenizers.whitespace,
+      queryTokenizer: Bloodhound.tokenizers.whitespace,
+      prefetch: '/atividades.json'
+    });
+
+    $('.typeahead').typeahead(null, {
+      name: 'atividades',
+      source: atividades
+    });
+
+
+  :javascript
+    var limite = $("#seguro_limite_maximo_indenizacao");
+    var tipo   = $("#tipo");
+    limite.change(function(){
+      valor = parseFloat(limite.val().replace('.','').replace('.','').replace(',','.'));
+      if (valor > 2000000.0) {
+        $('#div_limite_error').html('Valor máximo é: R$ 2.000.000,00. ');
+      } else if ( valor < 50000.0 && tipo.val() == 'C') {
+        var val_min = "50.000,00";
+        $('#div_limite_error').html('Valor mínimo é: R$ '+ val_min + '.');
+      } else if ( valor < 30000.0 && tipo.val() == 'R') {
+        var val_min = "30.000,00";
+        $('#div_limite_error').html('Valor mínimo é: R$ '+ val_min + '.');
+      } else {
+        $('#div_limite_error').html('');
+      }
+    });

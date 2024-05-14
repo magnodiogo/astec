@@ -1,0 +1,55 @@
+- model_class = Imobiliaria
+.row.grid
+  .col-md-12
+    = flash_message
+    .panel.panel-piluku
+      .panel-heading
+        %h3.panel-title
+          = t('.title', model: model_class.model_name.human.titleize)
+          - if can? :new, Imobiliaria
+            .right-button
+              = link_to t('.new', default: t("helpers.links.new")), new_admin_imobiliaria_path, class: 'btn btn-wtc'
+      .panel-body
+        .table-responsive
+          %table.table.table-striped.table-hover#dataTable
+            %thead
+              %tr
+                %th= model_class.human_attribute_name(:estipulante)
+                %th= model_class.human_attribute_name(:cpf_cnpj)
+                %th= model_class.human_attribute_name(:cidade)
+                %th= model_class.human_attribute_name(:bloqueada)
+                %th Opções
+            %tbody
+              - @imobiliarias.each do |imobiliaria|
+                %tr
+                  %td= imobiliaria.estipulante 
+                  %td= imobiliaria.cpf_cnpj 
+                  %td
+                    = imobiliaria.cidade 
+                    = " - "
+                    = imobiliaria.estado 
+                  %td= imobiliaria.bloqueada ? "S" : "N"
+                  %td
+                    - if can? :usuarios, imobiliaria
+                      = link_to usuarios_admin_imobiliaria_path(imobiliaria), class: 'btn btn-default btn-xs', title: "Usuários" do
+                        %i.icon.ion-ios-person{style: "height: 20px"}
+                    - if can? :edit, imobiliaria
+                      = link_to edit_admin_imobiliaria_path(imobiliaria), class: 'btn btn-default btn-xs', title: "Editar" do
+                        %i.icon.ion-edit
+                    - if can? :acessar_como, User
+                      = link_to acessar_como_users_path(id: imobiliaria), class: 'btn btn-default btn-xs', title: "Acessar como" do
+                        %i.icon.ion-arrow-right-a
+                    - if can? :index, Documento
+                      = link_to admin_imobiliaria_documentos_path(imobiliaria), class: 'btn btn-default btn-xs', title: 'Documentos' do
+                        %i.icon.ion-document
+                    - if can? :block_unblock,  Imobiliaria
+                      - if imobiliaria.bloqueada
+                        = link_to block_unblock_admin_imobiliaria_path(imobiliaria), class: "btn btn-success btn-xs", title: 'Desbloquear' do
+                          %i.icon.ion-unlocked
+                      - else 
+                        = link_to block_unblock_admin_imobiliaria_path(imobiliaria), class: "btn btn-danger btn-xs", title: 'Bloquear' do
+                          %i.icon.ion-locked
+                    - if can? :destroy, imobiliaria and imobiliaria.documentos.blank? and imobiliaria.seguros.blank?
+                      = link_to admin_imobiliaria_path(imobiliaria), class: "btn btn-danger btn-xs", :"data-confirm" => 'Confirma exclusão?', method: :delete, title: 'Excluir' do
+                        %i.icon.ion-trash-b
+

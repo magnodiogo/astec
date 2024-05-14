@@ -1,0 +1,20 @@
+.row
+  .right_block
+    .row
+      = form_for resource, as: resource_name, url: session_path(resource_name), class: "col-md-12 col-sm-12 col-xs-12" do |f|
+        / /fixes autocomplete off
+        %h2.signup-heading{style: "margin-top: 40%"}= t(".submit")
+        .row
+          .col-md-12.col-sm-12.col-xs-12
+            = flash_message(resource)
+        .row
+          .input-field.col-md-12.col-sm-12.col-xs-12
+            %i.ion-coffee.prefix
+            = f.text_field :login, autofocus: true
+            = f.label :login
+          .input-field.col-md-12.col-sm-12.col-xs-12
+            %i.ion-key.prefix
+            = f.password_field :password, autocomplete: "off"
+            = f.label :password
+        .clearfix
+        = f.submit t(".submit"), class: "btn btn-primary btn-block" 

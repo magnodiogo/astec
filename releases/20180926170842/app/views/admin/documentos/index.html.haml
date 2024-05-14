@@ -1,0 +1,57 @@
+- model_class = Documento
+.row.grid
+  .col-md-12
+    = flash_message(@documento)
+.row.grid
+  .col-md-6
+    .panel.panel-piluku
+      .panel-heading
+        %h3.panel-title
+          Documentação da Imobiliária
+          %span.panel-options
+            %a.panel-minimize{:href => "#"}
+              %i.icon.ti-angle-up
+      .panel-body
+        .table-responsive
+          %table.table.table-striped.table-hover
+            %thead
+              %tr
+                %th= model_class.human_attribute_name(:documento_file_name)
+                %th= model_class.human_attribute_name(:documento_file_size)
+                %th= model_class.human_attribute_name(:created_at)
+                %th{colspan: 3} Opções
+            %tbody
+              - @documentos.each do |documento|
+                %tr
+                  %td= documento.documento_file_name 
+                  %td
+                    - if documento.documento_file_size and documento.documento_file_size.to_f > 0.0 
+                      =h (documento.documento_file_size.to_f / 1024).round(2).to_s + ' kb'
+                  %td=l documento.created_at, format: :short
+                  %td
+                    = link_to documento.documento.url, download: documento.documento_file_name, class: "btn btn-primary btn-xs", title: "Baixar" do
+                      %i.icon.ion-android-download
+                    = link_to admin_imobiliaria_documento_path(documento.imobiliaria, documento), class: "btn btn-danger btn-xs", :"data-confirm" => 'Confirma exclusão?', method: :delete, title: 'Excluir' do
+                      %i.icon.ion-trash-b
+  .col-md-6
+    .panel.panel-piluku
+      .panel-heading
+        %h3.panel-title
+          Adicionar Documento
+          %span.panel-options
+            %a.panel-minimize{:href => "#"}
+              %i.icon.ti-angle-up
+      .panel-body
+        = form_for @documento, url: (@documento.new_record? ? admin_imobiliaria_documentos_path(@imobiliaria, @documento) : admin_imobiliaria_documento_path(@imobiliaria)), class: "form", multipart: true do |f|
+          = f.hidden_field :imobiliaria_id
+          .form-group
+            .field
+              = f.label :documento
+              = f.file_field :documento, class: "form-control"
+          .form-group
+            .actions  
+              .float-right
+                = f.submit t('.confirm', default: t("helpers.submit.confirm")), class: "btn btn-primary"
+              .float-left
+                = link_to t('.back', default: t("helpers.links.back")), admin_imobiliarias_path, class: 'btn btn-default'
+

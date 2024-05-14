@@ -1,0 +1,41 @@
+- model_class = User
+.row.grid
+  .col-md-12
+    = flash_message(resource)
+    .panel.panel-piluku
+      .panel-heading
+        %h3.panel-title
+          = t('.title', default: model_class.model_name.human.titleize, model: model_class.model_name.human.titleize)
+          %span.panel-options
+            %a.panel-minimize{:href => "#"}
+              %i.icon.ti-angle-up
+      .panel-body
+        = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, autocomplete: "off" }) do |f| 
+          - if devise_mapping.confirmable? && resource.pending_reconfirmation? 
+            %div Currently waiting confirmation for: #{resource.unconfirmed_email}
+            .row
+              .col-md-6
+                .form-group
+                  .field
+                    = f.label :current_password
+                    = f.password_field :current_password, required: true, class: "form-control"
+                    %span (Precisamos de sua senha atual para confirmar as alterações)
+          .row
+            .form-group.col-md-6
+              .field
+                = f.label :password
+                = f.password_field :password, class: "form-control", placeholder: @minimum_password_length ? "(Mínimo de #{@minimum_password_length} caracteres)" : ""
+
+            .form-group.col-md-6
+              .field
+                = f.label :password_confirmation
+                = f.password_field :password_confirmation, class: "form-control"
+
+          .row
+            .col-md-12
+              .form-group
+                .actions  
+                  .float-right
+                    = f.submit t('.confirm', default: t("helpers.submit.confirm")), class: "btn btn-primary"
+
+

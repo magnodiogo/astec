@@ -1,0 +1,30 @@
+- model_class = User
+.row.grid
+  .col-md-12
+    = flash_message(@user)
+    .panel.panel-piluku
+      .panel-heading
+        %h3.panel-title
+          Alterar Avatar do Usuário :: #{@user.name}
+          %span.panel-options
+            %a.panel-minimize{:href => "#"}
+              %i.icon.ti-angle-up
+      .panel-body
+        = form_for @user, url: editar_avatar_user_path(@user), method: :patch, class: "form" do |f| 
+          .row
+            .col-md-12
+              = f.label :avatar
+              .row
+                - %w(one two three four five six seven eight nine).each do |avatar|
+                  .col-md-4
+                    = f.radio_button :avatar, avatar
+                    %label{for: "user_avatar_#{avatar}" }
+                      %span
+                    = image_tag "/assets/avatar/#{avatar}.png", width: 60, style: "border-radius: 50%; margin-bottom: 30px"
+          .form-group
+            .actions  
+              .float-right
+                = f.submit t('.confirm', default: t("helpers.submit.confirm")), class: "btn btn-primary"
+              - if @user.imobiliaria_id
+                .float-left
+                  = link_to t('.back', default: t("helpers.links.back")), usuarios_admin_imobiliaria_path(@user.imobiliaria_id), class: 'btn btn-default'

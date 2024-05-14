@@ -1,0 +1,23 @@
+pt-BR:
+  activerecord:
+    models:
+      documento: 
+        one: Documento
+        other: Documentos
+    attributes:
+      documento:
+        id: "#"
+        imobiliaria_id:       Imobiliária
+        documento_file_name:  Documento
+        documento_content_type:  Tipo de Arquivo
+        documento_file_size: Tamanho
+        user_id:    Usuário
+        created_at: "Enviado em"
+        updated_at: "Data de Atualização"
+    errors:
+      models:
+        documento:
+          attributes:
+          validate:
+
+

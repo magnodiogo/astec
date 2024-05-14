@@ -1,0 +1,31 @@
+- model_class = Atividade
+/ form-heading
+= form_for @atividade, url: (@atividade.new_record? ? admin_atividades_path(@atividade) : admin_atividade_path), class: "form" do |f|
+  .row
+    .col-md-6
+      .form-group
+        .field
+          = f.label :codigo
+          = f.text_field :codigo, required: true, class: "form-control"
+    .col-md-6
+      .form-group
+        .field
+          = f.label :atividade
+          = f.text_field :atividade, required: true, class: "form-control"
+  .row
+    .col-md-6
+      .form-group
+        .field
+          = f.label :bloqueado
+          = f.check_box :bloqueado, class: "form-control"
+    .col-md-6
+      .form-group
+        .field
+          = f.label :observacao
+          = f.text_area :observacao, class: "form-control"
+  .form-group
+    .actions  
+      .float-right
+        = f.submit t('.confirm', default: t("helpers.submit.confirm")), class: "btn btn-primary"
+      .float-left
+        = link_to t('.back', default: t("helpers.links.back")), admin_atividades_path, class: 'btn btn-default'

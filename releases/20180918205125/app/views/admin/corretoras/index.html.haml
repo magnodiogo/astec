@@ -1,0 +1,38 @@
+- model_class = Corretora
+.row.grid
+  .col-md-12
+    = flash_message
+    .panel.panel-piluku
+      .panel-heading
+        %h3.panel-title
+          = t('.title', model: model_class.model_name.human.titleize)
+          .right-button
+            - if can? :new, Corretora
+              = link_to t('.new', default: t("helpers.links.new")), new_admin_corretora_path, class: 'btn btn-wtc'
+      .panel-body
+        .table-responsive
+          %table.table.table-striped.table-hover
+            %thead
+              %tr
+                %th= model_class.human_attribute_name(:codigo_sucursal)
+                %th= model_class.human_attribute_name(:razao_social)
+                %th= model_class.human_attribute_name(:tipo_de_pessoa)
+                %th= model_class.human_attribute_name(:codigo_corretor)
+                %th= model_class.human_attribute_name(:telefone_corretor)
+                %th= model_class.human_attribute_name(:cidade)
+                %th= model_class.human_attribute_name(:uf)
+                %th Opções
+            %tbody
+              - @corretoras.each do |corretora|
+                %tr
+                  %td= corretora.codigo_sucursal 
+                  %td= corretora.razao_social 
+                  %td= corretora.tipo_de_pessoa_desc 
+                  %td= corretora.codigo_corretor 
+                  %td= corretora.telefone_corretor 
+                  %td= corretora.cidade 
+                  %td= corretora.uf 
+                  %td
+                    = link_to t('.edit', default: t("helpers.links.edit")), edit_admin_corretora_path(corretora), class: 'btn btn-default btn-xs'
+
+

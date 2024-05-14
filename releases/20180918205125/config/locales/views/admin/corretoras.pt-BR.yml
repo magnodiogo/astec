@@ -1,0 +1,19 @@
+pt-BR:
+  admin:
+    corretoras:
+      form: 
+        header: Dados do Corretora
+        header_images: Imagens do Corretora
+      edit: 
+        title: Editar %{model}
+      index:  
+        title: Corretoras
+        header: Listagem de Corretoras
+        new: Cadastrar Corretora
+      new:
+        title: Cadastrar %{model}
+      show:
+        title: "Detalhes do %{model}"
+        title_serventia: "Listagem de %{model}"
+        header_serventia: "Listagem de %{model}"
+        tipo_de_documentos: Tipos de Documentos

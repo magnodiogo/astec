@@ -1,0 +1,19 @@
+pt-BR:
+  admin:
+    mensagens:
+      form: 
+        header: Dados do Mensagem
+        header_images: Imagens do Mensagem
+      edit: 
+        title: Editar %{model}
+      index:  
+        title: Mensagens
+        header: Listagem de Mensagens
+        new: Cadastrar Mensagem
+      new:
+        title: Cadastrar %{model}
+      show:
+        title: "Detalhes do %{model}"
+        title_serventia: "Listagem de %{model}"
+        header_serventia: "Listagem de %{model}"
+        tipo_de_documentos: Tipos de Documentos

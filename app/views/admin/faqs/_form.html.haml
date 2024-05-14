@@ -1,0 +1,21 @@
+- model_class = Faq
+/ form-heading
+= form_for @faq, url: (@faq.new_record? ? admin_faqs_path(@faq) : admin_faq_path), class: "form" do |f|
+  .row
+    .col-md-12
+      .form-group
+        .field
+          = f.label :pergunta
+          = f.text_field :pergunta, class: "form-control"
+  .row
+    .col-md-12
+      .form-group
+        .field
+          = f.label :resposta
+          = f.text_field :resposta, class: "form-control"
+  .form-group
+    .actions  
+      .float-right
+        = f.submit t('.confirm', default: t("helpers.submit.confirm")), class: "btn btn-primary"
+      .float-left
+        = link_to t('.back', default: t("helpers.links.back")), admin_faqs_path, class: 'btn btn-default'

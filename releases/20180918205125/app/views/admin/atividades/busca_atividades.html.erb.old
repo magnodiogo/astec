@@ -1,0 +1,1 @@
+<%= options_for_select(@atividades.collect{ |a| [a.atividade, a.id] })  %>

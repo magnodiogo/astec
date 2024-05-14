@@ -1,0 +1,24 @@
+pt-BR:
+  activerecord:
+    models:
+      mensagem: 
+        one: Mensagem
+        other: Mensagens
+    attributes:
+      mensagem:
+        id: "#"
+        ativo:           "Ativa"
+        texto:           "Texto"
+        titulo:          "Título"
+        inicio:          "Data Inicial"
+        fim:             "Data Final"
+        user_ids:        "Usuários"
+        imobiliaria_ids: "Imobiliarias"
+        created_at: "Cadastrada em"
+        updated_at: "Atualizada em"
+      models:
+        mensagem:
+          attributes:
+          validate:
+
+

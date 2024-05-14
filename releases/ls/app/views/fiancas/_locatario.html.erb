@@ -1,0 +1,88 @@
+<% is_show = ( action_name == 'show' ) %>
+<!-- PRETENDENTE (LOCATARIO) -->
+<!-- LINHA 1 -->
+<div class="formRow" style='padding: 0'>
+<div class='person_text_small seguros' style='width: 71.4%'>
+  <%= f.label :locatario_nome, "Locatário:" %>
+  <%= f.text_field :locatario_nome, :class => "input-text ninenine-width", :autofocus => 'autofocus', :readonly => is_show, :required => true %>
+</div>
+<div class='person_text_small seguros' style='width: 21.2%'>
+  <%= f.label :locatario_sexo, "Sexo:" %>
+  <%= f.select :locatario_sexo, options_sexo, { }, :class => "input-text big", :disabled => is_show, :required => true %>
+</div>
+</div>
+<!-- LINHA 2 -->
+<div class="formRow" style='padding: 0'>
+<div class='person_text_small seguros' style='width: 25.2%'>
+  <%= f.label :locatario_cpf, "CPF:" %>
+  <%= f.text_field :locatario_cpf, :maxlength => 18, :size => 18,  :class => "input-text big", :readonly => is_show, :required => true %>
+</div>   
+<div class='person_text_small seguros' style='width: 25.2%'>
+  <%= f.label :locatario_rg, "RG Nº:" %>
+  <%= f.text_field :locatario_rg,  :class => "input-text big", :readonly => is_show, :required => true %>
+</div>   
+<div class='person_text_small seguros' style='width: 21.2%'>
+  <%= f.label :locatario_orgao_expedidor, "Órgão Expedidor:" %>
+  <%= f.text_field :locatario_orgao_expedidor,  :class => "input-text big", :readonly => is_show, :required => true %>
+</div>   
+<div class='person_text_small seguros' style='width: 21.2%'>
+  <%= f.label :locatario_data_expedicao, "Data Expedição:" %>
+  <%= f.text_field :locatario_data_expedicao,  :class => "input-text big", :readonly => is_show, :required => true %>
+</div>   
+</div>
+<!-- LINHA 3 -->
+<div class="formRow" style='padding: 0'>
+<div class='person_text_small seguros' style='width: 50.4%'>
+  <%= f.label :locatario_nacionalidade, "Nacionalidade:" %>
+  <%= f.text_field :locatario_nacionalidade, :maxlength => 18, :size => 18,  :class => "input-text nineseven-width", :readonly => is_show, :required => true %>
+</div>   
+<div class='person_text_small seguros' style='width: 21.2%'>
+  <%= f.label :locatario_nascimento, "Data de Nascimento:" %>
+  <%= f.text_field :locatario_nascimento,  :class => "input-text big", :readonly => is_show, :required => true %>
+</div>   
+<div class='person_text_small seguros' style='width: 21.2%'>
+  <%= f.label :locatario_estado_civil, "Estado Civil:" %>
+  <%= f.text_field :locatario_estado_civil,  :class => "input-text big", :readonly => is_show, :required => true %>
+</div>   
+</div>
+<!-- LINHA 4 -->
+<div class="formRow" style='padding: 0'>
+<div class='person_text_small seguros' style='width: 47%'>
+  <%= f.label :locatario_mae, "Mãe:" %>
+  <%= f.text_field :locatario_mae, :maxlength => 18, :size => 18,  :class => "input-text nineeight-width", :readonly => is_show, :required => true %>
+</div>   
+<div class='person_text_small seguros' style='width: 47%'>
+  <%= f.label :locatario_pai, "Pai:" %>
+  <%= f.text_field :locatario_pai,  :class => "input-text big", :readonly => is_show, :required => true %>
+</div>   
+</div>
+<!-- LINHA 5 -->
+<div class="formRow" style='padding: 0'>
+<div class='person_text_small seguros' style='width: 23.5%'>
+  <%= f.label :locatario_residira_no_imovel, "Residirá no imóvel?" %>
+  <%= f.select :locatario_residira_no_imovel, options_yes_or_no, { }, :class => "input-text big", :disabled => is_show, :required => true %>
+</div>
+<div class='person_text_small seguros' style='width: 23.5%'>
+  <%= f.label :locatario_compora_renda, "Comporá renda?" %>
+  <%= f.select :locatario_compora_renda, options_yes_or_no, { }, :class => "input-text big", :disabled => is_show, :required => true %>
+</div>
+<div class='person_text_small seguros' style='width: 22.5%'>
+  <%= f.label :locatario_correntista, "Correntista Bradesco ?" %>
+  <%= f.select :locatario_correntista, options_yes_or_no, { }, :class => "input-text big", :disabled => is_show, :required => true %>
+</div>
+<div class='person_text_small seguros' style='width: 22.5%'>
+  <%= f.label :locatario_segmoneto, "Segmento:" %>
+  <%= f.text_field :locatario_segmoneto, :class => "input-text ninenine-width", :readonly => is_show, :required => true %>
+</div>
+</div>
+<!-- LINHA 6 -->
+<div class="formRow" style='padding: 0'>
+<div class='person_text_small seguros' style='width: 47%'>
+  <%= f.label :locatario_email_primario, "E-mail (1):" %>
+  <%= f.text_field :locatario_email_primario, :class => "input-text nineeight-width", :readonly => is_show, :required => true %>
+</div>
+<div class='person_text_small seguros' style='width: 47%'>
+  <%= f.label :locatario_email_secundario, "E-mail (2):" %>
+  <%= f.text_field :locatario_email_secundario, :class => "input-text big", :readonly => is_show, :required => true %>
+</div>
+</div>

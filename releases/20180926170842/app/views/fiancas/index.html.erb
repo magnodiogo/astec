@@ -1,0 +1,78 @@
+<div class="container" id='cont_index'>
+  <div class="row">
+    <div class="twelve columns">
+      <div class="box_c">
+        <center><h4>COTAÇÃO SEGURO FIANÇA </h4></center>
+      </div>
+      <div class="box_c">
+        <div class="box_c_heading cf box_actions">
+          <p>Listagem de Cotação de Seguro Fiança</p>
+        </div>
+        <div class="box_c_content">
+          <center><%= flash_message %></center>
+          <div class="medium table_act" style="clear:both;position:relative;top:5px">
+            <div class='left'>
+              <div class='left'>
+                <%= link_to 'Solicitação de Cotação de Seguro Fiança', new_fianca_path, :class => "button small nice blue radius" %>
+              </div>
+              <div class='left', style="margin-left: 5px;">
+                <%# if current_user.tipo == 'A' and current_user.imobiliaria_id %>
+                  <%#= link_to 'Renovação', {:action => :new, :tipo => 'R', :mes => params[:mes], :renovacao => true}, :class => "button small nice blue radius" %>
+                <%# end %>
+              </div>
+              <br/>
+              <br/>
+              <% if @paginate %>
+                <%= will_paginate @fiancas %>
+              <% end %>
+            </div>
+            <div class='right'>
+              <form method="get" action="/fiancas" class='nice custom'>
+                <input type="text" name="busca" id="busca" value="<%=  params[:busca] %>" maxlength='8' class='input-text big' style='float: left; width: 80%' placeholder='Segurado/Endereço'>
+                <input type="image" value="submit" name="commit" src="/img/ico/search-icon24.png" style='margin: 2px 0 0 5px'>
+              </form>
+            </div>
+          </div>
+          <table cellpadding="0" cellspacing="0" border="0" class="display mobile_dt1 dt_act" id="dt1">
+            <thead>
+              <tr>
+                <th>Solicitação</th>
+                <th>Nome do Locatário</th>
+                <th>Endereço</th>
+                <th>Tipo de Locação</th>
+                <th colspan=3>Opções</th>
+              </tr>
+            </thead>
+            <tbody>
+              <%row_alternate(2)%>
+              <% @fiancas.each do |fianca| %>
+                <tr class='<%= row_alternate %>'>
+                  <td><%=h fianca.created_at.to_date.to_s_br %></td>
+                  <td><%=h truncate(fianca.locatario_nome, :length => 50) %></td>
+                  <td><%=h endereco_formatado(fianca) %></td>
+                  <td><%=h descricao_tipo_do_imovel(fianca.imovel_tipo) %></td>
+                  <td><%= link_to image_tag('/img/ico/document_show.png', :title=>'Visualizar'), :action=>"show", :id=>fianca.id %></td>
+                  <% if current_user.is?(:administrador) %>
+                    <td><%= link_to image_tag('/img/ico/document_delete.png', :title =>'Excluir'), fianca, :"data-confirm" => 'Você realmente deseja excluir essa Solicitação de Cotação de Seguro Fiança ?', :method => :delete %></td>
+                  <% end %>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+          <div class="medium table_act" style="clear:both;position:relative;top:5px">
+            <div class='left'>
+              <%= link_to 'Voltar', :action => :comercial   %>
+            </div>
+         
+            <div class='right'>
+              <% if @paginate %>
+                <%= will_paginate @fiancas %>
+              <% end %>
+            </div>
+            <br/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

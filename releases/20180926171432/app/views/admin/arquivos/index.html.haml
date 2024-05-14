@@ -1,0 +1,33 @@
+- model_class = Arquivo
+.row.grid
+  .col-md-12
+    = flash_message
+    .panel.panel-piluku
+      .panel-heading
+        %h3.panel-title
+          = t('.title', model: model_class.model_name.human.titleize)
+          .right-button
+            - if can? :new, Arquivo
+              = link_to t('.new', default: t("helpers.links.new")), new_admin_arquivo_path, class: 'btn btn-wtc'
+      .panel-body
+        .table-responsive
+          %table.table.table-striped.table-hover
+            %thead
+              %tr
+                %th= model_class.human_attribute_name(:id)
+                %th= model_class.human_attribute_name(:nome)
+                %th= model_class.human_attribute_name(:total)
+                %th Opções
+            %tbody
+              - @arquivos.each do |arquivo|
+                %tr
+                  %td= arquivo.id
+                  %td= arquivo.nome
+                  %td= arquivo.total
+                  %td
+                    - if arquivo.url and File.exists?(Rails.public_path.to_s + arquivo.url)
+                      = link_to "Baixar Arquivo", arquivo.url, download: arquivo.url.split('/')[3], class: 'btn btn-default btn-xs'
+            %tfoot
+              %tr
+                %td{colspan: 99}
+                  %center= page_navigation_links @arquivos if will_paginate @arquivos

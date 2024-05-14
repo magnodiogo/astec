@@ -1,0 +1,10 @@
+pt-BR:
+  titulos:
+    index:
+      title: "Listagem de Títulos de Capitalização"
+    new:
+      title: Cadastrar Título de Capitalização
+    edit:
+      title: "Editar Título de Capitalização"
+    form: 
+      confirm: "Solicitar Título"

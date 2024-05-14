@@ -1,0 +1,50 @@
+<% is_show = ( action_name == 'show' ) %>
+<% form_for(@fianca, :html => {:class => 'nice custom'}) do |f| %>
+  <div class="box_c_content" style='padding-top: 0px'>
+    <center>
+    <% @fianca.errors.blank?
+      msg = "";
+      msg_1 = "";
+      atv_err = false;
+      @fianca.errors.each do |erro|
+        if /obrig/.match(erro[1]).nil? and /_/.match(erro.to_s).nil?
+          msg += "<div class='alert error'><span class='icon'></span> #{erro.to_s.gsub('base','')} </div>";
+        else
+          msg_1 = "<div class='alert error'> Os campos vermelhos são <span>obrigatórios</span>. </div>";
+        end
+        if !/atividade_id/.match(erro.to_s).nil?
+          atv_err = true;
+        end
+      end
+      msg = msg_1 + msg;
+    %>
+    <%= msg %>
+    </center>
+
+    <div class="twelve columns">
+      <%= render :partial => "locatario", :locals => {:f => f} %>
+      <%= render :partial => "imovel", :locals => {:f => f} %>
+      <%= render :partial => "residencia", :locals => {:f => f} %>
+      <%= render :partial => "correspondencia", :locals => {:f => f} %>
+      <%= render :partial => "anterior", :locals => {:f => f} %>
+      <%= render :partial => "dependentes", :locals => {:f => f} %>
+      <%= render :partial => "fontes_de_referencia", :locals => {:f => f} %>
+    </div>
+
+    <div class="eleven columns" > <hr/> </div>
+    <% if action_name == 'create' or action_name == 'new' %>
+      <div class="right_margin"><%= f.submit "Incluir", :class => "button medium nice blue radius"%></div>
+    <% elsif action_name == 'edit' or action_name == 'update' %>
+      <div class="right_margin"><%= f.submit "Alterar", :class => "button medium nice blue radius"%></div>
+    <% end %>
+
+    <div class='six columns'>
+      <%= link_to 'Voltar', fiancas_path, :class => "button medium nice blue radius" %>
+    </div>
+
+    <div class="medium table_act" style="clear:both;position:relative;top:5px"></div>
+  </div> 
+<% end %>
+
+
+

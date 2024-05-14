@@ -1,0 +1,18 @@
+default: &default
+  adapter:  postgresql
+  database: seguros
+  username: seguros
+  password: seguros*&098
+
+development:
+  <<: *default
+  pool: 5
+
+test:
+  <<: *default
+  database: seguros_test
+  pool: 5
+  #
+production:
+  <<: *default
+  pool: 25

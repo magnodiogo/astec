@@ -1,0 +1,63 @@
+- model_class = Titulo
+- if request.get?
+  .row.grid
+    .col-md-12
+      = flash_message
+      .panel.panel-piluku
+        .panel-heading
+          %h3.panel-title
+            Relatório de Títulos
+            %span.panel-options
+              %a.panel-minimize{:href => "#"}
+                %i.icon.ti-angle-up
+        .panel-body
+          = form_tag relatorios_admin_titulos_path, method: :post, class: "form" do |f|
+            .row
+              .col-md-3
+                .form-group
+                  .field
+                    = label_tag :data_inicial, "Data Inicial *"
+                    = text_field_tag :data_inicial, params[:data_inicial], class: "form-control", required: true
+              .col-md-3
+                .form-group
+                  .field
+                    = label_tag :data_final, "Data Final *"
+                    = text_field_tag :data_final, params[:data_final], class: "form-control", required: true
+              .col-md-6
+                .form-group
+                  .field
+                    = label_tag :imobiliaria_id
+                    = select_tag :imobiliaria_id, options_for_select(imobiliarias), include_blank: true, :class => "form-control selectize"
+            .form-group
+              .actions  
+                .float-right
+                  = submit_tag t('.confirm', default: t("helpers.submit.confirm")), class: "btn btn-primary"
+- else
+  :css
+    table, tr, td, th { border: 0px solid #000; border-collapse: collapse;}
+    * {font-weight: bold}
+    td, th { padding: 1px 3px; }
+    .margin { margin-bottom: 20px; }
+  %h2 Relatório de Títulos
+  %br/
+  Emitido em: #{l Time.now, format: :short}
+  %br/
+  = flash_message
+  %br/
+  %br/
+  Período: #{params[:data_inicial]} à #{params[:data_final]}
+  %br/
+  Imobiliária: #{@imobiliaria.try(:nome_fantasia) || "TODOS"}
+  %br/
+  %br/
+  %br/
+  %table{:border => "1", :width => "800px"}
+    %tbody
+      - (@titulos || []).each do |titulo|
+        %tr
+          %td=  titulo.imobiliaria.estipulante
+          %td=  titulo.endereco_formatado
+          %td=  titulo.valor_titulo.real
+          %td=  descricao_pago_titulo(titulo)
+          %td=  titulo.user.name
+          %td=l titulo.created_at, format: :short

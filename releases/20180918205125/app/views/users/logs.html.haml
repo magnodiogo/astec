@@ -1,0 +1,30 @@
+- model_class = User
+.row.grid
+  .col-md-12
+    = flash_message
+    .panel.panel-piluku
+      .panel-heading
+        %h3.panel-title
+          = t('.title', model: model_class.model_name.human.titleize)
+          %span.panel-options
+            %a.panel-minimize{:href => "#"}
+              %i.icon.ti-angle-up
+      .panel-body
+        .table-responsive
+          %table.table.table-striped.table-hover
+            %thead
+              %tr
+                %th= model_class.human_attribute_name(:user)
+                %th= model_class.human_attribute_name(:imobiliaria)
+                %th= model_class.human_attribute_name(:created_at)
+            %tbody
+              - @logs.each do |log|
+                %tr{title: log.id}
+                  %td= log.user.try(:username)
+                  %td= log.imobiliaria.try(:estipulante) 
+                  %td= l log.created_at, format: :short
+            %tfoot
+              %tr
+                %td.tfoot_pad{colspan: 99}
+                  %center= page_navigation_links @logs if will_paginate @logs
+

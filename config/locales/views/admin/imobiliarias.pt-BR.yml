@@ -1,0 +1,21 @@
+pt-BR:
+  admin:
+    imobiliarias:
+      form: 
+        header: Dados do Imobiliária
+        header_images: Imagens do Imobiliária
+      edit: 
+        title: Editar %{model}
+      index:  
+        title: Imobiliárias
+        header: Listagem de Imobiliárias
+        new: Cadastrar Imobiliária
+      new:
+        title: Cadastrar %{model}
+      show:
+        title: "Detalhes do %{model}"
+        title_serventia: "Listagem de %{model}"
+        header_serventia: "Listagem de %{model}"
+        tipo_de_documentos: Tipos de Documentos
+      usuarios: 
+        title: "Usuários"

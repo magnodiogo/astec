@@ -1,0 +1,77 @@
+source 'https://rubygems.org'
+
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'rails', '4.2.7'
+# Use sqlite3 as the database for Active Record
+gem 'pg'
+# HAML views. Read more: https://github.com/haml/haml
+gem 'haml', '~> 4.0.7' # '~> 4.0.5'
+gem 'haml-rails'
+# Users:: Read more: https://github.com/plataformatec/devise
+gem 'devise' #, '3.5.2' #, 3.2.4)
+gem 'devise-encryptable', '0.2.0'
+gem 'pundit'
+# UserAccess:: Read more: https://github.com/ryanb/cancan                                                                                                                                                  
+gem 'cancan'
+# Use SCSS for stylesheets
+#gem 'sass-rails', '~> 5.0'
+gem 'less-rails', '~> 2.8.0'
+# Session store
+gem 'activerecord-session_store'
+# Upload file
+gem "paperclip", "~> 5.0.0"
+gem 'will_paginate', '~> 3.1'
+gem 'prawn', '~> 2.0.2' #0.11.1'
+gem 'rghost'
+gem 'brazilian-rails', '~> 3.3'
+gem 'wicked_pdf', '~> 1.1.0'
+#gem 'wicked_pdf', git: 'https://github.com/mileszs/wicked_pdf.git', branch: 'master'
+gem 'wkhtmltopdf-binary'
+#gem 'ckeditor_rails'
+gem 'bootstrap-wysihtml5-rails', github: 'nerian/bootstrap-wysihtml5-rails'
+# Dynamic Select Boxes; Read more: https://github.com/mondriantecnologia/dynamic-select-boxes
+# JQMask
+gem 'maskedinput-rails'
+# Update Browser. Read more: https://github.com/fnando/browser
+gem "browser"
+
+# Use jquery as the JavaScript library
+gem 'jquery-rails'
+gem 'jquery-ui-rails', '~> 5.0.5'
+# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
+#gem 'turbolinks'
+# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+gem 'jbuilder', '~> 2.0'
+# bundle exec rake doc:rails generates the API under doc/api.
+gem 'sdoc', '~> 0.4.0', group: :doc
+
+# Gerar XLS
+gem 'rubyzip', '= 1.0.0'
+gem 'axlsx', '= 2.0.1'
+gem 'axlsx_rails'
+
+group :development, :test do
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'byebug'
+  gem 'thin'
+end
+
+group :development do
+  # Access an IRB console on exception pages or by using <%= console %> in views
+  gem 'web-console', '~> 2.0'
+
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'spring'
+end
+
+# Bootstrap. Read more: https://github.com/seyhunak/twitter-bootstrap-rails
+gem 'twitter-bootstrap-rails'
+
+group :assets do
+  #gem 'sass-rails', '~> 5.0'
+  gem 'uglifier', '>= 1.3.0'
+  gem 'yui-compressor'
+  gem 'coffee-rails'
+  gem 'execjs'
+  gem 'therubyracer', :platforms => :ruby
+end

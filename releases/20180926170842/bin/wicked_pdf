@@ -1,0 +1,2 @@
+#!/bin/bash
+xvfb-run -- /usr/local/rvm/gems/ruby-2.3.1/gems/wkhtmltopdf-binary-0.12.3.1/bin/wkhtmltopdf_linux_amd64 "$@"

@@ -1,0 +1,15 @@
+.panel.panel-piluku
+  .panel-heading
+    %h3.panel-title
+      Perguntas Frequentes
+  .panel-body
+    #accordion.panel-group.piluku-accordion{"aria-multiselectable" => "true", :role => "tablist"}
+      - @faqs.each do |faq|
+        .panel.panel-default
+          #headingOne.panel-heading{:role => "tab"}
+            %h4.panel-title
+              %a{"aria-controls" => "collapseOne", "aria-expanded" => "true", "data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapseOne"}
+                = faq.pergunta
+          #collapseOne.panel-collapse.collapse.in{"aria-expanded" =>"true", "aria-labelledby" => "headingOne", :role => "tabpanel"}
+            .panel-body
+              = faq.resposta

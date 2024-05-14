@@ -1,0 +1,48 @@
+pt-BR:
+  activerecord:
+    models:
+      titulo: 
+        one: Título
+        other: Títulos
+    attributes:
+      titulo:
+        id: "#"
+        finalidade_do_imovel:         "Finalidade do Imóvel Locado"
+        tipo_do_imovel:               "Tipo do Imóvel Locado"
+        valor_locacao:                "Valor do Aluguel"
+        locatario_nome:               "Nome ( Locatário )"
+        locatario_tipo:               "Tipo de Pessoa ( Locatário )"
+        locatario_cpf_cnpj:           "CPF/CNPJ ( Locatário )"
+        locatario_telefone:           "Telefone ( Locatário )"
+        locatario_email:              "E-Mail ( Locatário )"
+        cep:                          "CEP"
+        logradouro:                   "Endereço"
+        numero:                       "Número"
+        locatario_nome:               "Nome do Locatário"
+        logradouro:                   "Endereço"
+        valor_titulo:                 "Valor do Título"
+        locatario_data_nascimento:    "Data de Nascimento ( Locatário )"
+        locatario_rg:                 "RG ( Locatário )"
+        locatario_orgao_emissor:      "Órgão Expedidor ( Locatário )"
+        locatario_data_expedicao:     "Data Expedição ( Locatário )"
+        locatario_profissao:          "Profissão ( Locatário )"
+        finalidade_do_imovel:         "Tipo de Locação"
+        locador_nome:                 "Nome Locador"
+        locador_tipo:                 "Tipo de Pessoa (Locador)"
+        locador_cpf_cnpj:             "CPF/CNPJ Locador"
+        responsavel_legal_nome:       "Nome ( Rensposável Legal )"
+        responsavel_legal_rg:         "RG ( Rensposável Legal )"
+        responsavel_legal_cpf:        "CPF ( Rensposável Legal )"
+        locatario_atividade:          "Atividade da Empresa"
+        meses_do_titulo:              "Número de Meses do Título" 
+        multiplicador_do_titulo:      "Multiplicador do Título"
+        pago:                         "Confirmado Pagamento"
+        created_at:                   "Data de Cadastro"
+        updated_at:                   "Data de Atualização"
+    errors:
+      models:
+        titulo:
+          attributes:
+          validate:
+
+

@@ -1,0 +1,65 @@
+pt-BR:
+  activerecord:
+    models:
+      user: 
+        one: Usuário
+        other: Usuários
+    attributes:
+      user:
+        id: "#"
+        username:       Login
+        email:          Email
+        name:           Nome
+        password:       Senha
+        scope_id:       Tipo de Escopo
+        scope_system_id: Escopo
+        team:           Time
+        entregador_id:           Entregador ID
+        name_cpf:       Nome do Titular do CPF
+        cpf:            CPF
+        t_id:           Time
+        published:      Publicado
+        reset_password_token: Token de alteração de senha
+        reset_password_sent_at: Alteração de senha enviado em
+        remember_created_at: Lembrar data de cadastro
+        sign_in_count: Contador de Logins
+        current_sign_in_at: Logado desde       
+        last_sign_in_at:                Ultimo Login em     
+        current_sign_in_ip: IP do login atual
+        last_sign_in_ip: IP do último login
+        confirmation_token: Confirmação de Token
+        confirmed_at:  Confirmado em
+        confirmation_sent_at:                     Confirmação enviada em
+        unconfirmed_email: Email não confirmado
+        failed_attempts: Tentativas falhas
+        unlock_token:    Token de Desbloqueio
+        locked_at:       Bloqueado em        
+        block:           Bloqueado
+        sendEmail:       Enviar Email
+        activation:      Ativação         
+        params:          Parametros
+        language:        Idioma
+        tnumber:         Número da Camisa
+        resetCount:      Contador de Reset
+        country_id:      Federação
+        num_doc:         Número do Documento
+        name_doc:        Nome no Documento
+        somente_calculo: Somente Cálculo
+        #otpKey:                     
+        #otep:                     
+        terms_of_use_id:         Termos de Uso
+        player:         Jogador
+        players:        Jogadores
+        cpf_more18:     Perfil de Usuário
+        #requireReset:                     
+        scope_system_id: Escopo
+        roles_mask: Permissão
+        created_at: "Data de Cadastro"
+        updated_at: "Data de Atualização"
+    errors:
+      models:
+        user:
+          attributes:
+          validate:
+
+

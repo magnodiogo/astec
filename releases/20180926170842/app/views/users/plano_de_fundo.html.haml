@@ -1,0 +1,31 @@
+- model_class = User
+.row.grid
+  .col-md-12
+    = flash_message(@user)
+    .panel.panel-piluku
+      .panel-heading
+        %h3.panel-title
+          Alterar Plano de Fundo (Tela de Login)
+          %span.panel-options
+            %a.panel-minimize{:href => "#"}
+              %i.icon.ti-angle-up
+      .panel-body
+        = form_tag alterar_plano_de_fundo_users_path, method: :post, multipart: true, class: "form" do |f|
+          .row
+            .col-md-6
+              .form-group
+                .field
+                  = label_tag :imagem
+                  = file_field_tag :imagem, class: "form-control", required: true
+            .col-md-6
+              .form-group
+                .field
+                  = label_tag :imagem, "Imagem Atual"
+                  %br
+                  <img src="/assets/lock.jpg" width="100%"/>
+          .form-group
+            .actions  
+              .float-right
+                = submit_tag t('.confirm', default: t("helpers.submit.confirm")), class: "btn btn-primary"
+              .float-left
+                = link_to t('.back', default: t("helpers.links.back")), admin_arquivos_path, class: 'btn btn-default'

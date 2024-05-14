@@ -1,0 +1,49 @@
+- model_class = User
+.row.grid
+  .col-md-12
+    = flash_message(@user)
+    .panel.panel-piluku
+      .panel-heading
+        %h3.panel-title
+          Atualizar Permissões
+          %span.panel-options
+            %a.panel-minimize{:href => "#"}
+              %i.icon.ti-angle-up
+      .panel-body
+        = form_for @user, url: editar_permissoes_user_path, class: "form" do |f|
+          .form-group
+            .field
+              = label_tag :permissoes, "Permissões"
+              .row
+                .col-md-1.col-xs-1
+                  = f.check_box :add_atividade, :class => "input-text big"
+                .col-md-5.col-xs-11
+                  = f.label :add_atividade, "Cadastra Atividades"
+                .col-md-1.col-xs-1
+                  = f.check_box :edit_atividade, :class => "input-text big"
+                .col-md-5.col-xs-11
+                  = f.label :edit_atividade, "Edita Atividades:"
+              .row
+                .col-md-1.col-xs-1
+                  = f.check_box :new_imobiliaria, :class => "input-text big"
+                .col-md-5.col-xs-11
+                  = f.label :new_imobiliaria, "Nova Imobiliaria:"
+                .col-md-1.col-xs-1
+                  = f.check_box :edit_imobiliaria, :class => "input-text big"
+                .col-md-5.col-xs-11
+                  = f.label :edit_imobiliaria, "Edita Imobiliaria:"
+              .row
+                .col-md-1.col-xs-1
+                  = f.check_box :bloqueia_imobiliaria, :class => "input-text big"
+                .col-md-5.col-xs-11
+                  = f.label :bloqueia_imobiliaria, "Bloqueia Atividade:"
+                .col-md-1.col-xs-1
+                  = f.check_box :master, :class => "input-text big"
+                .col-md-5.col-xs-11
+                  = f.label :master, "MASTER :"
+          .form-group
+            .actions  
+              .float-right
+                = f.submit t('.confirm', default: t("helpers.submit.confirm")), class: "btn btn-primary"
+              .float-left
+                = link_to t('.back', default: t("helpers.links.back")), users_path, class: 'btn btn-default'

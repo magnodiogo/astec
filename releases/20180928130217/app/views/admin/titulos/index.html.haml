@@ -1,0 +1,58 @@
+- model_class = Titulo
+.row.grid
+  .col-md-12
+    = flash_message
+    .panel.panel-piluku
+      .panel-heading
+        %h3.panel-title
+          Listagem de Títulos
+      .panel-body
+        = form_tag admin_titulos_path, method: :get, class: "form" do |f|
+          .row
+            .col-md-4.col-xs-6
+              .form-group
+                .field
+                  = label_tag :imobiliaria_id
+                  = select_tag :imobiliaria_id, options_for_select(Imobiliaria.pluck(:estipulante, :id).sort),  class: "form-control selectize"
+            .col-md-2.col-xs-4
+              = submit_tag "Consultar", class: "btn btn-primary", style: "margin-top: 25px; width: 100%"
+        .table-responsive
+          %table.table.table-striped.table-hover
+            %thead
+              %tr
+                %th= model_class.human_attribute_name(:locatario_nome)
+                %th= model_class.human_attribute_name(:locatario_cpf_cnpj)
+                %th= model_class.human_attribute_name(:imobiliaria_id)
+                %th= model_class.human_attribute_name(:finalidade_do_imovel)
+                %th= model_class.human_attribute_name(:pago)
+                %th= model_class.human_attribute_name(:created_at)
+                %th{width: '14%'} Opções
+            %tbody
+              - @titulos.each do |titulo|
+                %tr
+                  %td= titulo.locatario_nome
+                  %td= cpf_cnpj_formatado(titulo.locatario_cpf_cnpj)
+                  %td= truncate(titulo.imobiliaria.estipulante, length: 30)
+                  %td= finalidade_do_imovel_desc(titulo.finalidade_do_imovel)
+                  %td= descricao_pago_titulo(titulo)
+                  %td= l titulo.created_at.to_date
+                  %td
+                    - if can? :show, titulo
+                      = link_to admin_titulo_path(titulo), class: 'btn btn-default btn-xs', title: "Visualizar" do
+                        %i.icon.ion-android-search
+                    - if titulo.pago.to_i > 0
+                      = link_to alterar_pagamento_admin_titulo_path(titulo, pendente: true), class: 'btn btn-warning btn-xs', :"data-confirm" => 'Confirma a alteração ?', title: "Retornar a Pendente" do
+                        %i.icon.ion-card
+                    - if titulo.pago != 1
+                      = link_to alterar_pagamento_admin_titulo_path(titulo, pagamento: true), class: 'btn btn-success btn-xs', :"data-confirm" => 'Confirma a pagamento ?', title: "Confirmar Pagamento" do
+                        %i.icon.ion-card
+                    - if titulo.pago != 2
+                      = link_to alterar_pagamento_admin_titulo_path(titulo), class: 'btn btn-danger btn-xs', title: "Recusar", :"data-confirm" => 'Confirma a recusa ?' do
+                        %i.icon.ion-close
+                    - if can? :destroy, Titulo
+                      = link_to admin_titulo_path(titulo), class: "btn btn-danger btn-xs", :"data-confirm" => 'Confirma a exclusão?', method: :delete, title: 'Excluir' do
+                        %i.icon.ion-trash-b
+            %tfoot
+              %tr
+                %td{colspan: 99}
+                  %center= page_navigation_links @titulos if will_paginate @titulos

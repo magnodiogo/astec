@@ -1,0 +1,104 @@
+
+<div class='container' id='confirma' style='display: none; height: auto; padding-bottom: 54px; '>
+  <div class="row">
+    <div class="twelve columns">
+      <div class="box_c" style="height:200px">
+        <% if params[:tipo] == 'R' %>
+           <div class="box_c_content" style="height: auto; padding-bottom: 44px; ">
+             <center>
+              <b style='font-size: 14px'>
+                 <big style='color: red; font-weight: bold; font-size: 20px'><u>IMPORTANTE </u></big><br/><br/>
+                 <br/>
+                 Seguro para imóveis exclusivamente residenciais. 
+                 <br/>
+                 <br/>
+                 Caso o imóvel não seja exclusivamente residencial, o seguro deve ser cadastrado através da opção de imóveis empresariais.
+                 <br/>
+                 <br/>
+                 <br/>
+                 <br/>
+              </b>
+              <br/><br/>
+             </center>
+        <% else %>
+           <div class="box_c_content" style="height: auto; padding-bottom: 44px; ">
+            <center>
+              <b style='font-size: 14px'>
+                 <big style='color: red; font-weight: bold; font-size: 20px'><u>IMPORTANTE </u></big><br/> As atividades abaixo são excluídas de aceitação para realização de seguro.
+              </b>
+              <br/><br/>
+              <table class='myTable'>
+                <tr>
+                   <td width='50%'>Construção com predominância em madeira/palha ou telhado de madeira/palha.</td>
+                   <td width='50%'>Imóveis Tombados ou históricos.</td>
+                </tr>
+                <tr>
+                   <td>Acetileno – Fábrica e Processamento</td>
+                   <td>Erva Mate – Depósito e Processamento.</td>
+                </tr>
+                <tr>
+                   <td>Algodão – Abridores, descaroçadores, prensagem, batedores e semelhantes.</td>
+                   <td>Fogos de artifícios – Fábrica, Loja e Depósito.</td>
+                </tr>
+                <tr>
+                   <td>Antiguidades – Loja e Depósito.</td>
+                   <td>Explosivo – Depósito e Fábrica.</td>
+                </tr>
+                <tr>
+                   <td>Banca de jornal e resista.</td>
+                   <td>Gás – Depósito, Fábrica e Engarrafamento.</td>
+                </tr>
+                <tr>
+                   <td>Boates, Casas de Shows, Cabarés e Similares.</td>
+                   <td>Inflamável – Fábrica e Depósito.</td>
+                </tr>
+                <tr>
+                   <td>Carbureto de Cálcio – Fábrica e Depósito.</td>
+                   <td>Marcenarias e Serrarias.</td>
+                </tr>
+                <tr>
+                   <td>Carvão mineral e vegetal – Depósito e Extração.</td>
+                   <td>Museus.</td>
+                </tr>
+                <tr>
+                   <td>Cera animal e vegetal.</td>
+                   <td>Depósito de aparas de papel velho / reciclável.</td>
+                </tr>
+                <tr>
+                   <td>Circos.</td>
+                   <td>Plantações.</td>
+                </tr>
+                <tr>
+                   <td>Colchões – Fábrica, Lojas e Depósitos.</td>
+                   <td>Pólvora – Fábrica, Loja e Depósito.</td>
+                </tr>
+                <tr>
+                   <td>Cortiça – Fábrica, Loja e Depósito.</td>
+                   <td>Sucata, ferro-velho, Resíduos e lixo.</td>
+                </tr>
+                <tr>
+                   <td>Estopa – Fábrica, Loja e Depósito.</td>
+                   <td>Vime, Junco, Piaçaba, Juta e assemelhados.</td>
+                </tr>
+              </table>
+               <br/>
+              <br/>
+            </center>
+           <% end %>
+
+           <div class="right_margin">
+             <% if params[:tipo] == 'R' %>
+               <%= link_to 'Estou ciente, Continuar.', {:action => :new, :tipo => 'R', :mes => params[:mes]}, :class => "button small nice blue radius" %>
+             <% else %>
+               <%= link_to 'Estou ciente, Continuar.', {:action => :new, :mes => params[:mes]}, :class => "button small nice blue radius" %>
+             <% end %>
+           </div>
+           <div class='six columns'>
+             <%= link_to 'Voltar', 'javascript:retorna()', :class => "button small nice blue radius" %>        
+          </div>
+       </div>
+     </div>
+   </div>
+</div>
+</div>
+</div>

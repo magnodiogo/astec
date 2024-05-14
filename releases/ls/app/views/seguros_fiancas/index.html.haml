@@ -1,0 +1,47 @@
+- model_class = SeguroFianca
+.row.grid
+  .col-md-12
+    = flash_message
+    .panel.panel-piluku
+      .panel-heading
+        %h3.panel-title
+          Listagem de Seguros Fiança
+          - if can? :new, SeguroFianca
+            .right-button
+              = link_to "Novo Seguro Fiança", new_seguro_fianca_path, class: 'btn btn-wtc'
+      .panel-body
+        = form_for SeguroFianca.new, url: seguros_fiancas_path, method: :get, class: "form" do |f|
+          .row
+            .col-md-10.col-xs-8
+              .form-group
+                .field
+                  = label_tag :busca
+                  = text_field_tag :busca, params[:busca], class: "form-control", placeholder: "Endereço / Inquilino"
+            .col-md-2.col-xs-4
+              = f.submit "Consultar", class: "btn btn-primary", style: "margin-top: 25px; width: 100%"
+        .table-responsive
+          %table.table.table-striped.table-hover
+            %thead
+              %tr
+                %th= model_class.human_attribute_name(:created_at)
+                %th= model_class.human_attribute_name(:locatario_nome)
+                %th= model_class.human_attribute_name(:logradouro)
+                %th= model_class.human_attribute_name(:valor_aluguel)
+                %th= model_class.human_attribute_name(:finalidade_do_imovel)
+                %th= model_class.human_attribute_name(:pago)
+                %th Opções
+            %tbody
+              - @seguros_fiancas.each do |seguro_fianca|
+                %tr
+                  %td=l seguro_fianca.created_at.to_date
+                  %td=  truncate(seguro_fianca.locatarios.first.try(:nome), length: 50)
+                  %td=  endereco_formatado(seguro_fianca)
+                  %td= seguro_fianca.valor_aluguel.to_f.real
+                  %td= finalidade_desc(seguro_fianca.finalidade)
+                  %td= descricao_pago_seguro_fianca(seguro_fianca)
+                  %td
+                    = link_to seguro_fianca, title: 'Visualizar', class: "btn btn-default btn-xs" do
+                      %i.ion.ion-search
+                    - if can? :edit, seguro_fianca
+                      = link_to edit_seguro_fianca_path(seguro_fianca), title: 'Visualizar', class: "btn btn-default btn-xs" do
+                        %i.ion.ion-edit

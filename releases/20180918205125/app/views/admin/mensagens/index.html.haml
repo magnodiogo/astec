@@ -1,0 +1,31 @@
+- model_class = Mensagem
+.row.grid
+  .col-md-12
+    = flash_message
+    .panel.panel-piluku
+      .panel-heading
+        %h3.panel-title
+          = t('.title', model: model_class.model_name.human.titleize)
+          .right-button
+            - if can? :new, Mensagem
+              = link_to t('.new', default: t("helpers.links.new")), new_admin_mensagem_path, class: 'btn btn-wtc'
+      .panel-body
+        .table-responsive
+          %table.table.table-striped.table-hover#dataTable
+            %thead
+              %tr
+                %th= model_class.human_attribute_name(:ativo)
+                %th= model_class.human_attribute_name(:inicio)
+                %th= model_class.human_attribute_name(:fim)
+                %th= model_class.human_attribute_name(:titulo)
+                %th Opções
+            %tbody
+              - @mensagens.each do |mensagem|
+                %tr
+                  %td= check_box_tag :ativo, mensagem.ativo, mensagem.ativo, class: 'checkbox', disabled: true
+                  %td=l mensagem.inicio if mensagem.inicio
+                  %td=l mensagem.fim    if mensagem.fim
+                  %td= mensagem.titulo
+                  %td
+                    = link_to t('.show', default: t("helpers.links.show")), admin_mensagem_path(mensagem), class: 'btn btn-default btn-xs'
+                    = link_to t('.edit', default: t("helpers.links.edit")), edit_admin_mensagem_path(mensagem), class: 'btn btn-default btn-xs'

@@ -1,0 +1,118 @@
+.float-left       { float: left; margin-right: 10px;}
+.float-right      { float: right; margin-left: 10px;}
+.right-button     { float: right; margin-top: -7px; }
+.btn.btn-primary  { border-radius: 0px;  }
+.btn.btn-wtc      { background: #f26522; font-weight: bold; color: #fff;}
+.ml20             { margin-left: 20px;   }
+.mb0              { margin-bottom: 0px;  }
+.p0               { padding: 0px;        }
+/*  */
+td.tfoot_pad {  padding-top: 20px !important }
+input[type="checkbox"] { display: block; height: 16px; width: 35px;}
+.top-bar .chat_btn .avatar_width .avatar-holder { margin-right: 25px; }
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control { cursor: auto; }
+
+.form-control { line-height: 22px }
+.select2-container--default .select2-selection--multiple {height: 105px !important;}
+.select2-container--default .select2-selection--multiple .select2-selection__rendered { height: 102px !important; }
+.row.main-chart-parent { margin-top: -5px; }
+/*  */
+.form-no-group .right { margin-left: 10px; }
+
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th { font-weight: bold }
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td { color: #555; }
+.left-bar .menu-parent > li a, .side-bar .menu-parent > li a { color: #555; }
+.mail_widget .mail_list .mails_holder li a .right h4,
+.mail_widget .mail_list .mails_holder li a .right .right_details { color: #666; }
+.mail_widget .mail_list .mails_holder li a .right .name{ width: 280px; }
+.left-bar .menu-parent > li a i, .side-bar .menu-parent > li a i { width: 35px; text-align: center }
+
+.nav.navbar-nav.navbar-right.top-elements { margin-right: 263px; }
+@media only screen and (max-width: 1200px) and (min-width: 700px) { 
+  .wrapper          .nav.navbar-nav.navbar-right.top-elements { margin-right: 263px;  }
+  .wrapper.mini-bar .nav.navbar-nav.navbar-right.top-elements { margin-right: 83px;   }
+}
+
+.pagination ul { display: flex; }
+.pagination ul li { list-style-type: none; margin: 0 2px; }
+
+/* titulo das boxes */
+.panel-piluku > .panel-heading h3 { font-size: 18px; font-weight: bold;  }
+.panel-piluku > .panel-heading h3 span { font-size: 15px; font-weight: normal; }
+.panel-piluku > .panel-heading { background: #2196f3; color: white; }
+/*  */
+
+/* width button */
+.input-group-btn:first-child>.btn, .input-group-btn:first-child>.btn-group { width: 210px; }
+/* */
+span.falert   { color: #ccbc00 !important; }
+span.fsuccess { color: #3c763d !important; }
+span.fdanger  { color: #e0332f !important; }
+
+.footer { position: inherit; bottom: 0; width: 100%; background: #2196f3; color: white; padding: 10px; text-align: center; }
+
+.field_with_errors, .field_with_errors label { margin-left: 0; width: auto; color: #a94442;}
+
+.left-bar .admin-logo, .side-bar .admin-logo { 
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#6abe47+0,6abe47+34,f26522+37,f26522+100 */
+  background: #efefef; /* Old browsers */
+  /*background: #6abe47; /* Old browsers */
+  /*background: -moz-linear-gradient(left,  #6abe47 0%, #6abe47 34%, #f26522 37%, #f26522 100%); /* FF3.6-15 */
+  /*background: -webkit-linear-gradient(left,  #6abe47 0%,#6abe47 34%,#f26522 37%,#f26522 100%); /* Chrome10-25,Safari5.1-6 */
+  /*background: linear-gradient(to right,  #6abe47 0%,#6abe47 34%,#f26522 37%,#f26522 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6abe47', endColorstr='#f26522',GradientType=1 ); /* IE6-9 */
+}
+
+.left-bar .admin-logo a.menu-bar, .side-bar .admin-logo a.menu-bar { background-color: #db5200 }
+.left-bar .menu-parent, .side-bar .menu-parent { padding-top: 79px; }
+.mini-bar .left-bar .menu-parent, .side-bar .menu-parent { padding-top: 70px; }
+@media only screen and (max-width: 1200px) and (min-width: 700px) { 
+  .left-bar .menu-parent, .side-bar .menu-parent { padding-top: 70px; } 
+}
+#div_limite_error, #div_info_atividade { color: #db5200 }
+/***************************
+   Text Inputs + Textarea
+****************************/
+input[type=text],
+input[type=password],
+input[type=email],
+input[type=url],
+input[type=date],
+input[type=tel],
+input[type=number],
+input[type=search],
+textarea.materialize-textarea {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #9e9e9e;
+  border-radius: 0px;
+  outline: none;
+  height: 3rem;
+  width: 100%;
+  margin: 0 0 15px 0;
+  padding: 0;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  -ms-transition: 0.3s;
+  transition: 0.3s;
+}
+.selectize { 
+  box-shadow: 0px 0px 0px 0px;
+  border: 0px;
+  border-radius: 0px;
+  border-bottom: 1px solid #9e9e9e;
+  height: 31px;
+}
+input[type="checkbox"] + label, input[type="radio"] + label { font-size: 15px; }
+input[type=checkbox], input[type=radio] { height: 15px; width: 15px; }
+
+h3.panel-title b {
+  color: #99ff33;
+}

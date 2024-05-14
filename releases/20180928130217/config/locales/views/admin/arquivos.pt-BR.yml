@@ -1,0 +1,19 @@
+pt-BR:
+  admin:
+    arquivos:
+      form: 
+        header: Dados do Arquivo
+        header_images: Imagens do Arquivo
+      edit: 
+        title: Editar %{model}
+      index:  
+        title: Arquivos
+        header: Listagem de Arquivos
+        new: Gerar Arquivo
+      new:
+        title: Gerar %{model}
+      show:
+        title: "Detalhes do %{model}"
+        title_serventia: "Listagem de %{model}"
+        header_serventia: "Listagem de %{model}"
+        tipo_de_documentos: Tipos de Documentos

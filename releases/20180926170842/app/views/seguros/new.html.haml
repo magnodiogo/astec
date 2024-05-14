@@ -1,0 +1,14 @@
+- model_class = Seguro
+.row.grid
+  .col-md-12
+    = flash_message(@seguro)
+    .panel.panel-piluku
+      .panel-heading
+        %h3.panel-title
+          = t('.title', default: model_class.model_name.human.titleize, model: model_class.model_name.human.titleize)
+          %b{style: "font-size: 29px; "}= params[:tipo] == 'R' ? " Residencial" :  " Empresarial"
+          %span.panel-options
+            %a.panel-minimize{:href => "#"}
+              %i.icon.ti-angle-up
+      .panel-body
+        = render 'form'

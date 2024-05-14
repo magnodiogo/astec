@@ -1,0 +1,43 @@
+pt-BR:
+  activerecord:
+    models:
+      seguro: 
+        one: Seguro
+        other: Seguros
+    attributes:
+      seguro:
+        id: "#"
+        cep:                        "CEP"
+        numero:                     "Número"
+        complemento:                "Complemento"
+        residencia:                 "Residência"
+        inquilino:                  "Inquilino"
+        tipo_pessoa:                "Tipo de Pessoa ( Inquilino )"
+        cpf_cnpj_inquilino:         "CPF/CNPJ do Inquilino"
+        proprietario:               "Proprietário"
+        cpf_cnpj_proprietario:      "CPF/CNPJ do Proprietário"
+        limite_maximo_indenizacao:  "Limite Máximo da Indenização"
+        cobertura_para_conteudo:    "Cobertura para Conteúdo"
+        premio_total:               "Prêmio Total"
+        status:                     "Status"
+        tipo_de_seguro:             "Tipo de Seguro"
+        tipo_pessoa_proprietario:   "Tipo de Pessoa ( Proprietário )"
+        imobiliaria_id:             "Imobiliária"
+        atividade_id:               "Atividade"
+        marcado:                    "Marcado"
+        arquivo_id:                 "Arquivo"
+        transmitido_em:             "Transmitido em"
+        user_id:                    "Usuário"
+        parent_id:                  "ParentID"
+        renovado:                   "Renovado"
+        data_limite_renovacao:      "Data de Limite para Renovação"
+        transmitido_por_id:         "Transmitido por"
+        created_at: "Enviado em"
+        updated_at: "Data de Atualização"
+    errors:
+      models:
+        seguro:
+          attributes:
+          validate:
+
+

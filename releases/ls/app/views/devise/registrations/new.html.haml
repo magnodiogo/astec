@@ -1,0 +1,38 @@
+- model_class = User
+.row.grid
+  .col-md-12
+    = flash_message(resource)
+    .panel.panel-piluku
+      .panel-heading
+        %h3.panel-title
+          = t('.title', default: model_class.model_name.human.titleize, model: model_class.model_name.human.titleize)
+          %span.panel-options
+            %a.panel-minimize{:href => "#"}
+              %i.icon.ti-angle-up
+      .panel-body
+        = form_for resource, as: resource_name, url: registration_path(resource_name), class: "form", autocomplete: "off" do |f|
+          = f.hidden_field :imobiliaria_id
+          = f.hidden_field :password, value: '123456'
+          = f.hidden_field :password_confirmation, value: '123456'
+          .row
+            .col-md-6
+              .form-group
+                .field
+                  = f.label :name
+                  = f.text_field :name, required: true, class: "form-control"
+          .row
+            .col-md-6
+              .form-group
+                .field
+                  = f.label :username
+                  = f.text_field :username, required: true, class: "form-control"
+            .col-md-6
+              .form-group
+                .field
+                  = f.label :email
+                  = f.email_field :email, value: Time.now.nsec.to_s + "user@webtecmaster.mail", required: true, class: "form-control"
+
+          .form-group
+            .actions  
+              .float-right
+                = f.submit t(".submit"), class: "btn btn-primary btn-block" 

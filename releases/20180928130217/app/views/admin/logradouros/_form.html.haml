@@ -1,0 +1,57 @@
+- model_class = Logradouro
+/ form-heading
+= form_for @logradouro, url: (@logradouro.new_record? ? admin_logradouros_path(@logradouro) : admin_logradouro_path), class: "form" do |f|
+  .row
+    - if @logradouro.new_record?
+      .col-md-6
+        .form-group
+          .field
+            = f.label :estado_id
+            = f.collection_select :estado_id, @estados, :id, :uf, {include_blank: true}, { data: { dynamic_selectable_url: dynamic_select_ds_logradouros_path(':estado_id'), dynamic_selectable_target: '#logradouro_codigo_cidade' } , class: "form-control selectize" }
+      .col-md-6
+        .form-group
+          .field
+            = f.label :codigo_cidade
+            = f.collection_select :codigo_cidade, @cidades || [], :codigo_correios, :nome, {include_blank: true}, class: "form-control selectize"
+    - else
+      .col-md-6
+        .form-group
+          .field
+            = f.label :codigo_cidade
+            = text_field_tag :cidade, @logradouro.localidade.nome, :class => "form-control", :readonly => true
+      .col-md-6
+        .form-group
+          .field
+            = f.label :uf
+            = text_field_tag :uf, @logradouro.localidade.uf, :class => "form-control", :readonly => true
+  .row
+    .col-md-6
+      .form-group
+        .field
+          = f.label :cep
+          = f.text_field :cep, required: true, class: "form-control", maxlength: 8
+    .col-md-6
+      .form-group
+        .field
+          = label_tag :nome_bairro, 'Bairro'
+          = f.text_field :nome_bairro, :maxlength => 30, :class => "form-control"
+  .row
+    .col-md-6
+      .form-group
+        .field
+          = f.label :tipo, 'Tipo'
+          = f.text_field :tipo, :class => "form-control", placeholder: "Rua/Avenida", :maxlength => 30
+    .col-md-6
+      .form-group
+        .field
+          = f.label :nome, 'Logradouro '
+          = f.text_field :nome, :class => "form-control", placeholder: "Pinto Madeira", :maxlength => 30
+  .form-group
+    .actions  
+      .float-right
+        = f.submit t('.confirm', default: t("helpers.submit.confirm")), class: "btn btn-primary"
+      .float-left
+        = link_to t('.back', default: t("helpers.links.back")), admin_logradouros_path, class: 'btn btn-default'
+
+
+

@@ -1,0 +1,15 @@
+.row
+  .col-md-4
+    .piluku-panel.no-pad.panel
+      = link_to atividades_path do 
+        .sparkline-widget
+          .heading-info.flatBlue{style: "padding: 10px 25px 0;"}
+            %p.pull-left
+              Atividades
+              %br/
+            %p.pull-right
+              = Atividade.count
+          .info-bottom
+            .col-md-12.left
+              .flatBluec Visualize todas as suas Consultas 
+              %p e acompanhe seus status

@@ -1,0 +1,20 @@
+pt-BR:
+  seguros:
+    empresarial:
+      title: Seguro Incêndio para o Prédio de Imóveis 
+    residencial:
+      title: Seguro Incêndio para o Prédio de Imóveis 
+    index:
+      title: "Seguro para Prédio de Imóveis "
+      new: "Novo Seguro %{tipo}"
+    new:
+      title: Cadastrar Seguro
+      confirm: Incluir
+    show:
+      title: "Detalhes do %{model}"
+      title_serventia: "Listagem de %{model}"
+      header_serventia: "Listagem de %{model}"
+      tipo_de_documentos: Tipos de Documentos
+    edit:
+      confirm: Editar
+      title: "Editar Seguro"

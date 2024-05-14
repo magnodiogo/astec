@@ -1,0 +1,153 @@
+<% is_show = ( action_name == 'show' ) %>
+<!-- IMOVEL A SER LOCADO -->
+<div class="formRow" style='padding: 0'></div>
+<!-- LINHA 1 -->
+<div class="formRow" style='padding: 0'>
+  <div class='person_text_small seguros' style='width: 71.4%'>
+    <%= f.label :locatario_nome, "xxxxxxx:" %>
+    <%= f.text_field :locatario_nome, :class => "input-text ninenine-width", :readonly => is_show, :required => true %>
+  </div>
+  <div class='person_text_small seguros' style='width: 21.2%'>
+    <%= f.label :locatario_sexo, "xxxxx:" %>
+    <%= f.select :locatario_sexo, options_sexo, { }, :class => "input-text big", :disabled => is_show, :required => true %>
+  </div>
+</div>
+<!-- LINHA 2 e 3 -->
+<div class="formRow double" style='padding: 0'>
+  <div class='person_text_very_small seguros'>
+    <%= f.label :imovel_cep, "CEP:" %>
+    <div style='margin-top: 2px'>
+      <% if @cep  %>
+        <%= f.text_field :imovel_cep, :maxlength => 9, :class => "input-text big", :readonly => is_show, :required => true, :style=>'width: 74%; float: left' %>
+      <% else %>
+        <%= f.text_field :imovel_cep, :maxlength => 9, :class => "input-text big", :readonly => is_show, :required => true, :style=>'width: 74%; float: left' %>
+      <% end %>
+      <% unless is_show %>
+        <a href="/ceps/search_cep?tipo=<%= params[:tipo] %>&mes=<%= params[:mes]%>&renovacao=<%= params[:renovacao] %>" style='float: left'>
+          <img style="margin: 2px 0 0 5px" src="/img/ico/search-icon24.png" />
+        </a>
+      <% end %>
+    </div>
+  </div>
+  <div id='div_endereco_imovel'>
+    <div class='person_text_small seguros'>
+      <%= label_tag :endereco, "Endereço do Imóvel Locado:" %>
+      <%= text_field_tag :endereco, @cep  ? @cep.endereco : nil, :class => "input-text nineeight-width", :readonly => true %>
+    </div>
+
+    <div class='person_text_very_small seguros'>
+      <%= label_tag :bairro, "Bairro:" %>  
+      <%= text_field_tag :bairro, @cep ? @cep.bairro.nome : nil, :class => "input-text big", :readonly => true %>
+    </div>   
+    <div class='person_text_very_small seguros'>
+      <%= label :cidade, "Cidade:" %>
+      <%= text_field_tag :cidade, @cep ? @cep.cidade : nil, :class => "input-text big", :readonly => true %>
+    </div>   
+    <div class='person_text_very_small seguros' style='width: 9.5%'>
+      <%= label_tag :uf, "UF:" %>
+      <%= text_field_tag :uf, @cep ? @cep.uf : nil , :class => "input-text big", :maxlength => 2, :readonly => true %>
+    </div>   
+  </div>
+  <div class='person_text_very_small  seguros'  style='width: 9.5%'>
+    <%= f.label :imovel_numero, "Número:" %>
+    <% if @cep %>
+       <%= f.text_field :imovel_numero, :maxlength => 6,  :class => "input-text big", :readonly => is_show, :required => true %>
+    <% else %>
+       <%= f.text_field :imovel_numero, :maxlength => 6,  :class => "input-text big", :readonly => is_show, :required => true %>
+    <% end %>
+  </div>   
+  <div class='person_text_very_small seguros' style='width: 27.5%'>
+    <%= f.label :imovel_complemento, "Complemento:" %>
+    <%= f.text_field :imovel_complemento, :maxlength => 15, :class => "input-text nineseven-width", :readonly => is_show %>
+  </div>   
+  <div class='person_text_small seguros' style='width: 36.5%'>
+    <%= f.label :imovel_administradora, "Administradora:" %>
+    <%= f.text_field :imovel_administradora, :maxlength => 18, :size => 18,  :class => "input-text nineeight-width", :readonly => is_show, :required => true %>
+  </div>   
+  <div class='person_text_small seguros' style='width: 9%'>
+    <%= f.label :imovel_aluguel, "Aluguel (R$):" %>
+    <% if action_name == 'show' %>
+      <%= text_field_tag :show, @fianca.imovel_aluguel.to_f.contabil, :class => "input-text ", :readonly => true %>
+    <% else %>
+      <%= f.text_field :imovel_aluguel, :class => "input-text big", :readonly => is_show, :required => true, :max => 99999999, :min => 10, :maxlength => 12 %>
+    <% end %>        
+  </div>   
+</div>
+<!-- LINHA 5 -->
+<div class="formRow" style='padding: 0'>
+  <div class='person_text_small seguros' style='width: 18.5%'>
+    <%= f.label :imovel_iptu, "IPTU (R$):" %>
+    <% if action_name == 'show' %>
+      <%= text_field_tag :show, @fianca.imovel_iptu.to_f.contabil, :class => "input-text ", :readonly => true %>
+    <% else %>
+      <%= f.text_field :imovel_iptu, :class => "input-text big", :readonly => is_show, :required => true, :max => 99999999, :min => 10, :maxlength => 12 %>
+    <% end %>        
+  </div>   
+  <div class='person_text_small seguros' style='width: 18.5%'>
+    <%= f.label :imovel_condominio, "Condomínio (R$):" %>
+    <% if action_name == 'show' %>
+      <%= text_field_tag :show, @fianca.imovel_condominio.to_f.contabil, :class => "input-text ", :readonly => true %>
+    <% else %>
+      <%= f.text_field :imovel_condominio, :class => "input-text big", :readonly => is_show, :required => true, :max => 99999999, :min => 10, :maxlength => 12 %>
+    <% end %>        
+  </div>   
+  <div class='person_text_small seguros' style='width: 18.5%'>
+    <%= f.label :imovel_agua, "Água (R$):" %>
+    <% if action_name == 'show' %>
+      <%= text_field_tag :show, @fianca.imovel_agua.to_f.contabil, :class => "input-text ", :readonly => true %>
+    <% else %>
+      <%= f.text_field :imovel_agua, :class => "input-text big", :readonly => is_show, :required => true, :max => 99999999, :min => 10, :maxlength => 12 %>
+    <% end %>        
+  </div>   
+  <div class='person_text_small seguros' style='width: 18.5%'>
+    <%= f.label :imovel_luz, "Luz (R$):" %>
+    <% if action_name == 'show' %>
+      <%= text_field_tag :show, @fianca.imovel_luz.to_f.contabil, :class => "input-text ", :readonly => true %>
+    <% else %>
+      <%= f.text_field :imovel_luz, :class => "input-text big", :readonly => is_show, :required => true, :max => 99999999, :min => 10, :maxlength => 12 %>
+    <% end %>        
+  </div>   
+  <div class='person_text_small seguros' style='width: 18.5%'>
+    <%= f.label :imovel_gas_canalizado, "Gás Canalizado (R$):" %>
+    <% if action_name == 'show' %>
+      <%= text_field_tag :show, @fianca.imovel_gas_canalizado.to_f.contabil, :class => "input-text ", :readonly => true %>
+    <% else %>
+      <%= f.text_field :imovel_gas_canalizado, :class => "input-text big", :readonly => is_show, :required => true, :max => 99999999, :min => 10, :maxlength => 12 %>
+    <% end %>        
+  </div>
+</div>
+<!-- LINHA 6 -->
+<div class="formRow" style='padding: 0'>
+  <div class='person_text_small seguros' style='width: 18.5%'>
+    <%= f.label :imovel_danos, "Danos ao imóvel (R$):" %>
+    <% if action_name == 'show' %>
+      <%= text_field_tag :show, @fianca.imovel_danos.to_f.contabil, :class => "input-text ", :readonly => true %>
+    <% else %>
+      <%= f.text_field :imovel_danos, :class => "input-text big", :readonly => is_show, :required => true, :max => 99999999, :min => 10, :maxlength => 12 %>
+    <% end %>        
+  </div>   
+  <div class='person_text_small seguros' style='width: 37%'>
+    <%= f.label :imovel_multa_recisao, "Multa por Rescisão Contratual (R$):" %>
+    <% if action_name == 'show' %>
+      <%= text_field_tag :show, @fianca.imovel_multa_recisao.to_f.contabil, :class => "input-text ", :readonly => true %>
+    <% else %>
+      <%= f.text_field :imovel_multa_recisao, :class => "input-text nineseven-width", :readonly => is_show, :required => true, :max => 99999999, :min => 10, :maxlength => 12 %>
+    <% end %>        
+  </div>   
+  <div class='person_text_small seguros' style='width: 18.5%'>
+    <%= f.label :imovel_pintura_interna, "Pintura Interna (R$):" %>
+    <% if action_name == 'show' %>
+      <%= text_field_tag :show, @fianca.imovel_pintura_interna.to_f.contabil, :class => "input-text ", :readonly => true %>
+    <% else %>
+      <%= f.text_field :imovel_pintura_interna, :class => "input-text big", :readonly => is_show, :required => true, :max => 99999999, :min => 10, :maxlength => 12 %>
+    <% end %>        
+  </div>   
+  <div class='person_text_small seguros' style='width: 18.5%'>
+    <%= f.label :imovel_puntura_externa, "Pintura Externa (R$):" %>
+    <% if action_name == 'show' %>
+      <%= text_field_tag :show, @fianca.imovel_puntura_externa.to_f.contabil, :class => "input-text ", :readonly => true %>
+    <% else %>
+      <%= f.text_field :imovel_puntura_externa, :class => "input-text big", :readonly => is_show, :required => true, :max => 99999999, :min => 10, :maxlength => 12 %>
+    <% end %>        
+  </div>
+</div>

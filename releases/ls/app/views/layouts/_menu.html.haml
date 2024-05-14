@@ -1,0 +1,20 @@
+/%li
+/  = link_to root_path, class: "waves-effect waves-light" do
+/    %i.icon.ti-home
+/    Página Inicial
+- if current_user.is?(:admin)
+  %li.header Administrar
+  = render "layouts/menu_admin"
+- if current_user.imobiliaria_id
+  %li.header Menu Principal
+  = render "layouts/menu_user"
+
+%li.header Meu Usuário
+%li
+  = link_to edit_user_registration_path, class: "waves-effect waves-light" do
+    %i.icon.ion.ion-key
+    Alterar Senha
+%li
+  = link_to destroy_user_session_path, class: "waves-effect waves-light", method: :delete do
+    %i.icon.ion.ion-log-out
+    Sair

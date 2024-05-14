@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="row">
+    <div class="twelve columns">
+      <div class="box_c">
+        <div class="box_c_heading cf box_actions">
+            <p>Resultado da Consulta</p>
+        </div>
+        <div class="box_c_content">
+          <table cellpadding="0" cellspacing="0" border="0" class="display mobile_dt1 dt_act" id="dt1">
+            <thead>
+              <tr>
+                <th>CEP</th>
+                <th>Endereço</th>
+                <th>Complemento</th>
+                <th>Bairro</th>
+                <th>Cidade</th>
+                <th>UF</th>
+                <th colspan=2>Opções</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @ceps.each do |cep| %>
+                <tr>
+                  <td><%=h cep.cep %></td>
+                  <td><%=h cep.endereco %></td>
+                  <td><%=h cep.complemento %></td>
+                  <td><%=h cep.nome_bairro %></td>
+                  <td><%=h cep.cidade %></td>
+                  <td><%=h cep.uf %></td>
+                  <% if current_user.imobiliaria_id.nil? and current_user.master %>
+                     <td><%= link_to image_tag('/img/ico/document_edit.png', :title => 'Editar'), edit_cep_path(cep) %></td>
+                    <td><%= link_to image_tag('/img/ico/document_delete.png', :title =>'Excluir'), {:controller => :ceps, :action => :destroy, :id => cep.id}, :"data-confirm" => 'Confirma exclusão?', :method => :delete %></td>
+                  <% else  %>
+                  <td><%= link_to image_tag('/img/ico/confirm.png', :title => 'Confirmar'), "/seguros/new?renovacao=#{params[:renovacao]}&mes=#{params[:mes]}&tipo=#{params[:tipo]}&cep=#{cep.cep}" %></td>
+                  <% end %>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

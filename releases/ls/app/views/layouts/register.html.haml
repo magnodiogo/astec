@@ -1,0 +1,39 @@
+!!! 5
+%html(lang="pt-BR")
+  %head
+    %meta{charset: "utf-8"}
+    %meta{:'http-equiv' => "X-UA-Compatible", content: "IE=Edge,chrome=1"}
+    %meta{name: "viewport", content: "width=device-width, initial-scale=1.0"}
+    %meta{name: "author",   content: "Sabor de Fátima" }
+    %meta{name: "description", content: ""}
+    %title= content_for?(:title) ? yield(:title) : "Sabor de Fátima"
+    %meta{:content => "", :name => "keywords"}/
+    = favicon_link_tag 'favicon-16x16.png', :rel => 'shortcut icon'
+    = csrf_meta_tags
+    = stylesheet_link_tag "application", :media => "all"
+    = javascript_include_tag "application"
+
+  %body.login_page
+    %header#header_main
+      .header_main_content
+        %nav.uk-navbar
+          #menu_top.uk-float-left
+            %h3 
+              Sabor de Fátima
+          .uk-navbar-flip
+            %ul.uk-navbar-nav.user_actions
+              %li
+                = link_to :back do
+                  %i.material-icons.white-color arrow_back
+
+    #page_content
+      #page_content_inner
+        = yield
+
+  %foot
+    .footer
+      Copyright © 2015  
+      = link_to "http://www.sabordefatima.com.br", :target => "_blank" do
+        Sabor de Fátima
+
+  = javascript_include_tag "controllers/#{controller_name}"

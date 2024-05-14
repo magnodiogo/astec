@@ -1,0 +1,13 @@
+- model_class = Mensagem
+.row.grid
+  .col-md-12
+    = flash_message(@mensagem)
+    .panel.panel-piluku
+      .panel-heading
+        %h3.panel-title
+          = t('.title', default: model_class.model_name.human.titleize, model: model_class.model_name.human.titleize)
+          %span.panel-options
+            %a.panel-minimize{:href => "#"}
+              %i.icon.ti-angle-up
+      .panel-body
+        = render 'form'

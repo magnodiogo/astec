@@ -1,0 +1,27 @@
+<style>
+  table, tr, td, th { border: 1px solid #000; border-collapse: collapse;}
+  td, th { padding: 1px 3px; }
+</style>
+
+<h2>RELATÓRIO DE COBERTURAS PENDENTES</h2>
+Emitido em: <%= Date.today.to_s_br %>
+<br/>
+<br/>
+<br/>
+<table width='100%' border=1>
+  <thead>
+     <th>Imobiliária</th>
+     <th>Tipo</th>
+     <th>Quantidade</th>
+  </thead>
+  <tbody>
+    <% for r in @resultado %>
+    <tr>
+      <td><%=h r['estipulante'] %></td>
+      <td><%=h r['tipo_de_seguro'] %></td>
+      <td><%=h r['quantidade'] %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+

@@ -1,0 +1,24 @@
+pt-BR:
+  admin:
+    usuarios:
+      form: 
+        header: Dados do Usuário
+        header_images: Imagens do Usuário
+      edit: 
+        title: Editar %{model}
+      index:  
+        title: Usuários
+        header: Listagem de Usuários
+        new: Cadastrar Usuário
+      new:
+        title: Cadastrar %{model}
+      show:
+        title: "Detalhes do %{model}"
+        title_serventia: "Listagem de %{model}"
+        header_serventia: "Listagem de %{model}"
+        tipo_de_documentos: Tipos de Documentos
+      cartorios:
+        title: "Detalhes do %{model}"
+        title_cartorio: "Cartórios para %{model}"
+      listagem:
+        title_usuario: "Usuários "

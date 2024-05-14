@@ -1,0 +1,81 @@
+- model_class = Seguro
+- if request.get?
+  .row.grid
+    .col-md-12
+      = flash_message
+      .panel.panel-piluku
+        .panel-heading
+          %h3.panel-title
+            Relatório de Títulos
+            %span.panel-options
+              %a.panel-minimize{:href => "#"}
+                %i.icon.ti-angle-up
+        .panel-body
+          = form_tag relatorios_admin_titulos_path, method: :post, class: "form" do |f|
+            .row
+              .col-md-3
+                .form-group
+                  .field
+                    = label_tag :data_inicial
+                    = text_field_tag :data_inicial, params[:data_inicial], class: "form-control datepicker", required: true
+              .col-md-3
+                .form-group
+                  .field
+                    = label_tag :data_final
+                    = text_field_tag :data_final, params[:data_final], class: "form-control datepicker", required: true
+              .col-md-6
+                .form-group
+                  .field
+                    = label_tag :imobiliaria_id
+                    = select_tag :imobiliaria_id, options_for_select(imobiliarias), :class => "form-control selectize", :required => true
+            .form-group
+              .actions  
+                .float-right
+                  = submit_tag t('.confirm', default: t("helpers.submit.confirm")), class: "btn btn-primary"
+- else
+  :css
+    table, tr, td, th { border: 0px solid #000; border-collapse: collapse;}
+    * {font-weight: bold}
+    td, th { padding: 1px 3px; }
+    .margin { margin-bottom: 20px; }
+  %h2 Relatório de Títulos
+  %br/
+  Emitido em: #{l Time.now, format: :short}
+  %br/
+  %br/
+  %br/
+  Período: #{params[:data_inicial]} à #{params[:data_final]}
+  %br/
+  Imobiliária: #{@imobiliaria.nome_fantasia}
+  %br/
+  %br/
+  %br/
+  %table{:border => "1", :width => "60%"}
+    %tbody
+      %tr
+        %td{:colspan => "6"}
+          %hr/
+      #margin
+        %tr
+          %td{:align => "center", :colspan => "6"}
+            = "EMPRESARIAL"
+      - count = 1
+      - @seguros.each do |s|
+        - if s.tipo_de_seguro == "R" and count == 1
+          - count = 0
+          %tr
+            %td{:colspan => "6"}
+              %hr/
+          %tr
+            %td{:align => "center", :colspan => "6"}
+              = "RESIDENCIAL"
+        %tr
+          %td= s.inquilino
+          %td= s.created_at.to_date.to_s_br
+          %td= s.created_at.strftime("%H:%M")
+          %td= s.endereco_formatado
+          %td= s.premio_total.real.real_contabil
+          %td= s.user.name
+      %tr
+        %td{:colspan => "6"}
+          %hr/

@@ -1,0 +1,29 @@
+- model_class = Emailer
+.row.grid
+  .col-md-12
+    = flash_message
+    .panel.panel-piluku
+      .panel-heading
+        %h3.panel-title
+          Fale Conosco
+          %span.panel-options
+            %a.panel-minimize{:href => "#"}
+              %i.icon.ti-angle-up
+      .panel-body
+        = form_for formulario_emailer_index_path, method: :post, class: "form" do |f|
+          .row
+            .col-md-6
+              .form-group
+                .field
+                  = label_tag :assunto, "Assunto: "
+                  = text_field_tag :assunto, nil, :class => "form-control", :required => true
+          .row
+            .col-md-12
+              .form-group
+                .field
+                  = label_tag :mensagem, "Mensagem: "
+                  = text_area_tag :mensagem, '', :class => "form-control", rows: 8, :required => true
+          .form-group
+            .actions  
+              .float-right
+                = submit_tag "Enviar", class: "btn btn-primary"

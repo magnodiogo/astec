@@ -1,0 +1,37 @@
+<div class="ac_results" style="display: block; left: 0px; position: absolute; top: 100%; width: 46.5%">
+   <ul style="max-height: 180px; <%= @atividades.size > 8 ? 'overflow: scroll;' : ''%>">
+      <% @atividades.each do |a|%>
+         <li class="ac_even" id=<%= a.id %>><strong></strong> <%= a.atividade%> </li>
+      <% end %>
+   </ul>
+</div> 
+
+<script>
+   function Trim(str){return str.replace(/^\s+|\s+$/g,"");}
+
+   <% if @atividades.first.id %>
+      var a = new Array(<%= @atividades.size %>);
+      <% @atividades.each do |a|%>
+         a[<%=a.id%>] = '<%= a.observacao %>';
+      <% end %>
+   <% end %>
+
+   jQuery("#seguro_atividade_id").val(null);
+   <% if @atividades.first.id %>
+      jQuery(".ac_results ul li").click(function(){
+         jQuery("#seguro_atividade_id").val(this.id);
+
+         if ( this.innerText ) {
+             jQuery("#filtro").val(Trim(this.innerText));
+         } else {
+             jQuery("#filtro").val(Trim(this.textContent));
+         }
+
+         $("#div_observacao").html(a[this.id]);
+      });
+   <% end %>
+
+   $('html').click(function() {
+      jQuery("#div_atividade div").remove();
+   });
+</script>      

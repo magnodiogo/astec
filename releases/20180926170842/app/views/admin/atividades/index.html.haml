@@ -1,0 +1,34 @@
+- model_class = Atividade
+.row.grid
+  .col-md-12
+    = flash_message
+    .panel.panel-piluku
+      .panel-heading
+        %h3.panel-title
+          = t('.title', model: model_class.model_name.human.titleize)
+          .right-button
+            - if can? :new, Atividade
+              = link_to t('.new', default: t("helpers.links.new")), new_admin_atividade_path, class: 'btn btn-wtc'
+      .panel-body
+        .table-responsive
+          %table.table.table-striped.table-hover#dataTable
+            %thead
+              %tr
+                %th= model_class.human_attribute_name(:codigo)
+                %th= model_class.human_attribute_name(:atividade)
+                %th= model_class.human_attribute_name(:bloqueado)
+                %th= model_class.human_attribute_name(:observacao)
+                %th Opções
+                %th 
+            %tbody
+              - @atividades.each do |atividade|
+                %tr
+                  %td= atividade.codigo
+                  %td= atividade.atividade
+                  %td= atividade.bloqueado ? 'SIM' : 'NÃO'
+                  %td= atividade.observacao
+                  %td
+                    = link_to t('.show', default: t("helpers.links.show")), admin_atividade_path(atividade), class: 'btn btn-default btn-xs'
+                  %td
+                    = link_to t('.edit', default: t("helpers.links.edit")), edit_admin_atividade_path(atividade), class: 'btn btn-default btn-xs'
+

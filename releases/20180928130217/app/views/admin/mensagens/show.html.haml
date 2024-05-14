@@ -1,0 +1,47 @@
+- model_class = Mensagem
+.row.grid
+  .col-md-12
+    = flash_message(@mensagem)
+    .panel.panel-piluku
+      .panel-heading
+        %h3.panel-title
+          = t('.title', default: model_class.model_name.human.titleize, model: model_class.model_name.human.titleize)
+          %span.panel-options
+            %a.panel-minimize{:href => "#"}
+              %i.icon.ti-angle-up
+      .panel-body
+        = form_for @mensagem, url: admin_mensagens_path(@mensagem), class: "form" do |f|
+          .row
+            .col-md-5.form-group
+              .field
+                = f.label :inicio
+                = f.text_field :inicio, value: @mensagem.inicio.try(:to_s_br), readonly: true, class: "form-control"
+            .col-md-5.form-group
+              .field
+                = f.label :fim
+                = f.text_field :fim, value: @mensagem.fim.try(:to_s_br), readonly: true, class: "form-control"
+            .col-md-2.form-group
+              .field
+                = f.label :ativo
+                = f.check_box :ativo, readonly: true
+          .row
+            .col-md-6.form-group
+              .field
+                = f.label :user_ids, "Usuários"
+                = text_area_tag :user_ids, @mensagem.users.pluck(:name).join(', '), readonly: true, class: "form-control"
+            .col-md-6.form-group
+              .field
+                = f.label :imobiliaria_ids, "Imobiliárias"
+                = text_area_tag :imobiliaria_ids, @mensagem.imobiliarias.pluck(:estipulante).join(', '), readonly: true, class: "form-control"
+          %br
+          .row
+            .col-md-12
+              %h3= '[ ' + l(@mensagem.created_at.to_date) + ' ] - ' + @mensagem.titulo
+              = @mensagem.texto.html_safe
+          %br
+          .form-group
+            .actions  
+              .float-right
+                = link_to t('.edit', default: t("helpers.links.edit")), edit_admin_mensagem_path(@mensagem), class: 'btn btn-default'
+              .float-left
+                = link_to t('.back', default: t("helpers.links.back")), admin_mensagens_path, class: 'btn btn-default'

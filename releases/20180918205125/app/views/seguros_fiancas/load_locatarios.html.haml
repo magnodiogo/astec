@@ -1,0 +1,107 @@
+- model_class = Locatario
+- if [2,4].include? @finalidade
+  .row
+    .col-md-12
+      %h3{style: 'font-weight: bold'} Locatário
+  .row
+    .col-md-4
+      .form-group
+        .field
+          = label_tag :nome, model_class.human_attribute_name(:razao_social) + " *"
+          = text_field_tag 'seguro_fianca[locatarios_attributes][0][nome]', '', class: "form-control", required: true 
+    .col-md-4
+      .form-group
+        .field
+          = label_tag :cpf_cnpj, model_class.human_attribute_name(:cnpj) + " *"
+          = text_field_tag 'seguro_fianca[locatarios_attributes][0][cpf_cnpj]', '', class: "form-control", required: true 
+
+
+- elsif @finalidade == 1
+  - if @locatarios != 0
+    .row
+      .col-md-12
+        %h3{style: 'font-weight: bold'} Locatário(s)
+  - (1..@locatarios).each do |i|
+    .row
+      .col-md-4
+        .form-group
+          .field
+            = label_tag :nome, model_class.human_attribute_name(:nome) + " ( Locatário #{i} )" + " *"
+            = text_field_tag "seguro_fianca[locatarios_attributes][#{i-1}][nome]", '', class: "form-control", required: true 
+      .col-md-4
+        .form-group
+          .field
+            = label_tag :cpf, model_class.human_attribute_name(:cpf) + " ( Locatário #{i} )" + " *"
+            = text_field_tag "seguro_fianca[locatarios_attributes][#{i-1}][cpf_cnpj]", '', class: "form-control", required: true 
+      .col-md-4
+        .form-group
+          .field
+            = label_tag :estado_civil, model_class.human_attribute_name(:estado_civil) + " ( Locatário #{i} )" + " *"
+            = select_tag "seguro_fianca[locatarios_attributes][#{i-1}][estado_civil]", options_for_select(options_estado_civil), include_blank: true, class: "form-control", required: true 
+      .col-md-4
+        .form-group
+          .field
+            = label_tag :residira_no_imovel, model_class.human_attribute_name(:residira_no_imovel) + " ( Locatário #{i} )" + " *"
+            = select_tag "seguro_fianca[locatarios_attributes][#{i-1}][residira_no_imovel]", options_for_select(options_yes_or_no), include_blank: true,  class: "form-control", required: true 
+      .col-md-4
+        .form-group
+          .field
+            = label_tag :renda, model_class.human_attribute_name(:renda) + " ( Locatário #{i} )" + " *"
+            = text_field_tag "seguro_fianca[locatarios_attributes][#{i-1}][renda]", '', class: "form-control", required: true 
+      .col-md-4
+        .form-group
+          .field
+            = label_tag :vinculo_empregaticio, model_class.human_attribute_name(:vinculo_empregaticio) + " ( Locatário #{i} )" + " *"
+            = select_tag "seguro_fianca[locatarios_attributes][#{i-1}][vinculo_empregaticio]", options_for_select(options_vinculo_empregaticio_locatario), class: "form-control selectize", include_blank: true, required: true
+
+
+- elsif @finalidade == 3
+  .row
+    .col-md-12
+      %h3{style: 'font-weight: bold'} Locatário
+  .row
+    .col-md-4
+      .form-group
+        .field
+          = label_tag :nome, model_class.human_attribute_name(:nome) + " *"
+          = text_field_tag 'seguro_fianca[locatarios_attributes][0][nome]', '', class: "form-control", required: true 
+    .col-md-4
+      .form-group
+        .field
+          = label_tag :cpf, model_class.human_attribute_name(:cpf) + " *"
+          = text_field_tag 'seguro_fianca[locatarios_attributes][0][cpf_cnpj]', '', class: "form-control", required: true 
+    .col-md-4
+      .form-group
+        .field
+          = label_tag :estado_civil, model_class.human_attribute_name(:estado_civil) + " *"
+          = select_tag "seguro_fianca[locatarios_attributes][0][estado_civil]", options_for_select(options_estado_civil), include_blank: true,  class: "form-control", required: true 
+    .col-md-4
+      .form-group
+        .field
+          = label_tag :residira_no_imovel, model_class.human_attribute_name(:residira_no_imovel) + " *"
+          = select_tag "seguro_fianca[locatarios_attributes][0][residira_no_imovel]", options_for_select(options_yes_or_no), include_blank: true,  class: "form-control", required: true 
+    .col-md-4
+      .form-group
+        .field
+          = label_tag :renda, model_class.human_attribute_name(:renda) + " *"
+          = text_field_tag 'seguro_fianca[locatarios_attributes][0][renda]', 0.to_f.real,  class: "form-control", required: true
+    .col-md-4
+      .form-group
+        .field
+          = label_tag :vinculo_empregaticio, model_class.human_attribute_name(:vinculo_empregaticio) + " *"
+          = select_tag 'seguro_fianca[locatarios_attributes][0][vinculo_empregaticio]', options_for_select(options_vinculo_empregaticio_locatario), class: "form-control selectize", include_blank: true, required: true
+
+
+- if [2,4].include? @finalidade
+  :javascript
+    $("#seguro_fianca_locatarios_attributes_0_cpf_cnpj").mask('99.999.999/9999-99');
+- elsif [3].include? @finalidade
+  :javascript
+    $("#seguro_fianca_locatarios_attributes_0_cpf_cnpj").mask('999.999.999-99');
+    $('#seguro_fianca_locatarios_attributes_0_renda').priceFormat({ prefix: '', centsSeparator: ',', thousandsSeparator: '.' });
+- else  
+  :javascript
+    $("#seguro_fianca_locatarios_attributes_0_cpf_cnpj").mask('999.999.999-99');
+    $('#seguro_fianca_locatarios_attributes_0_renda').priceFormat({ prefix: '', centsSeparator: ',', thousandsSeparator: '.' });
+    $("#seguro_fianca_locatarios_attributes_1_cpf_cnpj").mask('999.999.999-99');
+    $('#seguro_fianca_locatarios_attributes_1_renda').priceFormat({ prefix: '', centsSeparator: ',', thousandsSeparator: '.' });

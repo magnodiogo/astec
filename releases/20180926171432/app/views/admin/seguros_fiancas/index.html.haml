@@ -1,0 +1,59 @@
+- model_class = SeguroFianca
+.row.grid
+  .col-md-12
+    = flash_message
+    .panel.panel-piluku
+      .panel-heading
+        %h3.panel-title
+          Listagem de Seguros Fianças
+      .panel-body
+        = form_tag admin_seguros_fiancas_path, method: :get, class: "form" do |f|
+          .row
+            .col-md-4.col-xs-6
+              .form-group
+                .field
+                  = label_tag :imobiliaria_id
+                  = select_tag :imobiliaria_id, options_for_select(Imobiliaria.pluck(:estipulante, :id).sort, params[:imobiliaria_id]),  class: "form-control selectize"
+            .col-md-2.col-xs-4
+              = submit_tag "Consultar", class: "btn btn-primary", style: "margin-top: 25px; width: 100%"
+        .table-responsive
+          %table.table.table-striped.table-hover
+            %thead
+              %tr
+                %th= model_class.human_attribute_name(:locatario_nome)
+                %th= model_class.human_attribute_name(:locatario_cpf_cnpj)
+                %th= model_class.human_attribute_name(:imobiliaria_id)
+                %th= model_class.human_attribute_name(:finalidade_do_imovel)
+                %th= model_class.human_attribute_name(:pago)
+                %th= model_class.human_attribute_name(:created_at)
+                %th{width: '14%'} Opções
+            %tbody
+              - @seguros_fiancas.each do |seguro_fianca|
+                - locatario_principal = seguro_fianca.locatarios.first
+                %tr
+                  %td= locatario_principal.try(:nome)
+                  %td= cpf_cnpj_formatado(locatario_principal.try(:cpf_cnpj) || '00000000000') 
+                  %td= truncate(seguro_fianca.imobiliaria.estipulante, length: 30)
+                  %td= finalidade_desc(seguro_fianca.finalidade)
+                  %td= descricao_pago_seguro_fianca(seguro_fianca)
+                  %td= l seguro_fianca.created_at.to_date
+                  %td
+                    - if can? :show, seguro_fianca
+                      = link_to admin_seguro_fianca_path(seguro_fianca), class: 'btn btn-default btn-xs', title: "Visualizar" do
+                        %i.icon.ion-android-search
+                    - if seguro_fianca.status != 1
+                      = link_to alterar_pagamento_admin_seguro_fianca_path(seguro_fianca, pagamento: true), class: 'btn btn-success btn-xs', :"data-confirm" => 'Confirma o envio ?', title: "Enviar" do
+                        %i.icon.ion-card
+                    - if seguro_fianca.status.to_i > 0
+                      = link_to alterar_pagamento_admin_seguro_fianca_path(seguro_fianca, pendente: true), class: 'btn btn-warning btn-xs', :"data-confirm" => 'Confirma a alteração ?', title: "Retornar à Análise" do
+                        %i.icon.ion-card
+                    - if seguro_fianca.status != 2
+                      = link_to alterar_pagamento_admin_seguro_fianca_path(seguro_fianca), class: 'btn btn-danger btn-xs', title: "Recusar", :"data-confirm" => 'Confirma a recusa ?' do
+                        %i.icon.ion-close
+                    - if can? :destroy, SeguroFianca
+                      = link_to admin_seguro_fianca_path(seguro_fianca), class: "btn btn-danger btn-xs", :"data-confirm" => 'Confirma a exclusão?', method: :delete, title: 'Excluir' do
+                        %i.icon.ion-trash-b
+            %tfoot
+              %tr
+                %td{colspan: 99}
+                  %center= page_navigation_links @seguros_fiancas if will_paginate @seguros_fiancas

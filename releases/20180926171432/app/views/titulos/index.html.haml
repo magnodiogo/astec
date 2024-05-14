@@ -1,0 +1,44 @@
+- model_class = Titulo
+.row.grid
+  .col-md-12
+    = flash_message
+    .panel.panel-piluku
+      .panel-heading
+        %h3.panel-title
+          Listagem de Títulos de Capitalização
+          - if can? :new, Titulo
+            .right-button
+              = link_to "Novo Título de Capitalização", new_titulo_path, class: 'btn btn-wtc'
+      .panel-body
+        = form_for Titulo.new, url: titulos_path, method: :get, class: "form" do |f|
+          .row
+            .col-md-10.col-xs-8
+              .form-group
+                .field
+                  = label_tag :busca
+                  = text_field_tag :busca, params[:busca], class: "form-control", placeholder: "Endereço / Inquilino"
+            .col-md-2.col-xs-4
+              = f.submit "Consultar", class: "btn btn-primary", style: "margin-top: 25px; width: 100%"
+        .table-responsive
+          %table.table.table-striped.table-hover
+            %thead
+              %tr
+                %th= model_class.human_attribute_name(:created_at)
+                %th= model_class.human_attribute_name(:locatario_nome)
+                %th= model_class.human_attribute_name(:logradouro)
+                %th= model_class.human_attribute_name(:valor_titulo)
+                %th= model_class.human_attribute_name(:finalidade_do_imovel)
+                %th= model_class.human_attribute_name(:pago)
+                %th Opções
+            %tbody
+              - @titulos.each do |titulo|
+                %tr
+                  %td=l titulo.created_at.to_date
+                  %td=  truncate(titulo.locatario_nome, :length => 50)
+                  %td=  endereco_formatado(titulo)
+                  %td{align: :right}= titulo.valor_titulo.to_f.real
+                  %td= descricao_finalidade_do_imovel(titulo)
+                  %td= descricao_pago_titulo(titulo)
+                  %td
+                    = link_to titulo, :title=>'Visualizar', class: "btn btn-default btn-xs" do
+                      %i.ion.ion-search

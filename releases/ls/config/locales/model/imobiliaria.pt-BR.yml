@@ -1,0 +1,44 @@
+pt-BR:
+  activerecord:
+    models:
+      imobiliaria: 
+        one: Imobiliaria
+        other: Imobiliarias
+    attributes:
+      imobiliaria:
+        id: "#"
+        nome_fantasia:     Nome Fantasia
+        estipulante:       Nome
+        tipo_pessoa:       Tipo de Pessoa
+        cpf_cnpj:          "CPF/CNPJ"
+        data_nascimento:   Data de Nascimento
+        ie_rg:             IE RG
+        data_expedicao:    Data de Expedição
+        orgao_expeditor:   Orgão Expeditor
+        endereco:          Endereço
+        numero:            Número
+        complemento:       Complemento
+        bairro:            Bairro
+        cidade:            Cidade
+        estado:            UF
+        telefone:          Telefone
+        celular:           Celular
+        contato:           Contato
+        email:             Email
+        retorno:           Retorno
+        operacao:          Operação
+        taxa_residencial:  Taxa Residencial
+        taxa_empresarial:  Taxa Empresarial
+        valor_no_recibo:   Valor no Recibo
+        pro_laborista:     Pro Laborista
+        bloqueada:         Bloqueada
+        id_antigo:         ID Antigo
+        created_at:        Data de Cadastro
+        updated_at:        Data de Atualização
+    errors:
+      models:
+        imobiliaria:
+          attributes:
+          validate:
+
+

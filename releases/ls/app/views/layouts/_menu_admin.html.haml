@@ -1,0 +1,93 @@
+- if current_user.imobiliaria_id
+  %li
+    = link_to acessar_como_users_path, class: "waves-effect waves-light" do
+      %i.icon.ti-view-list-alt
+      Acessar como Administrador
+- else 
+  %li.submenu
+    %a.waves-effect.waves-light{:href => "#cadastros"}
+      %i.icon.ti-view-list-alt
+      %span.text Cadastros
+      %i.chevron.ti-angle-right
+    %ul.list-unstyled{:style => "display: none;"}
+      - if can? :admin, Imobiliaria
+        %li
+          = link_to "Imobiliárias", admin_imobiliarias_path
+      - if can? :admin, Logradouro
+        %li
+          = link_to "CEPs", admin_logradouros_path
+      - if can? :admin, Atividade
+        %li
+          = link_to "Atividades", admin_atividades_path
+      - if can? :admin, Corretora
+        %li
+          = link_to "Corretoras", admin_corretoras_path
+      - if can? :index, User
+        %li
+          = link_to "Usuários", users_path
+      - if can? :admin, Faq
+        %li
+          = link_to "Perguntas Frequentes", admin_faqs_path
+  %li.submenu
+    %a.waves-effect.waves-light{:href => "#cadastros"}
+      %i.icon.ti-folder
+      %span.text Seguros
+      %i.chevron.ti-angle-right
+    %ul.list-unstyled{:style => "display: none;"}
+      - if can? :coberturas_pendentes, Seguro
+        %li
+          = link_to "Coberturas Pendentes", coberturas_pendentes_admin_seguros_path, target: "_blank"
+      - if can? :relatorios, Seguro
+        %li
+          = link_to "Relatório de Seguros", relatorios_admin_seguros_path, target: "_blank"
+      - if can? :new, Arquivo
+        %li
+          = link_to "Gerar Arquivo", new_admin_arquivo_path
+      - if can? :admin, Arquivo
+        %li
+          = link_to "Baixar Arquivos", admin_arquivos_path
+      - if can? :renovacoes, Seguro
+        %li
+          = link_to "Renovações", renovacoes_admin_seguros_path
+  %li.submenu
+    %a.waves-effect.waves-light{:href => "#cadastros"}
+      %i.icon.ti-agenda
+      %span.text Títulos
+      %i.chevron.ti-angle-right
+    %ul.list-unstyled{:style => "display: none;"}
+      - if can? :admin, Titulo
+        %li
+          = link_to "Títulos", admin_titulos_path
+      - if can? :relatorios, Titulo
+        %li
+          = link_to "Relatório de Títulos", relatorios_admin_titulos_path, target: "_blank"
+  %li.submenu
+    %a.waves-effect.waves-light{:href => "#cadastros"}
+      %i.icon.ti-layers
+      %span.text Seguros Fianças
+      %i.chevron.ti-angle-right
+    %ul.list-unstyled{:style => "display: none;"}
+      - if can? :admin, SeguroFianca
+        %li
+          = link_to "Seguros Fianças", admin_seguros_fiancas_path
+      - if can? :relatorios, SeguroFianca
+        %li
+          = link_to "Relatório de Títulos", relatorios_admin_seguros_fiancas_path, target: "_blank"
+
+  - if can? :logs, User
+    %li
+      = link_to logs_users_path, class: "waves-effect waves-light" do
+        %i.icon.ti-user
+        Log de Acesso
+  - if can? :index, Mensagem
+    %li
+      = link_to admin_mensagens_path, class: "waves-effect waves-light" do
+        %i.icon.ti-comment-alt
+        Mensagens
+  - if can? :alterar_plano_de_fundo, User
+    %li
+      = link_to plano_de_fundo_users_path, class: "waves-effect waves-light" do
+        %i.icon.ti-image
+        Alterar BG
+
+

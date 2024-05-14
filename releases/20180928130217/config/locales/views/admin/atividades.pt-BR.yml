@@ -1,0 +1,19 @@
+pt-BR:
+  admin:
+    atividades:
+      form: 
+        header: Dados do Atividade
+        header_images: Imagens do Atividade
+      edit: 
+        title: Editar %{model}
+      index:  
+        title: Atividades
+        header: Listagem de Atividades
+        new: Cadastrar Atividade
+      new:
+        title: Cadastrar %{model}
+      show:
+        title: "Detalhes do %{model}"
+        title_serventia: "Listagem de %{model}"
+        header_serventia: "Listagem de %{model}"
+        tipo_de_documentos: Tipos de Documentos

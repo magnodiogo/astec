@@ -1,0 +1,65 @@
+- model_class = User
+.panel-body
+  .table-responsive
+    %table.table.table-striped.table-hover
+      %thead
+        %tr
+          %th= model_class.human_attribute_name(:avatar)
+          %th= model_class.human_attribute_name(:name)
+          %th= model_class.human_attribute_name(:username)
+          %th= model_class.human_attribute_name(:email)
+          %th= model_class.human_attribute_name(:tipo)
+          %th= model_class.human_attribute_name(:imobiliaria)
+          %th= model_class.human_attribute_name(:somente_calculo)
+          %th= model_class.human_attribute_name(:cobertura)
+          %th{colspan: 99} Opções
+      %tbody
+        - @users.each do |user|
+          %tr
+            %td
+              = link_to editar_avatar_user_path(user) do 
+                = image_tag "/assets/avatar/" + user.avatar + ".png", width: 30, style: "border-radius: 50%"
+            %td= user.name 
+            %td= user.username 
+            %td= user.email 
+            %td= user.tipo_desc_min 
+            %td= user.imobiliaria.try(:nome_fantasia)
+            %td= check_box_tag :show, user.somente_calculo ? true : nil, user.somente_calculo ? true : nil, :disabled => true
+            /
+            - if current_user.master
+              - unless user.bloqueio_proposta
+                %td= check_box_tag :show, true, true, :disabled => true
+                %td
+                  = link_to bloqueia_proposta_user_path(user), class: 'btn btn-danger btn-xs', title: "Bloquear Cobertura" do
+                    %i.icon.ion-close
+              - else
+                %td= check_box_tag :show, nil, nil,  :disabled => true
+                %td
+                  = link_to bloqueia_proposta_user_path(user), class: 'btn btn-success btn-xs', title: "Liberar Cobertura" do
+                    %i.icon.ion-checkmark-round
+              - if user.tipo == "A" 
+                %td
+                  = link_to editar_permissoes_user_path(user), class: 'btn btn-default btn-xs', title: "Gerenciar Permissoes" do
+                    %i.icon.ion-ios-toggle
+              - else
+                %td
+                  = link_to alterar_calculo_user_path(user), class: 'btn btn-default btn-xs', title: "Alterar Somente Calculo" do
+                    %i.icon.ion-calculator
+              %td
+                = link_to resetar_senha_user_path(user), class: "btn btn-default btn-xs", title: "Redefinir Senha" do
+                  %i.icon.ion-key{style: "padding: 0 2.5px"}
+              %td
+                - if user.locked_at?
+                  = link_to desbloquear_user_path(user), class: "btn btn-success btn-xs", title: 'Desbloquear' do
+                    %i.icon.ion-unlocked
+                - else 
+                  = link_to bloquear_user_path(user), class: "btn btn-danger btn-xs", title: 'Bloquear' do
+                    %i.icon.ion-locked
+        %tfoot
+          %tr
+            %td.tfoot_pad{colspan: 99}
+              - if params[:id].present?
+                .float-left
+                  = link_to t('.back', default: t("helpers.links.back")), admin_imobiliarias_path, class: 'btn btn-default'
+              .float-right
+                = link_to 'Log de Acesso', logs_users_path, class: 'btn btn-info'

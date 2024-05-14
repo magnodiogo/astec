@@ -1,0 +1,64 @@
+
+.nome_usuario {
+    font-size: 18px;
+    font-weight: bold;
+    left: 170px;
+    position: absolute;
+    top: 23px;
+}
+
+.tipo_de_pessoa {
+    font-size: 13px;
+/*    font-weight: bold;*/
+    margin-top: 5px;
+}
+#div_premio input{  
+    margin-top: 0px; }
+
+#div_observacao, #div_limite_error { color: #ca0005; margin-top: 3px}
+
+.tipo_de_pessoa,.tipo_de_pessoa * {float: left}
+
+.tipo_de_pessoa { width: 100% } 
+
+.tipo_de_pessoa input {margin-top: 3px} 
+
+.tipo_de_pessoa div.fieldWithErrors { border:1px solid red }
+
+
+
+.pagination * {
+    font-size: 15px;
+    font-weight: bold;
+    margin: 0 3px;
+}
+
+
+
+.alert.error {
+    color: #ca0005;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+
+.formRow {
+    float: left;
+    height: 51px;
+    padding: 9px 18px;
+    width: 100%;
+}
+
+.formRow.double{
+    height: 102px;
+}
+
+.fieldWithErrors select, .fieldWithErrors input{
+  border: 1px solid #C22127;
+}
+
+.myTable { width: 80%; font-size: 13px }
+.myTable tr, .myTable td { border: 1px solid #ccc; padding: 5px }
+
+.linha_par {}
+.linha_impar { background: #eee }

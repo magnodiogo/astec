@@ -1,0 +1,153 @@
+- model_class = Seguro
+.row.grid
+  .col-md-12
+    = flash_message(@seguro)
+    .panel.panel-piluku
+      .panel-heading
+        %h3.panel-title
+          Calculadora de Seguros
+          %span.panel-options
+            %a.panel-minimize{:href => "#"}
+              %i.icon.ti-angle-up
+      .panel-body
+        = form_for @seguro, url: calculadora_seguros_path, class: "form" do |f|
+          = f.hidden_field :imobiliaria_id, value: current_user.imobiliaria_id
+          .row
+            .col-md-4
+              .form-group
+                .field
+                  = label_tag :tipo
+                  %ul.list-inline.checkboxes-radio
+                    %li.ms-hover{style: 'margin-top: 10px'}
+                      = radio_button_tag :tipo, 'R'
+                      %label{for: "tipo_R" }
+                        %span
+                        Residencial
+                    %li.ms-hover{style: 'margin-top: 10px'}
+                      = radio_button_tag :tipo, 'C'
+                      %label{for: "tipo_C"}
+                        %span
+                        Empresarial
+          .row{style: "display: none"}
+            .col-md-12
+              %br
+              %center
+                %b{:style => "font-size: 18px"}
+                  %big{:style => "color: red; font-weight: bold; font-size: 20px"}
+                    %u.text
+              %br
+          .row{style: "display: none"}
+            .col-md-4
+              .form-group
+                .field
+                  = f.label :limite_maximo_indenizacao
+                  = f.text_field :limite_maximo_indenizacao, value: (@seguro.limite_maximo_indenizacao.to_f.real), :required => true, :maxlength => 12, type: :tel, max: 2000000
+                  #div_limite_error
+            .col-md-4#cobertura
+              .form-group
+                .field
+                  = f.label :cobertura_para_conteudo
+                  = f.select :cobertura_para_conteudo, options_for_select(@cobertura, @seguro.cobertura_para_conteudo.to_i), {}, class: "form-control selectize", required: true
+            .col-md-4
+              .form-group
+                .field
+                  = f.label :premio_total, "Prêmio Total:"
+                  = f.text_field :premio_total, value: @seguro.premio_total.to_f.real, :readonly => true
+                  #div_limite_error_empresarial{style: 'color: #db5200'}
+                    %b
+                      %u IMPORTANTE: 
+                    Verifique as atividades sem aceita&ccedil;&atilde;o.
+          .form-group
+            .actions  
+              .float-right
+                = link_to 'Calcular', '#', class: 'btn btn-primary', id: "calcular"
+              .float-left
+                = link_to t('.back', default: t("helpers.links.back")), root_path, class: 'btn btn-default'
+
+          :javascript
+            $( document ).ready(function() {          
+              var limite      = $("#seguro_limite_maximo_indenizacao");
+              var cobertura   = $("#seguro_cobertura_para_conteudo");
+              var imobiliaria = $("#seguro_imobiliaria_id");
+              var tipoR       = $("#tipo_R");
+              var tipoC       = $("#tipo_C");
+              var tipo        = 'X;'
+              $("#cobertura").hide();
+
+              tipoR.change(function(){
+                tipo = 'R';
+                $("#cobertura").show();
+                $(".row").show();
+                $('#seguro_premio_total').val('')
+                limite.val('');
+                limite.attr('30000');
+                $('#div_limite_error').html('');
+                $("u.text").html('RESIDENCIAL');
+                $("#div_limite_error_empresarial").hide();
+              });
+              tipoC.change(function(){
+                tipo = 'C';
+                $("#cobertura").hide();
+                $("#div_limite_error_empresarial").show();
+                cobertura.val('');
+                $(".row").show();
+                limite.val('');
+                $('#seguro_premio_total').val('')
+                limite.attr('50000');
+                $('#div_limite_error').html('');
+                $("u.text").html('EMPRESARIAL');
+              });
+
+              limite.change(function(){
+                ajax_calcula_premio(limite, cobertura);
+              });
+              cobertura.change(function(){
+                ajax_calcula_premio(limite, cobertura);
+              });
+              $("#calcular").click(function(){
+                validar_valores();
+                ajax_calcula_premio(limite, cobertura);
+              });
+              function ajax_calcula_premio(limite, cobertura){
+                $.ajax({
+                  url:  '/seguros/calcula_premio?seguro_limite_maximo_indenizacao=' + limite.val() + "&seguro_cobertura_para_conteudo=" + cobertura.val() + "&imobiliaria_id=" + imobiliaria.val() + "&seguro_tipo_de_seguro=" + tipo,
+                  //data: { seguro_limite_maximo_indenizacao: limite.val(), seguro_cobertura_para_conteudo: cobertura.val() },
+                  type: 'get',
+                  error: function() { $('#seguro_premio_total').val('0,00');  },
+                  success: function(data) {
+                    $('#seguro_premio_total').val(data);
+                  }
+                });
+              }
+            });
+            var atividades = new Bloodhound({
+              datumTokenizer: Bloodhound.tokenizers.whitespace,
+              queryTokenizer: Bloodhound.tokenizers.whitespace,
+              prefetch: '/atividades.json'
+            });
+            $('.typeahead').typeahead(null, {
+              name: 'atividades',
+              source: atividades
+            });
+
+            function validar_valores(){
+              valor = parseFloat(limite.val().replace('.','').replace('.','').replace(',','.'));
+              if (valor > 2000000.0) {
+                $('#div_limite_error').html('Valor máximo é: R$ 2.000.000,00. ');
+              } else if ( valor < 50000.0 && tipoC[0].checked) {
+                var val_min = "50.000,00";
+                $('#div_limite_error').html('Valor mínimo é: R$ '+ val_min + '.');
+              } else if ( valor < 30000.0 && tipoR[0].checked) {
+                var val_min = "30.000,00";
+                $('#div_limite_error').html('Valor mínimo é: R$ '+ val_min + '.');
+              } else { 
+                $('#div_limite_error').html('');
+              }
+            }              
+
+            var limite = jQuery('#seguro_limite_maximo_indenizacao');
+            var tipoR  = $("#tipo_R");
+            var tipoC  = $("#tipo_C");
+            limite.change(function(){
+              validar_valores();
+            });

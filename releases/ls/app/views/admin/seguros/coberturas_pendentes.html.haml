@@ -1,0 +1,21 @@
+:css
+  table, tr, td, th { border: 1px solid #000; border-collapse: collapse;}
+  td, th { padding: 1px 3px; }
+%h2 RELATÓRIO DE COBERTURAS PENDENTES
+Emitido em: #{Date.today.to_s_br}
+%br/
+%br/
+%br/
+%table{:border => "1", :width => "100%"}
+  %thead
+    %th Imobiliária
+    %th Tipo
+    %th Quantidade
+  %tbody
+    - for r in @resultado
+      %tr
+        %td= h r['estipulante']
+        %td= h r['tipo_de_seguro']
+        %td= h r['quantidade']
+%br
+= link_to "Voltar", :back

@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  seguro_fianca_id: 1
+  nome: MyString
+  cpf_cnpj: MyString
+  estado_civil: MyString
+  residira_no_imovel: MyString
+  renda: 1.5
+  vinculo_empregaticio: 1
+
+two:
+  seguro_fianca_id: 1
+  nome: MyString
+  cpf_cnpj: MyString
+  estado_civil: MyString
+  residira_no_imovel: MyString
+  renda: 1.5
+  vinculo_empregaticio: 1

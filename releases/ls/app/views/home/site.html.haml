@@ -1,0 +1,244 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}/
+    %link{:href => "/site/css2.css", :rel => "stylesheet", :type => "text/css"}/
+    %script{:src => "/site/jquery-1.2.6.min.js", :type => "text/javascript"}
+    %title Tec Master Corretora de Seguros
+    :css
+      .content {width:530px; float:left; background:#FFF; padding:0px 4px; }
+  %body
+    #bg
+      / Corpo
+      / Fim Topo
+      / Fim Menu horizontal
+      %div{:style => "background:url() center repeat-y; border-bottom:0px solid #A5CE37"}
+        .main{:style => " background-color:#FFF"}
+          / Conteúdo
+          %div{:style => "float:left; margin-left:2px;"}
+            / Menu Esquerda
+            %a{:href => "?p="}
+              %img{:height => "130", :src => "/site/imgs/logo.png", :width => "149"}/
+            %br/
+            %br/
+            %a{:href => "/users/sign_in", :target => "_blank"}
+              %img{:height => "80", :src => "/site/imgs/left1.gif", :width => "142", style: "margin-top: -2px"}/
+            %br/
+            %a{:href => "?p=qsomos"}
+              %img{:border => "0", :height => "118", :src => "/site/imgs/left2.gif", :width => "142", style: "margin-top: -3px"}/
+            %br/
+            %a{:href => "?p=contato"}
+              %img{:border => "0", :height => "117", :src => "/site/imgs/left3.gif", :width => "142", style: "margin-top: -3px"}/
+            %br/
+            %img{:border => "0", :height => "158", :src => "/site/imgs/left4.gif", :width => "142", style: "margin-top: -3px"}/
+            %div{:style => " background:url(/site/imgs/bg_menuv3.jpg) repeat-x; height:18px; color:#CCC"}
+          %div{:style => "background-color:#FFF; width:795px; float:left; margin:0px 0px 0px 10px; padding:0px 0px 0px 0px; min-height:577px "}
+            %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}/
+            %div{:style => "float:left"}
+              - if params[:p] == 'qsomos'
+                :javascript
+                  function slideSwitch() {
+                    var $active = $('#slideshow DIV.active');
+                    if ( $active.length == 0 ) $active = $('#slideshow DIV:last');
+                    // use this to pull the divs in the order they appear in the markup
+                    var $next =  $active.next().length ? $active.next() : $('#slideshow DIV:first');
+                    $active.addClass('last-active');
+                    $next.css({opacity: 0.0}).addClass('active').animate({opacity: 1.0}, 1000, function() {
+                      $active.removeClass('active last-active');
+                    });
+                  }
+                  $(function() {
+                    setInterval( "slideSwitch()", 8000 );
+                  });
+                %div{:style => "width:340px; float:left"}
+                  %div{:style => " margin-top:20px; margin-left:15px"}
+                    %div{:style => "float:left"}
+                      %img{:height => "275", :src => "/site/imgs/tecmaster.jpg", :width => "328"}/
+                    %div{:style => "clear:both"}
+                    %br/
+                    %br/
+                    #slideshow
+                      .active{:style => "opacity: 1;"}
+                        %a{:href => "#"}
+                          %img{:alt => "", :src => "/site/imgs/logo1.png"}/
+                      %div{:style => "opacity: 0;"}
+                        %a{:href => "#"}
+                          %img{:alt => "", :src => "/site/imgs/logo2.png"}/
+                  %div{:style => "clear:both"}
+                %div{:style => "float:left; margin-left:30px; width:400px; background:#FFF;"}
+                  %h6 Tec Master Corretora
+                  %br/
+                  %h2{:style => " text-align:justify"}
+                    Diante dos novos desafios, em realizar seguros com atendimento personalizado, utilizando sempre de toda a tecnologia disponível, a diretoria da Astec Corretora de Seguros, empresa fundada em 1987 e da Master Future Corretora de Seguros, fundada em 1990, uniram-se e criaram a Tecmaster Corretora de Seguros Ltda.
+                    %br/
+                    %br/
+                    Empresa voltada exclusivamente para assessorar seus clientes com soluções praticas na realização de seguros de riscos especiais, corporativos e vultosos nos mais diversos ramos, sempre contando com a eficiência das melhores seguradoras e re-seguradoras do mercado nacional e internacional.
+                    %br/
+                    %br/
+                  %h3
+                    "Se me fosse possível escreveria a palavra SEGUROS no umbral de cada porta e na fronte de cada homem, tão convencido estou de que o seguro pode mediante o desembolso de módica quantia livrar famílias de catástrofes irreparáveis."
+                    %br/
+                    %br/
+                    Winston Churchill – Primeiro Ministro do Reino Unido
+              - elsif params[:p] == 'contato'
+                %div{:style => "float:left;"}
+                  %div{:style => "margin:4px"}
+                    %div{:style => "float:left"}
+                      %a{:href => "?p=01"}
+                        %img{:height => "123", :src => "/site/imgs/01.jpg", :width => "280"}/
+                    %div{:style => "float:left; margin-left:12px"}
+                      %a{:href => "?p=01"}
+                        %img{:align => "top", :height => "48", :src => "/site/imgs/1.png", :width => "93"}/
+                    %div{:style => "clear:both"}
+                  %div{:style => "margin:4px"}
+                    %div{:style => "float:left"}
+                      %a{:href => "?p=02"}
+                        %img{:height => "123", :src => "/site/imgs/02.jpg", :width => "280"}/
+                    %div{:style => "float:left; margin-left:12px"}
+                      %a{:href => "?p=02"}
+                        %img{:align => "top", :height => "48", :src => "/site/imgs/2.png", :width => "97"}/
+                    %div{:style => "clear:both"}
+                  %div{:style => "margin:4px"}
+                    %div{:style => "float:left"}
+                      %a{:href => "?p=03"}
+                        %img{:height => "123", :src => "/site/imgs/03.jpg", :width => "280"}/
+                    %div{:style => "float:left; margin-left:12px"}
+                      %a{:href => "?p=03"}
+                        %img{:align => "top", :height => "52", :src => "/site/imgs/3.png", :width => "80"}/
+                    %div{:style => "clear:both"}
+                  %div{:style => "margin:4px"}
+                    %div{:style => "float:left"}
+                      %a{:href => "?p=04"}
+                        %img{:height => "123", :src => "/site/imgs/04.jpg", :width => "280"}/
+                    %div{:style => "float:left; margin-left:12px"}
+                      %a{:href => "04"}
+                        %img{:align => "top", :height => "52", :src => "/site/imgs/4.png", :width => "82"}/
+                    %div{:style => "clear:both"}
+                  %div{:style => "margin:4px"}
+                    %div{:style => "float:left"}
+                      %a{:href => "?p=05"}
+                        %img{:height => "123", :src => "/site/imgs/05.jpg", :width => "280"}/
+                    %div{:style => "float:left; margin-left:12px"}
+                      %a{:href => "?p=05"}
+                        %img{:align => "top", :height => "47", :src => "/site/imgs/5.png", :width => "83"}/
+                    %div{:style => "clear:both"}
+                %div{:style => "float:left; margin-left:30px; width:330px; background:#FFF; color:#999"}
+                  %p
+                    %span{:style => "font-size:20px; font-weight:bold"} Tec Master Corretora de Seguros
+                    %br/
+                    = succeed "Av Coronel Miguel Dias, 99 lj 39 - Guararapes - Fortaleza" do
+                      %strong Endereço:
+                    %br/
+                    = succeed "(85)3088-4620" do
+                      %strong Fone:
+                    %br/
+                    %strong E-mail:
+                    comercial@webtecmaster.com.br
+                    %br/
+                    %br/
+                  %div
+                    %iframe{:frameborder => "0", :height => "330", :marginheight => "0", :marginwidth => "0", :scrolling => "no", :src => "http://maps.google.com.br/maps?f=q&source=s_q&hl=pt-BR&geocode=&q=Avenida+Coronel+Miguel+Dias,+99,+Guararapes,+Fortaleza+-+Cear%C3%A1&aq=0&oq=Av+Coronel+Miguel+Dias,+99+-+Guararapes+-+Fortaleza&sll=-14.239424,-53.186502&sspn=50.293231,79.013672&ie=UTF8&hq=&hnear=Av.+Cel.+Miguel+Dias,+99+-+Guararapes,+Fortaleza+-+Cear%C3%A1,+60810-160&t=m&z=14&ll=-3.758679,-38.488192&output=embed", :width => "320"}
+                    %br/
+                    %small
+                      %a{:href => "http://maps.google.com.br/maps?f=q&source=embed&hl=pt-BR&geocode=&q=Avenida+Coronel+Miguel+Dias,+99,+Guararapes,+Fortaleza+-+Cear%C3%A1&aq=0&oq=Av+Coronel+Miguel+Dias,+99+-+Guararapes+-+Fortaleza&sll=-14.239424,-53.186502&sspn=50.293231,79.013672&ie=UTF8&hq=&hnear=Av.+Cel.+Miguel+Dias,+99+-+Guararapes,+Fortaleza+-+Cear%C3%A1,+60810-160&t=m&z=14&ll=-3.758679,-38.488192", :style => "color:#0000FF;text-align:left"} Exibir mapa ampliado
+              - elsif ['01', '02', '03', '04', '05'].include? params[:p]
+                %div{:style => "float:left;"}
+                  %div{:style => "margin:4px"}
+                    %div{:style => "float:left"}
+                      %a{:href => "?p=01"}
+                        %img{:height => "123", :src => "/site/imgs/01.jpg", :width => "280"}/
+                    %div{:style => "float:left; margin-left:12px"}
+                      %a{:href => "?p=01"}
+                        %img{:align => "top", :height => "48", :src => "/site/imgs/1.png", :width => "93"}/
+                    %div{:style => "clear:both"}
+                  %div{:style => "margin:4px"}
+                    %div{:style => "float:left"}
+                      %a{:href => "?p=02"}
+                        %img{:height => "123", :src => "/site/imgs/02.jpg", :width => "280"}/
+                    %div{:style => "float:left; margin-left:12px"}
+                      %a{:href => "?p=02"}
+                        %img{:align => "top", :height => "48", :src => "/site/imgs/2.png", :width => "97"}/
+                    %div{:style => "clear:both"}
+                  %div{:style => "margin:4px"}
+                    %div{:style => "float:left"}
+                      %a{:href => "?p=03"}
+                        %img{:height => "123", :src => "/site/imgs/03.jpg", :width => "280"}/
+                    %div{:style => "float:left; margin-left:12px"}
+                      %a{:href => "?p=03"}
+                        %img{:align => "top", :height => "52", :src => "/site/imgs/3.png", :width => "80"}/
+                    %div{:style => "clear:both"}
+                  %div{:style => "margin:4px"}
+                    %div{:style => "float:left"}
+                      %a{:href => "?p=04"}
+                        %img{:height => "123", :src => "/site/imgs/04.jpg", :width => "280"}/
+                    %div{:style => "float:left; margin-left:12px"}
+                      %a{:href => "04"}
+                        %img{:align => "top", :height => "52", :src => "/site/imgs/4.png", :width => "82"}/
+                    %div{:style => "clear:both"}
+                  %div{:style => "margin:4px"}
+                    %div{:style => "float:left"}
+                      %a{:href => "?p=05"}
+                        %img{:height => "123", :src => "/site/imgs/05.jpg", :width => "280"}/
+                    %div{:style => "float:left; margin-left:12px"}
+                      %a{:href => "?p=05"}
+                        %img{:align => "top", :height => "47", :src => "/site/imgs/5.png", :width => "83"}/
+                    %div{:style => "clear:both"}
+                %div{:style => "float:left; margin-left:30px; width:330px; background:#FFF; color:#999"}
+                  %h1= @title
+                  %br/
+                  %h2= @desc
+                  - if @obs
+                    %h3= @obs
+              - else
+                %div{:style => "width:450px; float:left"}
+                  %div{:style => "margin:4px"}
+                    %div{:style => "float:left"}
+                      %a{:href => "?p=01"}
+                        %img{:height => "123", :src => "/site/imgs/01.jpg", :width => "310"}/
+                    %div{:style => "float:left; margin-left:12px"}
+                      %a{:href => "?p=01"}
+                        %img{:align => "top", :height => "48", :src => "/site/imgs/1.png", :width => "93"}/
+                    %div{:style => "clear:both"}
+                  %div{:style => "margin:4px"}
+                    %div{:style => "float:left"}
+                      %a{:href => "?p=02"}
+                        %img{:height => "123", :src => "/site/imgs/02.jpg", :width => "310"}/
+                    %div{:style => "float:left; margin-left:12px"}
+                      %a{:href => "?p=02"}
+                        %img{:align => "top", :height => "48", :src => "/site/imgs/2.png", :width => "97"}/
+                    %div{:style => "clear:both"}
+                  %div{:style => "margin:4px"}
+                    %div{:style => "float:left"}
+                      %a{:href => "?p=03"}
+                        %img{:height => "123", :src => "/site/imgs/03.jpg", :width => "310"}/
+                    %div{:style => "float:left; margin-left:12px"}
+                      %a{:href => "?p=03"}
+                        %img{:align => "top", :height => "52", :src => "/site/imgs/3.png", :width => "80"}/
+                    %div{:style => "clear:both"}
+                  %div{:style => "margin:4px"}
+                    %div{:style => "float:left"}
+                      %a{:href => "?p=04"}
+                        %img{:height => "123", :src => "/site/imgs/04.jpg", :width => "310"}/
+                    %div{:style => "float:left; margin-left:12px"}
+                      %a{:href => "04"}
+                        %img{:align => "top", :height => "52", :src => "/site/imgs/4.png", :width => "82"}/
+                    %div{:style => "clear:both"}
+                  %div{:style => "margin:4px"}
+                    %div{:style => "float:left"}
+                      %a{:href => "?p=05"}
+                        %img{:height => "123", :src => "/site/imgs/05.jpg", :width => "310"}/
+                    %div{:style => "float:left; margin-left:12px"}
+                      %a{:href => "?p=05"}
+                        %img{:align => "top", :height => "47", :src => "/site/imgs/5.png", :width => "83"}/
+                    %div{:style => "clear:both"}
+                %div{:style => "float:left; margin-left:30px"}
+                  %img{:height => "222", :src => "/site/imgs/right5.png", :style => "margin:2px", :width => "281"}/
+                  %br/
+                  %img{:height => "206", :src => "/site/imgs/right4.png", :style => "margin:1px", :width => "140"}/
+                  %img{:height => "206", :src => "/site/imgs/right3.png", :style => "margin:1px", :width => "140"}/
+                  %br/
+                  %img{:height => "206", :src => "/site/imgs/right1.png", :style => "margin:1px", :width => "140"}/
+                  %img{:height => "206", :src => "/site/imgs/right2.png", :style => "margin:1px", :width => "140"}/
+                  %br/
+            %div{:style => "clear:both"}
+          / FIM Conteúdo geral

@@ -1,0 +1,67 @@
+- model_class = Arquivo
+.row.grid
+  .col-md-12
+    = flash_message(@arquivo)
+    .panel.panel-piluku
+      .panel-heading
+        %h3.panel-title
+          = t('.title', default: model_class.model_name.human.titleize, model: model_class.model_name.human.titleize)
+          %span.panel-options
+            %a.panel-minimize{:href => "#"}
+              %i.icon.ti-angle-up
+      .panel-body
+        = form_for @arquivo, url: new_admin_arquivo_path, method: :get, class: "form" do |f|
+          .row
+            .col-md-6
+              .form-group
+                .field
+                  = f.label :imobiliaria_id
+                  = f.select :imobiliaria_id, options_for_select(Imobiliaria.pluck(:estipulante, :id).sort, @arquivo.imobiliaria_id), {prompt: "Selecione a Imobiliária"}, class: "form-control selectize"
+            .col-md-6
+              .form-group
+                .field
+                  = f.label :tipo
+                  = f.select :tipo, options_tipo_arquivo, {}, class: "form-control selectize"
+          .form-group
+            .actions  
+              .float-right
+                = f.submit t('.confirm', default: t("helpers.submit.confirm")), class: "btn btn-primary"
+              .float-left
+                = link_to t('.back', default: t("helpers.links.back")), admin_arquivos_path, class: 'btn btn-default'
+
+- if @seguros.any?
+  .row.grid
+    .col-md-12
+      = form_for @arquivo, url: (@arquivo.new_record? ? admin_arquivos_path(@arquivo) : admin_arquivo_path), class: "form" do |f|
+        .panel.panel-piluku
+          .panel-heading
+            %h3.panel-title
+              = t('.title', model: model_class.model_name.human.titleize)
+              .right-button
+                = submit_tag 'Gerar Arquivo', class: "btn btn-wtc"
+          .panel-body
+            .table-responsive
+              %table.table.table-striped.table-hover
+                %thead
+                  %tr
+                    %th= model_class.human_attribute_name(:inquilino)
+                    %th= model_class.human_attribute_name(:endereco_formatado)
+                    %th= model_class.human_attribute_name(:transmitido_em)
+                    %th= model_class.human_attribute_name(:status)
+                    %th Opções
+                %tbody
+                  = f.hidden_field :imobiliaria_id
+                  = f.hidden_field :tipo
+                  - @seguros.each do |seguro|
+                    %tr
+                      %td=  truncate(seguro.inquilino, length: 40)
+                      %td=  seguro.endereco_formatado 
+                      %td=l seguro.transmitido_em, format: :short
+                      %td=  seguro.descricao_status_admin 
+                      %td{title: seguro.id}= check_box_tag 'marcado[]', seguro.id
+                %tfoot
+                  %tr
+                    %td{colspan: 99}
+                      %center= page_navigation_links @seguros if will_paginate @seguros
+                      .float-right{style: (will_paginate(@seguros) ? "margin-top: -65px" : "")}
+                        = submit_tag 'Gerar Arquivo', class: "btn btn-primary"

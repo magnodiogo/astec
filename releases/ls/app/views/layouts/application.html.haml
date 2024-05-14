@@ -1,0 +1,99 @@
+!!!
+%html{:lang => "en"}
+  %head
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0", :name => "viewport"}/
+    / 320
+    %title Web Tec Master
+    = stylesheet_link_tag "application"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+    /
+      <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    %link{ rel: "icon", href: "/assets/favicon.ico", type: "image/x-icon"}
+    / Bootstrap CSS
+    :javascript
+      jQuery(window).load(function () {
+        $('.piluku-preloader').addClass('hidden');
+      });
+  %body
+    .piluku-preloader.text-center
+      .loader Loading...
+    .wrapper.hide-left-bar-disable{style: "background: url('/assets/Background.png') 100% 100%"}
+      .left-bar{:style => "overflow: hidden; outline: none;", :tabindex => "0"}
+        .admin-logo
+          .logo-holder.pull-left{style: "padding-top: 0px"}
+            = link_to root_path do 
+              = image_tag "logo_TECMASTER.png", class: "logo", style: "width: 75px"
+
+          %a.menu-bar.pull-right{:href => "#", style: "/*background-color: #e0e0e0; color: #333*/"}
+            %i.ti-menu
+        / admin-logo
+        %ul#mainMenu.list-unstyled.menu-parent.header-style
+          = render "layouts/menu"
+
+      #content.content{style: "background: none"}
+        .overlay
+        .top-bar{style: "position: fixed;"}
+          %nav.navbar.navbar-default.top-bar{style: "height: 80px;"}
+            #open-left.menu-bar-mobile
+              %i.ti-menu
+            - if user_signed_in?
+              #bs-example-navbar-collapse-1.collapse.navbar-collapse
+                %ul.nav.navbar-nav.navbar-left.top-elements.top-collapse-nav
+                  %li
+                    %h3{style: "margin-left: 30px; font-weight: bold"}
+                      - if current_user.try(:imobiliaria)
+                        = current_user.try(:imobiliaria).try(:nome_fantasia).to_s.upcase
+                      - else
+                        TEC MASTER
+                  
+                %ul.nav.navbar-nav.navbar-right.top-elements
+                  %li.piluku-dropdown.dropdown.user_background 
+                    %a.dropdown-toggle.avatar_width{class: "right-bar-toggle", style: "background-color: #f8f8f8; line-height: 0px"}
+                      %span{style: "line-height: 37px; font-size: 18px"}
+                        = current_user.name
+                        %br
+                        #clock{style: "font-size: 12px"}
+                  %li.piluku-dropdown.dropdown.user_background 
+                    %a.dropdown-toggle.avatar_width{"aria-expanded" => "false", "data-toggle" => "dropdown", :href => "#", :role => "button", class: "right-bar-toggle"}
+                      %span.avatar-holder
+                        = image_tag "/assets/avatar/" + current_user.avatar + ".png"
+                    %ul.dropdown-menu.dropdown-piluku-menu.piluku-right.animated.fadeInUp.wow.avatar_drop.neat_drop{"data-wow-duration" => "1500ms", :role => "menu"}
+                      %li
+                        = link_to edit_user_registration_path do
+                          %i.ion-android-settings
+                          Alterar Senha
+                      %li
+                        = link_to destroy_user_session_path, method: :delete, class: "logout_button" do 
+                          /
+                          %i.ion-power
+                          Sair
+        / top-bar
+        .main-content
+          %div{style: "margin-top: 80px"}
+            /- if current_user.is?(:usuario)
+            /  = render partial: "home/menu_user"
+            = yield
+    %footer
+      .footer
+        WebTecMaster - Copyright 2017
+    = javascript_include_tag "administrador"
+    /
+    :javascript
+      $('#clock').countdown('#{Date.today.strftime("%Y/%m/%d")} #{(current_user.current_sign_in_at + 1.hour).strftime("%H:%M:%S")}')
+      .on('update.countdown', function(event) {
+        var format = '%H:%M:%S';
+        if(event.offset.totalDays > 0) {
+          format = '%-d day%!d ' + format;
+        }
+        if(event.offset.weeks > 0) {
+          format = '%-w week%!w ' + format;
+        }
+        $(this).html('Sua sessão expira em: ' + event.strftime(format));
+      })
+      .on('finish.countdown', function(event) {
+        //$(this).html('Sua sessao expirou!')
+        $(this).html('Sua sessão expiou!')
+          .parent().addClass('disabled');
+      });

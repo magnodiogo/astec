@@ -1,0 +1,91 @@
+
+
+
+<% if current_user.tipo == 'A' and current_user.imobiliaria_id.nil? %>
+
+<div class="nine columns">
+
+ <nav class="ddsmoothmenu tinyNav" id="smoothmenu_h">    
+  <ul id='menu' class="cf">
+    <li>
+      <!--a href="javascript:void(0)" class="mb_parent">Atividades</a-->
+      <%= link_to 'Atividades', atividades_path %>
+    </li>
+
+    <li>
+      <%= link_to 'CEPs', ceps_path %>
+    </li>
+
+    <li>
+      <li> <%= link_to 'Corretora', corretoras_path %>
+    </li>
+    
+    <li>
+      <%= link_to 'Imobiliárias', imobiliarias_path %>
+    </li>
+
+    <li>
+      <%= link_to 'Gerar Arquivo', gerador_de_arquivos_admin_path %>
+    </li>
+
+    <li>
+      <%= link_to 'Baixar Arquivo', arquivos_path %>
+    </li>
+
+    <li>
+      <%= link_to 'Renovações', renovacoes_path %>
+    </li>
+
+    <li>
+      <%= link_to 'Coberturas', coberturas_pendentes_admin_path, :target => "_blank" %>
+    </li>
+
+    <li>
+      <%= link_to 'Relatórios', index_relatorios_admin_path %>
+    </li>
+
+    <li>
+      <%= link_to 'Títulos', index_titulos_admin_path %>
+    </li>
+
+    <li>
+      <%= link_to 'Usuários', users_path %>
+    </li>
+    <li>
+      <%= link_to 'BG', alterar_plano_de_fundo_admin_path %>
+    </li>
+  </ul> 
+
+<% elsif controller_name == 'seguros' and action_name == 'inicio' %>
+<div class="seven columns">
+
+ <nav class="ddsmoothmenu tinyNav" id="smoothmenu_h__________new">    
+  <ul class='cf' style='margin-left: 11%'> 
+    <li>
+     <%= link_to 'Prédio Empresarial', comercial_seguros_path, :class => "button medium nice blue radius", :style => "color: #eee; font-size: 17px; margin: 5px 0px 5px 0px;"%>
+    </li>  
+    <li>&nbsp;    &nbsp;    &nbsp;    &nbsp;    &nbsp; </li>
+    <li>
+      <%= link_to 'Prédio Residencial', residencial_seguros_path, :class => "button medium nice blue radius", :style=> "color: #eee; font-size: 17px; margin: 5px 0px 5px 30px;"%> 
+    </li>
+  </ul> 
+<% else %>
+<div class="seven columns">
+ <nav class="ddsmoothmenu tinyNav" id="smoothmenu_h__________new">    
+  <ul class='cf' style='margin-left: 5%'> 
+    <li><%= link_to 'Seguro Incêndio', inicio_seguros_path,:class =>"button medium nice blue radius", :style => "color: #eee; font-size: 13px; margin: 5px 0px 5px 0px;"%></li>  
+    <li>&nbsp;    &nbsp;    &nbsp;    &nbsp;    &nbsp; </li>
+    <li><%= link_to'Título de Capitalização', titulos_path,:class=>"button medium nice blue radius", :style => "color: #eee; font-size: 13px; margin: 5px 0px 5px 0px;"%></li>  
+    <li>&nbsp;    &nbsp;    &nbsp;    &nbsp;    &nbsp; </li>
+    <li><%= link_to 'Seguro Fiança', fiancas_path, :class =>"button medium nice blue radius", :style => "color: #eee; font-size: 13px; margin: 5px 0px 5px 0px;"%></li>  
+  </ul> 
+<% end %>
+
+</nav>
+<ul id="breadcrumbs" class="cf" >
+<li> :: Hora do Sistema:</li>
+<li class='righta'><%= Time.now.strftime("%d/%m/%Y  %H:%M:%S") %> ::</li> <!--"-->
+</ul>
+</div>
+
+

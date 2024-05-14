@@ -1,0 +1,26 @@
+- model_class = Seguro
+.row.grid
+  .col-md-12
+    = flash_message
+    .panel.panel-piluku
+      .panel-heading
+        %h3.panel-title
+          = t('.title', model: model_class.model_name.human.titleize)
+          %b{style: "font-size: 29px"} Residenciais
+      .panel-body
+        .table-responsive
+          %table.table.table-striped.table-hover
+            %thead
+              %tr
+                %th= "Mês de Início de Vigência"
+                %th= "Status"
+                %th= "Valor da Fatura(R$)"
+            %tbody
+              - @resultados.each do |resultado|
+                %tr
+                  %td= link_to resultado['mes'], seguros_path(tipo: "R", mes: resultado['mes'])
+                  %td= resultado['status']
+                  %td= resultado['valor'].to_f.try(:real_contabil)
+            %tfoot
+              %tr
+                %td{colspan: 99}

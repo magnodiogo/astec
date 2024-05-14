@@ -1,0 +1,61 @@
+<style>
+  table, tr, td, th { border: 1px solid #000; border-collapse: collapse;}
+  td, th { padding: 1px 3px; }
+</style>
+
+<h2>NOVO SEGURO FIANÇA CADASTRADO</h2>
+<br/>
+Cadastrado em: <%= l(Time.now, format: :short) %>
+<br/>
+Imobiliaria:   <%= @seguro_fianca.imobiliaria.estipulante %>
+<br/>
+Usuário:       <%= @seguro_fianca.user.name %>
+<br/>
+<br/>
+<table width='100%' border=1>
+  <tbody>
+    <% %w(cep endereco numero complemento bairro cidade uf finalidade valor_aluguel valor_condominio valor_iptu danos_ao_imovel multa_recisoria pintura_interna pintura_externa).each do |key| %>
+      <tr>
+        <td width='40%'><b><%= SeguroFianca.human_attribute_name(key.to_sym) %></b></td>
+        <td>
+          <% if key == 'endereco' %>
+            <%= @seguro_fianca.logradouro.nome %>
+          <% elsif key == 'bairro' %>
+            <%= @seguro_fianca.logradouro.nome_bairro %>
+          <% elsif key == 'cidade' %>
+            <%= @seguro_fianca.logradouro.localidade.nome %>
+          <% elsif key == 'uf' %>
+            <%= @seguro_fianca.logradouro.uf %>
+          <% elsif key == 'finalidade' %>
+            <%= @seguro_fianca.finalidade_desc %>
+          <% elsif ['danos_ao_imovel', 'multa_recisoria', 'pintura_interna', 'pintura_externa'].include? key %>
+            <%= @seguro_fianca.send(key) ?  "SIM" : "NÃO" %>
+          <% else %>
+            <%= @seguro_fianca.send(key) %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+    <% count = 1 %>
+    <% @seguro_fianca.locatarios.each do |locatario| %>
+      <tr><td colspan="2"><%= "Locatário " + count.to_s %>  </td></tr>
+      <% count = count + 1 %>
+      <% %w(nome cpf_cnpj estado_civil residira_no_imovel renda vinculo_empregaticio).each do |key| %>
+        <tr>
+          <td width='40%'><b><%= Locatario.human_attribute_name(key.to_sym) %></b></td>
+          <td>
+            <% if key == 'vinculo_empregaticio' %>
+              <%= locatario.vinculo_empregaticio_desc %> 
+            <% elsif ['residira_no_imovel'].include? key %>
+              <%= locatario.send(key) ?  "SIM" : "NÃO" %>
+            <% else %>
+              <% if locatario.send(key).present? %>
+                <%= locatario.send(key) %>
+              <% end %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

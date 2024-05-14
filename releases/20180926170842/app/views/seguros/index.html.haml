@@ -1,0 +1,85 @@
+- model_class = Seguro
+.row.grid
+  .col-md-12
+    = flash_message
+    .panel.panel-piluku
+      .panel-heading
+        %h3.panel-title
+          = t('.title', model: model_class.model_name.human.titleize, tipo: @type[:plural])
+          %b{style: "font-size: 29px; "}= @type[:plural]
+          - if can? :new, Seguro
+            .right-button#hidden-button
+              = link_to t('.new', tipo: @type[:singular]), "javascript:confirma()", class: 'btn btn-wtc'
+          - if current_user.tipo == 'A' and current_user.imobiliaria_id 
+            .right-button{style: "margin-right: 10px"}
+              = link_to 'Renovação', new_seguro_path(tipo: @type[:id], mes: @mes, renovacao: true), :class => "btn btn-wtc"
+
+      .panel-body
+        = render "aviso_new"
+        /
+        #cont_index
+          = form_for Seguro.new, url: seguros_path, method: :get, class: "form" do |f|
+            = hidden_field_tag :mes, params[:mes]
+            = hidden_field_tag :tipo, params[:tipo]
+            .row
+              .col-md-10.col-xs-8
+                .form-group
+                  .field
+                    = label_tag :busca
+                    = text_field_tag :busca, params[:busca], class: "form-control", placeholder: "Endereço / Inquilino"
+              .col-md-2.col-xs-4
+                = f.submit "Consultar", class: "btn btn-primary", style: "margin-top: 25px; width: 100%"
+          .table-responsive
+            %table.table.table-striped.table-hover
+              %thead
+                %tr
+                  %th= model_class.human_attribute_name(:inquilino)
+                  %th= model_class.human_attribute_name(:endereco)
+                  %th= model_class.human_attribute_name(:premio_total)
+                  %th= model_class.human_attribute_name(:status)
+                  %th= model_class.human_attribute_name(:renovar_ate)
+                  %th{width: '12%'} Opções
+              %tbody
+                - @seguros.each do |seguro|
+                  %tr
+                    %td{title: l(seguro.created_at.to_date)}= seguro.inquilino 
+                    %td= seguro.endereco_formatado 
+                    %td= seguro.premio_total.try(:real_contabil)
+                    %td
+                      - if seguro.status == 0 
+                        = link_to 'Transmitir Cobertura', transmitir_seguro_path(seguro.id), :"data-confirm" => "Tem certeza que deseja dar cobertura a este endereço ?", :"data-submit" => "SIM"
+                      - else
+                        = eval(seguro.descricao_status)
+                    %td{style: "color: red"}= seguro.descricao_renovacao
+                    %td
+                      - if can? :show, seguro
+                        = link_to seguro_path(seguro, tipo: params[:tipo], mes: params[:mes]), class: 'btn btn-default btn-xs', title: "Visualizar" do
+                          %i.icon.ion-android-search
+                      - if can? :edit, seguro
+                        = link_to edit_seguro_path(seguro, tipo: params[:tipo], mes: params[:mes]), class: 'btn btn-default btn-xs', title: "Editar" do
+                          %i.icon.ion-edit
+                      - if can? :destroy, seguro
+                        = link_to seguro_path(seguro), class: "btn btn-danger btn-xs", :"data-confirm" => 'Confirma exclusão?', method: :delete, title: 'Excluir' do
+                          %i.icon.ion-trash-b
+                      - if can? :desfazer_transmitir, seguro
+                        = link_to desfazer_transmitir_seguro_path(seguro), class: 'btn btn-default btn-xs', title: "Desfazer Cobertura" do
+                          %i.icon.ion-arrow-return-left
+                      - if can? :gerar_pdf, seguro
+                        = link_to gerar_pdf_seguro_path(seguro), class: 'btn btn-default btn-xs', title: "Gerar PDF", target: "_blank"  do
+                          %i.icon.ion-document-text
+              %tfoot
+                %tr
+                  %td{colspan: 99}
+                    %center= page_navigation_links @seguros if will_paginate @seguros
+
+:javascript
+  function confirma(){
+   jQuery("#confirma").show();
+   jQuery("#cont_index").hide();
+   $("#hidden-button").hide();
+  }
+  function retorna(){
+   jQuery("#confirma").hide();
+   jQuery("#cont_index").show();
+   $("#hidden-button").show();
+  }

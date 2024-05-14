@@ -1,0 +1,168 @@
+
+<script type="text/javascript">
+      $(document).ready(function() {
+        <% if controller_name == 'users' and (['new', 'edit', 'create', 'update'].include? action_name)%>
+            $(".custom.dropdown").first().remove();
+            jQuery("#user_tipo").show();
+            jQuery("#user_tipo").width('95%');
+
+            $(".custom.dropdown").last().hide();
+            jQuery("#user_imobiliaria_id").show();
+            jQuery("#user_imobiliaria_id").width('95%');
+
+            jQuery("#user_tipo").change(function(){
+               if (jQuery("#user_tipo").val() == 'A'){
+                  jQuery("#user_imobiliaria_id").hide();
+                  jQuery("#label_imobiliaria_id").hide();
+               }else{
+                  jQuery("#user_imobiliaria_id").show();
+                  jQuery("#label_imobiliaria_id").show();
+               }
+            });
+        <% elsif controller_name == 'titulos' and ['new', 'edit', 'create', 'update'].include? action_name %>
+          <%= observe_field_js('#titulo_cep', 'ceps','busca_endereco_por_cep', ['titulo_cep'],'#div_endereco')%>
+        
+        <% elsif controller_name == 'fiancas' and ['new', 'edit', 'create', 'update'].include? action_name %>
+          <%= observe_field_js('#fianca_imovel_cep', 'ceps','busca_endereco_fianca', ['fianca_imovel_cep'],'#div_endereco_imovel')%>
+          <%= observe_field_js('#fianca_residencia_cep', 'ceps','busca_endereco_fianca', ['fianca_residencia_cep'],'#div_endereco_residencia')%>
+          <%= observe_field_js('#fianca_correspondencia_cep', 'ceps','busca_endereco_fianca', ['fianca_correspondencia_cep'],'#div_endereco_correspondencia')%>
+          <%= observe_field_js('#fianca_anterior_cep', 'ceps','busca_endereco_fianca', ['fianca_anterior_cep'],'#div_endereco_anterior')%>
+        
+        <% elsif controller_name == 'seguros' and ['new', 'edit', 'create', 'update'].include? action_name %>
+            $("#seguro_data_limite_renovacao").mask("99/99/9999");
+
+            jQuery(".custom.dropdown").remove();
+            jQuery('.tinynav.tinynav1').remove();
+
+            jQuery('select').show();
+            jQuery('select').width('100%');
+            
+            <% if @cep %>
+               document.getElementById("seguro_numero").focus();
+            <% else %>
+               document.getElementById("seguro_cep").focus();
+            <% end %>
+
+
+            var s_tipo = jQuery("#seguro_tipo_pessoa_pf");
+            s_tipo.bind('change', function() {
+               if ( document.getElementById('seguro_tipo_pessoa_pf').checked ) {
+                   $("#seguro_cpf_cnpj_inquilino").mask("999.999.999-99");
+               }
+            });
+            // create, update
+            if ( document.getElementById('seguro_tipo_pessoa_pf').checked ) {
+               $("#seguro_cpf_cnpj_inquilino").mask("999.999.999-99");
+            }
+
+
+            var s_tipo_2 = jQuery("#seguro_tipo_pessoa_pj");
+            s_tipo_2.bind('change', function() {
+               if ( document.getElementById('seguro_tipo_pessoa_pj').checked ) {
+                   $("#seguro_cpf_cnpj_inquilino").mask("99.999.999/9999-99");
+               }
+            });
+            // create, update
+            if ( document.getElementById('seguro_tipo_pessoa_pj').checked ) {
+                $("#seguro_cpf_cnpj_inquilino").mask("99.999.999/9999-99");
+            }
+
+            var s_tipo_3 = jQuery("#seguro_tipo_pessoa_proprietario_pf");
+            s_tipo_3.bind('change', function() {
+               if ( document.getElementById('seguro_tipo_pessoa_proprietario_pf').checked ) {
+                   $("#seguro_cpf_cnpj_proprietario").mask("999.999.999-99");
+               }
+            });
+            // create, update
+            if ( document.getElementById('seguro_tipo_pessoa_proprietario_pf').checked ) {
+                $("#seguro_cpf_cnpj_proprietario").mask("999.999.999-99");
+            }
+
+            var s_tipo_3 = jQuery("#seguro_tipo_pessoa_proprietario_pj");
+            s_tipo_3.bind('change', function() {
+               if ( document.getElementById('seguro_tipo_pessoa_proprietario_pj').checked ) {
+                   $("#seguro_cpf_cnpj_proprietario").mask("99.999.999/9999-99");
+               }
+            });
+            // create, update
+            if ( document.getElementById('seguro_tipo_pessoa_proprietario_pj').checked ) {
+                $("#seguro_cpf_cnpj_proprietario").mask("99.999.999/9999-99");
+            }
+
+ 
+	         /*cep*/
+            <%= observe_field_js('#seguro_cep', 'ceps','busca_endereco_por_cep', ['seguro_cep'],'#div_endereco')%>
+
+            <% if @tipo != 'R'%>
+	            /*valor limite*/
+               <%= observe_field_js('#seguro_limite_maximo_indenizacao', 'seguros','calcula_premio', ['seguro_limite_maximo_indenizacao', 'seguro_tipo_de_seguro', 'imobiliaria_id'], '#div_premio', 50000.00, 2000000.00, 'div_limite_error') %>
+
+               <%= observe_field_js_click('#seguro_premio_total',   'seguros','calcula_premio', ['seguro_limite_maximo_indenizacao', 'seguro_cobertura_para_conteudo', 'seguro_tipo_de_seguro', 'imobiliaria_id'], '#div_premio', 50000.0, 2000000.0, 'div_limite_error') %>
+
+               /* buscar atividade */
+               <%= observe_field_atividade %>
+
+
+            <% else %>
+               <%= observe_field_js('#seguro_limite_maximo_indenizacao',   'seguros','calcula_premio', ['seguro_limite_maximo_indenizacao', 'seguro_cobertura_para_conteudo', 'seguro_tipo_de_seguro', 'imobiliaria_id'], '#div_premio', 30000.0, 2000000.0, 'div_limite_error') %>
+
+               <%= observe_field_js('#seguro_cobertura_para_conteudo',   'seguros','calcula_premio', ['seguro_limite_maximo_indenizacao', 'seguro_cobertura_para_conteudo', 'seguro_tipo_de_seguro', 'imobiliaria_id'], '#div_premio', 30000.0, 2000000.0, 'div_limite_error') %>
+              
+               <%= observe_field_js_click('#seguro_premio_total',   'seguros','calcula_premio', ['seguro_limite_maximo_indenizacao', 'seguro_cobertura_para_conteudo', 'seguro_tipo_de_seguro', 'imobiliaria_id'], '#div_premio', 30000.0, 2000000.0, 'div_limite_error') %>
+
+               // Exigir Complemento 
+               var res = jQuery("#seguro_residencia")
+               res.bind('change', function(){
+                  if ( res.val() == 'A' ){
+                     jQuery("#seguro_complemento").attr('required', 'true')
+                  }else{
+                     jQuery("#seguro_complemento").removeAttr('required')
+                  }
+
+               });
+            <% end %>
+
+            <% if @cep %>
+               jQuery("#seguro_cep").val('<%= @cep.cep_formatado %>');
+            <% end %>
+         <% end %>
+         jQuery(".bAct_toggle").remove();
+         jQuery(".bAct_hide").remove();
+
+         <% if action_name != 'show' %>
+            jQuery('.custom.radio').remove();
+            jQuery('input:radio').show();
+         <% end %>
+
+         <% if controller_name == 'ceps' %>
+            jQuery(".custom.dropdown").remove();
+            jQuery('.tinynav.tinynav1').remove();
+
+            jQuery('select').show();
+            jQuery('select').width('100%');
+
+
+            <%= observe_field_js('#uf', 'ceps','get_cidades',['uf'], '#div_cidade' )%>
+            <%#= observe_field_js('#cidade', 'ceps','get_bairros',['cidade'], '#div_bairro' )%>
+         <% end %>
+         <% if action_name == 'index_relatorios' %>
+             jQuery("#todas").bind('click', function() { 
+                if ( $("#imob").css('display') == "block") {
+                    jQuery("#imob").css('display','none'); 
+                } else {
+                    jQuery("#imob").css('display','block'); 
+                }
+             });
+         <% end %>
+
+      });
+      function confirma(){
+         jQuery("#confirma").show();
+         jQuery("#cont_index").hide();
+      }
+      function retorna(){
+         jQuery("#confirma").hide();
+         jQuery("#cont_index").show();
+      }
+
+</script>
